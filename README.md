@@ -4,7 +4,7 @@ This repository contains the HTML source for the [Ruby on Rails Tutorial, 2nd ed
 
 ## Getting started
 
-To translate the Ruby on Rails Tutorial, simply fork this repository, clone it to your local machine, and get started translating it to your language of choice. If you wish to collaborate with other translators, which I recommend, add them as collaborators to the repository as needed. At any time, you are free to deploy the result to a URL of your choice. Once it's up and ready for public consumption, send the URI to `admin@railstutorial.org` and I'll link to it from the main Rails Tutorial website.
+To translate the Ruby on Rails Tutorial, simply fork this repository, clone it to your local machine, and get started translating it to your language of choice. If you want to work with other translators (which I certainly encourage), add them as collaborators to the repository as needed. At any time, you are free to deploy the result to a URL of your choice. Once it's up and ready for public consumption, send the URI to `admin@railstutorial.org` and I'll link to it from the main Rails Tutorial website.
 
 Since I often make minor fixes to the book, I recommend occasionally merging in changes from the master branch. If merging causes too many conflicts, you can omit this optional step.
 
