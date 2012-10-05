@@ -10,7 +10,7 @@ Since I often make minor fixes to the book, I recommend occasionally merging in 
 
 ## Source files
 
-The repository contains an HTML source file for each chapter of the Ruby on Rails Tutorial, as well as an images directory with all the figures. Note that the image URIs in the HTML files are *relative*, i.e., they appear as
+The repository contains an HTML source file for each chapter of the Ruby on Rails Tutorial, as well as two CSS files for styling and an images directory with all of the book's figures. Note that the image URIs in the HTML files are *relative*, i.e., they appear as
 
     images/figures/foo.png
 
