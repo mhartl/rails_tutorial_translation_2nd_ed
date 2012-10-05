@@ -14,9 +14,7 @@ The repository contains an HTML source file for each chapter of the Ruby on Rail
 
     images/figures/foo.png
 
-with no leading slash.
-
-This is so that when you view the HTML files locally all the images load correctly. 
+with no leading slash. This is so that when you view the HTML files locally all the images load correctly. 
 
 For a fully deployed version of the book, you may have to change the image paths from relative to absolute, such as
 
