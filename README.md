@@ -25,7 +25,7 @@ For a fully deployed version of the book, you may have to change the image paths
 If this ends up being the case, I recommend writing a script to build the production output. You may find the Ruby line
 
 ```ruby
-    text.gsub!('"/images/', '"images/')
+text.gsub!('"/images/', '"images/')
 ```
 
 to be useful in this context.
