@@ -1363,9 +1363,11 @@ THE SOFTWARE.
 <h2><a id="sec-6_3" href="modeling-users.html#sec-adding_a_secure_password" class="heading"><span class="number">6.3</span> Adding a secure password</a></h2>
 
 
-<p>In this section we&rsquo;ll add the last of the basic User attributes: a secure password used to authenticate users of the sample application. The method is to require each user to have a password (with a password confirmation), and then store an encrypted version of the password in the database. We&rsquo;ll also add a way to <em>authenticate</em> a user based on a given password, a method we&rsquo;ll use in <a class="ref" href="sign-in-sign-out.html#top">Chapter&nbsp;8</a> to allow users to sign in to the site.</p>
+<p>In this section, we&rsquo;ll add the last of the basic User attributes: a secure password used to authenticate users of the sample application. The method is to require each user to have a password (with a password confirmation), and then store an encrypted version of the password in the database. We&rsquo;ll also add a way to <em>authenticate</em> a user based on a given password, a method we&rsquo;ll use in <a class="ref" href="sign-in-sign-out.html#top">Chapter&nbsp;8</a> to allow users to sign in to the site.</p>
 
-<p>The method for authenticating users will be to take a submitted password, encrypt it, and compare the result to the encrypted value stored in the database. If the two match, then the submitted password is correct and the user is authenticated. By comparing encrypted values instead of raw passwords, we will be able to authenticate users without storing the passwords themselves, thereby avoiding a serious security hole.</p>
+<p>The method for authenticating users will be to take a submitted password, encrypt it, and compare the result to the encrypted value stored in the database. If the two match, then the submitted password is correct and the user is authenticated. By comparing encrypted values instead of raw passwords, we will be able to authenticate users without storing the passwords themselves. This means that, even if our database is compromised, our users&rsquo; passwords will still be secure.</p>
+
+<p>Much of the secure password machinery will be implemented using a single Rails method called <code>has_secure_password</code> (first introduced in Rails&nbsp;3.1). Because so much of what follows depends on this one method, it is difficult to develop secure passwords incrementally. As a result, starting in <a class="ref" href="modeling-users.html#sec-password_and_confirmation">Section&nbsp;6.3.2</a>, we&rsquo;ll write a large number of tests before getting any of them to pass. If you start getting bogged down, I recommend staying patient and pushing through, because there is a great payoff in <a class="ref" href="modeling-users.html#sec-has_secure_password">Section&nbsp;6.3.4</a>. (Since screencasts allow for a more incremental developmnet approach, interested readers should consider the <a href="http://railstutorial.org/screencasts">Ruby on Rails Tutorial screencasts</a> for a fuller understanding of this material.)</p>
 
 <div class="label" id="sec-an_encrypted_password"></div>
 
@@ -1491,7 +1493,7 @@ THE SOFTWARE.
 <h3><a id="sec-6_3_2" href="modeling-users.html#sec-password_and_confirmation" class="heading"><span class="number">6.3.2</span> Password and confirmation</a></h3>
 
 
-<p>As seen in the mockup in <a class="ref" href="modeling-users.html#fig-signup_mockup_preview">Figure&nbsp;6.1</a>, we expect to have users confirm their passwords, a common practice on the web meant to minimize typos. We could enforce this at the controller layer, but it&rsquo;s conventional to put it in the model and use Active Record to enforce the constraint. The method is to add <code>password</code> and <code>password_confirmation</code> attributes to the User model, and then require that the two attributes match before the record is saved to the database. Unlike the other attributes we&rsquo;ve seen so far, the password attributes will be <em>virtual</em>&mdash;they will only exist temporarily in memory, and will not be persisted to the database.</p>
+<p>As seen in the mockup in <a class="ref" href="modeling-users.html#fig-signup_mockup_preview">Figure&nbsp;6.1</a>, we expect to have users confirm their passwords, a common practice on the web meant to minimize typos. We could enforce this at the controller layer, but it&rsquo;s conventional to put it in the model and use Active Record to enforce the constraint. The method is to add <code>password</code> and <code>password_confirmation</code> attributes to the User model, and then require that the two attributes match before the record is saved to the database. Unlike the other attributes we&rsquo;ve seen so far, the password attributes will be <em>virtual</em>&mdash;they will only exist temporarily in memory, and will not be persisted to the database. As we&rsquo;ll see in <a class="ref" href="modeling-users.html#sec-has_secure_password">Section&nbsp;6.3.4</a>, these virtual attributes are implemented automatically by <code>has_secure_password</code>.</p>
 
 <p>We&rsquo;ll start with <code>respond_to</code> tests for a password and its confirmation, as seen in <a class="ref" href="modeling-users.html#code-user_respond_to_password">Listing&nbsp;6.27</a>.</p>
 
@@ -1595,7 +1597,7 @@ THE SOFTWARE.
 
 <p>(This behavior strikes me as a minor bug in Rails, and perhaps it will be fixed in a future version, and in any case adding the validation does no harm.)</p>
 
-<p>Putting everything together gives the (failing) tests in <a class="ref" href="modeling-users.html#code-password_tests">Listing&nbsp;6.28</a>. We&rsquo;ll get them to pass in <a class="ref" href="modeling-users.html#sec-has_secure_password">Section&nbsp;6.3.4</a>.</p>
+<p>Putting everything together gives the (failing) tests in <a class="ref" href="modeling-users.html#code-password_tests">Listing&nbsp;6.28</a>. As noted in the introduction to this section, it is difficult to develop secure passwords incrementally due to the large number of features encapsulated in <code>has_secure_password</code>, so at this point all of these new tests fail. We&rsquo;ll get them to pass in <a class="ref" href="modeling-users.html#sec-has_secure_password">Section&nbsp;6.3.4</a>.</p>
 
 <div class="label" id="code-password_tests"></div>
 
