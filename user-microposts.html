@@ -699,7 +699,89 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <h4><a id="sec-10_1_4_2" href="user-microposts.html#sec-dependent_destroy" class="heading">Dependent: destroy</a></h4>
 
 
-<p>Apart from proper ordering, there is a second refinement we&rsquo;d like to add to microposts. Recall from <a class="ref" href="updating-showing-and-deleting-users.html#sec-destroying_users">Section&nbsp;9.4</a> that site administrators have the power to <em>destroy</em> users. It stands to reason that, if a user is destroyed, the user&rsquo;s microposts should be destroyed as well. We can test for this by first destroying a micropost&rsquo;s user and then verifying that the associated microposts are no longer in the database (<a class="ref" href="user-microposts.html#code-micropost_dependency_test">Listing&nbsp;10.15</a>).</p>
+<p>Apart from proper ordering, there is a second refinement we&rsquo;d like to add to microposts. Recall from <a class="ref" href="updating-showing-and-deleting-users.html#sec-destroying_users">Section&nbsp;9.4</a> that site administrators have the power to <em>destroy</em> users. It stands to reason that, if a user is destroyed, the user&rsquo;s microposts should be destroyed as well. We can test for this by first destroying a micropost&rsquo;s user and then verifying that the associated microposts are no longer in the database.</p>
+
+<p>In order to test destroying microposts properly, we first need to capture a given user&rsquo;s posts in a local variable, and then destroy the user. A straighforward implementation looks like this:</p>
+
+<div class="code"><div class="highlight"><pre><span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span>
+<span class="vi">@user</span><span class="o">.</span><span class="n">destroy</span>
+<span class="n">microposts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">micropost</span><span class="o">|</span>
+  <span class="c1"># Make sure the micropost doesn&#39;t appear in the database.</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+
+
+<p>Unfortunately, this doesn&rsquo;t work, due to a subtlety about Ruby arrays. Array assignment in Ruby copies a <em>reference</em> to the array, not the full array itself, which means that changes to the original array also affect the copy. For example, suppose we create an array, assign a second variable to it, and then reverse the first array in place using the <code>reverse!</code> method:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+<span class="go">=&gt; [1, 2, 3]</span>
+<span class="gp">&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<span class="go">=&gt; [1, 2, 3]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">reverse!</span>
+<span class="go">=&gt; [3, 2, 1]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span>
+<span class="go">=&gt; [3, 2, 1]</span>
+<span class="gp">&gt;&gt; </span><span class="n">b</span>
+<span class="go">=&gt; [3, 2, 1]</span>
+</pre></div>
+</div>
+
+
+<p>Somewhat suprisingly, here <code>b</code> gets reversed as well as <code>a</code>. This is because both <code>a</code> and <code>b</code> point to the same array. (The same thing happens with other Ruby data structures, such as strings and hashes.)</p>
+
+<p>In the case of a user&rsquo;s microposts, we would have this:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">$ rails console --sandbox</span>
+<span class="gp">&gt;&gt; </span><span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">first</span>
+<span class="gp">&gt;&gt; </span><span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span>
+<span class="gp">&gt;&gt; </span><span class="vi">@user</span><span class="o">.</span><span class="n">destroy</span>
+<span class="gp">&gt;&gt; </span><span class="n">microposts</span>
+<span class="go">=&gt; []</span>
+</pre></div>
+</div>
+
+
+<p>(Because we haven&rsquo;t implemented the destruction of associated microposts yet, this code won&rsquo;t currently work, and is included only to illustrate the principle.) Here we see that destroying a user leaves the <code>microposts</code> variable with no elements; i.e., it&rsquo;s the empty array&nbsp;<code>[]</code>.</p>
+
+<p>This behavior means that we must take great care when making duplicates of Ruby objects. To duplicate relatively simple objects such as arrays, we can use the <code>dup</code> method:</p>
+
+<div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="o">]</span>
+<span class="go">=&gt; [1, 2, 3]</span>
+<span class="gp">&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">dup</span>
+<span class="go">=&gt; [1, 2, 3]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">reverse!</span>
+<span class="go">=&gt; [3, 2, 1]</span>
+<span class="gp">&gt;&gt; </span><span class="n">a</span>
+<span class="go">=&gt; [3, 2, 1]</span>
+<span class="gp">&gt;&gt; </span><span class="n">b</span>
+<span class="go">=&gt; [1, 2, 3]</span>
+</pre></div>
+</div>
+
+
+<p>(This is known as a &ldquo;shallow copy&rdquo;. Making a &ldquo;deep copy&rdquo; is a much more difficult problem, and in fact has no general solution, but dropping &ldquo;ruby deep copy&rdquo; into a search engine should be enough get you started if you need to copy a more complicated structure such as a nested array.) Applying the <code>dup</code> method to the user&rsquo;s microposts gives us code like this:</p>
+
+<div class="code"><div class="highlight"><pre><span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">dup</span>
+<span class="vi">@user</span><span class="o">.</span><span class="n">destroy</span>
+<span class="n">microposts</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_empty</span>
+<span class="n">microposts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">micropost</span><span class="o">|</span>
+  <span class="c1"># Make sure the micropost doesn&#39;t appear in the database.</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+
+
+<p>Here we&rsquo;ve included the line</p>
+
+<div class="code"><div class="highlight"><pre><span class="n">microposts</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_empty</span>
+</pre></div>
+</div>
+
+
+<p>as a safety check to catch any errors should the <code>dup</code> ever be accidentally removed.<sup class="footnote" id="fnref-10_3"><a href="#fn-10_3">3</a></sup> The full implementation appears in <a class="ref" href="user-microposts.html#code-micropost_dependency_test">Listing&nbsp;10.15</a>.</p>
 
 <div class="label" id="code-micropost_dependency_test"></div>
 
@@ -725,8 +807,9 @@ because this is such an important security concern we&rsquo;ll add a failing tes
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="n">it</span> <span class="s2">&quot;should destroy associated microposts&quot;</span> <span class="k">do</span>
-      <span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span>
+      <span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">dup</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">destroy</span>
+      <span class="n">microposts</span><span class="o">.</span><span class="n">should_not</span> <span class="n">be_empty</span>
       <span class="n">microposts</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">micropost</span><span class="o">|</span>
         <span class="no">Micropost</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">micropost</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">should</span> <span class="n">be_nil</span>
       <span class="k">end</span>
@@ -1090,7 +1173,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <h3><a id="sec-10_2_2" href="user-microposts.html#sec-sample_microposts" class="heading"><span class="number">10.2.2</span> Sample microposts</a></h3>
 
 
-<p>With all the work making templates for user microposts in <a class="ref" href="user-microposts.html#sec-augmenting_the_user_show_page">Section&nbsp;10.2.1</a>, the ending was rather anticlimactic. We can rectify this sad situation by adding microposts to the sample populator from <a class="ref" href="updating-showing-and-deleting-users.html#sec-sample_users">Section&nbsp;9.3.2</a>. Adding sample microposts for <em>all</em> the users actually takes a rather long time, so first we&rsquo;ll select just the first six users<sup class="footnote" id="fnref-10_3"><a href="#fn-10_3">3</a></sup> using the <code>:limit</code> option to the <code>User.all</code> method:<sup class="footnote" id="fnref-10_4"><a href="#fn-10_4">4</a></sup></p>
+<p>With all the work making templates for user microposts in <a class="ref" href="user-microposts.html#sec-augmenting_the_user_show_page">Section&nbsp;10.2.1</a>, the ending was rather anticlimactic. We can rectify this sad situation by adding microposts to the sample populator from <a class="ref" href="updating-showing-and-deleting-users.html#sec-sample_users">Section&nbsp;9.3.2</a>. Adding sample microposts for <em>all</em> the users actually takes a rather long time, so first we&rsquo;ll select just the first six users<sup class="footnote" id="fnref-10_4"><a href="#fn-10_4">4</a></sup> using the <code>:limit</code> option to the <code>User.all</code> method:<sup class="footnote" id="fnref-10_5"><a href="#fn-10_5">5</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="n">users</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="ss">limit:</span> <span class="mi">6</span><span class="p">)</span>
 </pre></div>
@@ -1130,7 +1213,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 </div>
 
 
-<p>With that, we are in a position to enjoy the fruits of our <a class="ref" href="user-microposts.html#sec-augmenting_the_user_show_page">Section&nbsp;10.2.1</a> labors by displaying information for each micropost.<sup class="footnote" id="fnref-10_5"><a href="#fn-10_5">5</a></sup> The preliminary results appear in <a class="ref" href="user-microposts.html#fig-user_profile_microposts_no_styling">Figure&nbsp;10.6</a>.</p>
+<p>With that, we are in a position to enjoy the fruits of our <a class="ref" href="user-microposts.html#sec-augmenting_the_user_show_page">Section&nbsp;10.2.1</a> labors by displaying information for each micropost.<sup class="footnote" id="fnref-10_6"><a href="#fn-10_6">6</a></sup> The preliminary results appear in <a class="ref" href="user-microposts.html#fig-user_profile_microposts_no_styling">Figure&nbsp;10.6</a>.</p>
 
 <div class="label" id="fig-user_profile_microposts_no_styling"></div>
 
@@ -1138,7 +1221,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <div class="figure"><div class="center"><span class="graphic"><img src="images/figures/user_profile_microposts_no_styling_bootstrap.png" alt="user_profile_microposts_no_styling_bootstrap" /></span></div><div class="caption"><span class="header">Figure 10.6: </span><span class="description">The user profile (<a href="http://localhost:3000/users/1">/users/1</a>) with unstyled microposts.&nbsp;<a href="http://railstutorial.org/images/figures/user_profile_microposts_no_styling_bootstrap-full.png">(full size)</a></span></div></div>
 
 
-<p>The page shown in <a class="ref" href="user-microposts.html#fig-user_profile_microposts_no_styling">Figure&nbsp;10.6</a> has no micropost-specific styling, so let&rsquo;s add some (<a class="ref" href="user-microposts.html#code-micropost_css">Listing&nbsp;10.24</a>) and take a look the resulting pages.<sup class="footnote" id="fnref-10_6"><a href="#fn-10_6">6</a></sup> <a class="ref" href="user-microposts.html#fig-user_profile_with_microposts">Figure&nbsp;10.7</a>, which displays the user profile page for the first (signed-in) user, while <a class="ref" href="user-microposts.html#fig-other_profile_with_microposts">Figure&nbsp;10.8</a> shows the profile for a second user. Finally, <a class="ref" href="user-microposts.html#fig-user_profile_microposts_page_2_rails_3">Figure&nbsp;10.9</a> shows the <em>second</em> page of microposts for the first user, along with the pagination links at the bottom of the display. In all three cases, observe that each micropost display indicates the time since it was created (e.g., &ldquo;Posted 1 minute ago.&rdquo;); this is the work of the <code>time_ago_in_words</code> method from <a class="ref" href="user-microposts.html#code-micropost_partial">Listing&nbsp;10.21</a>. If you wait a couple minutes and reload the pages, you&rsquo;ll see how the text gets automatically updated based on the new time.</p>
+<p>The page shown in <a class="ref" href="user-microposts.html#fig-user_profile_microposts_no_styling">Figure&nbsp;10.6</a> has no micropost-specific styling, so let&rsquo;s add some (<a class="ref" href="user-microposts.html#code-micropost_css">Listing&nbsp;10.24</a>) and take a look the resulting pages.<sup class="footnote" id="fnref-10_7"><a href="#fn-10_7">7</a></sup> <a class="ref" href="user-microposts.html#fig-user_profile_with_microposts">Figure&nbsp;10.7</a>, which displays the user profile page for the first (signed-in) user, while <a class="ref" href="user-microposts.html#fig-other_profile_with_microposts">Figure&nbsp;10.8</a> shows the profile for a second user. Finally, <a class="ref" href="user-microposts.html#fig-user_profile_microposts_page_2_rails_3">Figure&nbsp;10.9</a> shows the <em>second</em> page of microposts for the first user, along with the pagination links at the bottom of the display. In all three cases, observe that each micropost display indicates the time since it was created (e.g., &ldquo;Posted 1 minute ago.&rdquo;); this is the work of the <code>time_ago_in_words</code> method from <a class="ref" href="user-microposts.html#code-micropost_partial">Listing&nbsp;10.21</a>. If you wait a couple minutes and reload the pages, you&rsquo;ll see how the text gets automatically updated based on the new time.</p>
 
 <div class="label" id="code-micropost_css"></div>
 
@@ -1212,7 +1295,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <h2><a id="sec-10_3" href="user-microposts.html#sec-manipulating_microposts" class="heading"><span class="number">10.3</span> Manipulating microposts</a></h2>
 
 
-<p>Having finished both the data modeling and display templates for microposts, we now turn our attention to the interface for creating them through the web. The result will be our third example of using an HTML form to create a resource&mdash;in this case, a Microposts resource.<sup class="footnote" id="fnref-10_7"><a href="#fn-10_7">7</a></sup> In this section, we&rsquo;ll also see the first hint of a <em>status feed</em>&mdash;a notion brought to full fruition in <a class="ref" href="following-users.html#top">Chapter&nbsp;11</a>. Finally, as with users, we&rsquo;ll make it possible to destroy microposts through the web.</p>
+<p>Having finished both the data modeling and display templates for microposts, we now turn our attention to the interface for creating them through the web. The result will be our third example of using an HTML form to create a resource&mdash;in this case, a Microposts resource.<sup class="footnote" id="fnref-10_8"><a href="#fn-10_8">8</a></sup> In this section, we&rsquo;ll also see the first hint of a <em>status feed</em>&mdash;a notion brought to full fruition in <a class="ref" href="following-users.html#top">Chapter&nbsp;11</a>. Finally, as with users, we&rsquo;ll make it possible to destroy microposts through the web.</p>
 
 <p>There is one break with past convention worth noting: the interface to the Microposts resource will run principally through the Users and StaticPages controllers, rather than relying on a controller of its own. This means that the routes for the Microposts resource are unusually simple, as seen in <a class="ref" href="user-microposts.html#code-microposts_resource">Listing&nbsp;10.25</a>. The code in <a class="ref" href="user-microposts.html#code-microposts_resource">Listing&nbsp;10.25</a> leads in turn to the RESTful routes shown in <a class="ref" href="user-microposts.html#table-RESTful_microposts">Table&nbsp;10.2</a>, which is a small subset of the full set of routes seen in <a class="ref" href="a-demo-app.html#table-demo_RESTful_microposts">Table&nbsp;2.3</a>. Of course, this simplicity is a sign of being <em>more</em> advanced, not less&mdash;we&rsquo;ve come a long way since our reliance on scaffolding in <a class="ref" href="a-demo-app.html#top">Chapter&nbsp;2</a>, and we no longer need most of its complexity.</p>
 
@@ -1294,7 +1377,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 
 <p>Rather than using the (yet-to-be-built) web interface for microposts, the code in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> operates at the level of the individual micropost actions, a strategy we first saw in <a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_wrong_user_tests">Listing&nbsp;9.14</a>. In this case, a non-signed-in user is redirected upon submitting a <tt>POST</tt> request to /microposts (<code>post microposts_path</code>, which hits the <code>create</code> action) or submitting a <tt>DELETE</tt> request to /microposts/1 (<code>delete micropost_path(micropost)</code>, which hits the <code>destroy</code> action).</p>
 
-<p>Writing the application code needed to get the tests in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> to pass requires a little refactoring first. Recall from <a class="ref" href="updating-showing-and-deleting-users.html#sec-requiring_signed_in_users">Section&nbsp;9.2.1</a> that we enforced the signin requirement using a before filter that called the <code>signed_in_user</code> method (<a class="ref" href="updating-showing-and-deleting-users.html#code-authorize_before_filter">Listing&nbsp;9.12</a>). At the time, we only needed that method in the Users controller, but now we find that we need it in the Microposts controller as well, so we&rsquo;ll move it into the Sessions helper, as shown in <a class="ref" href="user-microposts.html#code-sessions_helper_authenticate">Listing&nbsp;10.27</a>.<sup class="footnote" id="fnref-10_8"><a href="#fn-10_8">8</a></sup></p>
+<p>Writing the application code needed to get the tests in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> to pass requires a little refactoring first. Recall from <a class="ref" href="updating-showing-and-deleting-users.html#sec-requiring_signed_in_users">Section&nbsp;9.2.1</a> that we enforced the signin requirement using a before filter that called the <code>signed_in_user</code> method (<a class="ref" href="updating-showing-and-deleting-users.html#code-authorize_before_filter">Listing&nbsp;9.12</a>). At the time, we only needed that method in the Users controller, but now we find that we need it in the Microposts controller as well, so we&rsquo;ll move it into the Sessions helper, as shown in <a class="ref" href="user-microposts.html#code-sessions_helper_authenticate">Listing&nbsp;10.27</a>.<sup class="footnote" id="fnref-10_9"><a href="#fn-10_9">9</a></sup></p>
 
 <div class="label" id="code-sessions_helper_authenticate"></div>
 
@@ -1772,7 +1855,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 </div></div>
 
 
-<p>These tests introduce (via the RSpec boolean convention) the array <code>include?</code> method, which simply checks if an array includes the given element:<sup class="footnote" id="fnref-10_9"><a href="#fn-10_9">9</a></sup></p>
+<p>These tests introduce (via the RSpec boolean convention) the array <code>include?</code> method, which simply checks if an array includes the given element:<sup class="footnote" id="fnref-10_10"><a href="#fn-10_10">10</a></sup></p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="o">[</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;foo&quot;</span><span class="p">,</span> <span class="ss">:bar</span><span class="o">]</span>
@@ -1788,7 +1871,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 
 <p>This example shows just how flexible the RSpec boolean convention is; even though <code>include</code> is already a Ruby keyword (used to include a module, as seen in, e.g., <a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a>), in this context RSpec correctly guesses that we want to test array inclusion.</p>
 
-<p>We can arrange for an appropriate micropost <code>feed</code> method by selecting all the microposts with <code>user_id</code> equal to the current user&rsquo;s id, which we accomplish using the <code>where</code> method on the <code>Micropost</code> model, as shown in <a class="ref" href="user-microposts.html#code-proto_status_feed">Listing&nbsp;10.39</a>.<sup class="footnote" id="fnref-10_10"><a href="#fn-10_10">10</a></sup></p>
+<p>We can arrange for an appropriate micropost <code>feed</code> method by selecting all the microposts with <code>user_id</code> equal to the current user&rsquo;s id, which we accomplish using the <code>where</code> method on the <code>Micropost</code> model, as shown in <a class="ref" href="user-microposts.html#code-proto_status_feed">Listing&nbsp;10.39</a>.<sup class="footnote" id="fnref-10_11"><a href="#fn-10_11">11</a></sup></p>
 
 <div class="label" id="code-proto_status_feed"></div>
 
@@ -1992,7 +2075,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 <div class="figure"><div class="center"><span class="graphic"><img src="images/figures/home_with_proto_feed_bootstrap.png" alt="home_with_proto_feed_bootstrap" /></span></div><div class="caption"><span class="header">Figure 10.14: </span><span class="description">The Home page (<a href="http://localhost:3000/">/</a>) with a proto-feed.&nbsp;<a href="http://railstutorial.org/images/figures/home_with_proto_feed-full.png">(full size)</a></span></div></div>
 
 
-<p>At this point, creating a new micropost works as expected, as seen in <a class="ref" href="user-microposts.html#fig-micropost_created">Figure&nbsp;10.15</a>. There is one subtlety, though: on <em>failed</em> micropost submission, the Home page expects an <code>@feed_items</code> instance variable, so failed submissions currently break (as you should be able to verify by running your test suite). The easiest solution is to suppress the feed entirely by assigning it an empty array, as shown in <a class="ref" href="user-microposts.html#code-microposts_create_action_with_feed">Listing&nbsp;10.45</a>.<sup class="footnote" id="fnref-10_11"><a href="#fn-10_11">11</a></sup></p>
+<p>At this point, creating a new micropost works as expected, as seen in <a class="ref" href="user-microposts.html#fig-micropost_created">Figure&nbsp;10.15</a>. There is one subtlety, though: on <em>failed</em> micropost submission, the Home page expects an <code>@feed_items</code> instance variable, so failed submissions currently break (as you should be able to verify by running your test suite). The easiest solution is to suppress the feed entirely by assigning it an empty array, as shown in <a class="ref" href="user-microposts.html#code-microposts_create_action_with_feed">Listing&nbsp;10.45</a>.<sup class="footnote" id="fnref-10_12"><a href="#fn-10_12">12</a></sup></p>
 
 <div class="label" id="fig-micropost_created"></div>
 
@@ -2342,15 +2425,16 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 <ol>
 <li id="fn-10_1">Technically, we treated sessions as a resource in <a class="ref" href="sign-in-sign-out.html#top">Chapter&nbsp;8</a>, but sessions are not saved to the database the way users and microposts are.&nbsp;<a class="arrow" href="#fnref-10_1">&uarr;</a></li>
 <li id="fn-10_2">The <code>content</code> attribute will be a <code>string</code>, but, as noted briefly in <a class="ref" href="a-demo-app.html#sec-modeling_demo_microposts">Section&nbsp;2.1.2</a>, for longer text fields you should use the <code>text</code> data type.&nbsp;<a class="arrow" href="#fnref-10_2">&uarr;</a></li>
-<li id="fn-10_3">(i.e., the five users with custom Gravatars, and one with the default Gravatar)&nbsp;<a class="arrow" href="#fnref-10_3">&uarr;</a></li>
-<li id="fn-10_4">Tail your <code>log/development.log</code> file if you&rsquo;re curious about the SQL this method generates.&nbsp;<a class="arrow" href="#fnref-10_4">&uarr;</a></li>
-<li id="fn-10_5">By design, the Faker gem&rsquo;s <em>lorem ipsum</em> text is randomized, so the contents of your sample microposts will differ.&nbsp;<a class="arrow" href="#fnref-10_5">&uarr;</a></li>
-<li id="fn-10_6">For convenience, <a class="ref" href="user-microposts.html#code-micropost_css">Listing&nbsp;10.24</a> actually has <em>all</em> the CSS needed for this chapter.&nbsp;<a class="arrow" href="#fnref-10_6">&uarr;</a></li>
-<li id="fn-10_7">The other two resources are Users in <a class="ref" href="sign-up.html#sec-signup_form">Section&nbsp;7.2</a> and Sessions in <a class="ref" href="sign-in-sign-out.html#sec-signin_failure">Section&nbsp;8.1</a>.&nbsp;<a class="arrow" href="#fnref-10_7">&uarr;</a></li>
-<li id="fn-10_8">We noted in <a class="ref" href="sign-in-sign-out.html#sec-remember_me">Section&nbsp;8.2.1</a> that helper methods are available only in <em>views</em> by default, but we arranged for the Sessions helper methods to be available in the controllers as well by adding <code>include SessionsHelper</code> to the Application controller (<a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a>).&nbsp;<a class="arrow" href="#fnref-10_8">&uarr;</a></li>
-<li id="fn-10_9">Learning about methods such as <code>include?</code> is one reason why, as noted in <a class="ref" href="beginning.html#sec-comments_for_various_readers">Section&nbsp;1.1.1</a>, I recommend reading a pure Ruby book after finishing this one.&nbsp;<a class="arrow" href="#fnref-10_9">&uarr;</a></li>
-<li id="fn-10_10">See the Rails Guide on the <a href="http://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a> for more on <code>where</code> and the like.&nbsp;<a class="arrow" href="#fnref-10_10">&uarr;</a></li>
-<li id="fn-10_11">Unfortunately, returning a paginated feed doesn&rsquo;t work in this case. Implement it and click on a pagination link to see why.&nbsp;<a class="arrow" href="#fnref-10_11">&uarr;</a></li>
+<li id="fn-10_3">Initially, I forgot to duplicate the microposts property, and in fact previous versions of the tutorial had a bug in this test. Having a safety check would have revealed the error. Thanks to alert reader Jacob Turino for catching the bug and bringing it to my attention.&nbsp;<a class="arrow" href="#fnref-10_3">&uarr;</a></li>
+<li id="fn-10_4">(i.e., the five users with custom Gravatars, and one with the default Gravatar)&nbsp;<a class="arrow" href="#fnref-10_4">&uarr;</a></li>
+<li id="fn-10_5">Tail your <code>log/development.log</code> file if you&rsquo;re curious about the SQL this method generates.&nbsp;<a class="arrow" href="#fnref-10_5">&uarr;</a></li>
+<li id="fn-10_6">By design, the Faker gem&rsquo;s <em>lorem ipsum</em> text is randomized, so the contents of your sample microposts will differ.&nbsp;<a class="arrow" href="#fnref-10_6">&uarr;</a></li>
+<li id="fn-10_7">For convenience, <a class="ref" href="user-microposts.html#code-micropost_css">Listing&nbsp;10.24</a> actually has <em>all</em> the CSS needed for this chapter.&nbsp;<a class="arrow" href="#fnref-10_7">&uarr;</a></li>
+<li id="fn-10_8">The other two resources are Users in <a class="ref" href="sign-up.html#sec-signup_form">Section&nbsp;7.2</a> and Sessions in <a class="ref" href="sign-in-sign-out.html#sec-signin_failure">Section&nbsp;8.1</a>.&nbsp;<a class="arrow" href="#fnref-10_8">&uarr;</a></li>
+<li id="fn-10_9">We noted in <a class="ref" href="sign-in-sign-out.html#sec-remember_me">Section&nbsp;8.2.1</a> that helper methods are available only in <em>views</em> by default, but we arranged for the Sessions helper methods to be available in the controllers as well by adding <code>include SessionsHelper</code> to the Application controller (<a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a>).&nbsp;<a class="arrow" href="#fnref-10_9">&uarr;</a></li>
+<li id="fn-10_10">Learning about methods such as <code>include?</code> is one reason why, as noted in <a class="ref" href="beginning.html#sec-comments_for_various_readers">Section&nbsp;1.1.1</a>, I recommend reading a pure Ruby book after finishing this one.&nbsp;<a class="arrow" href="#fnref-10_10">&uarr;</a></li>
+<li id="fn-10_11">See the Rails Guide on the <a href="http://guides.rubyonrails.org/active_record_querying.html">Active Record Query Interface</a> for more on <code>where</code> and the like.&nbsp;<a class="arrow" href="#fnref-10_11">&uarr;</a></li>
+<li id="fn-10_12">Unfortunately, returning a paginated feed doesn&rsquo;t work in this case. Implement it and click on a pagination link to see why.&nbsp;<a class="arrow" href="#fnref-10_12">&uarr;</a></li>
 </ol>
 </div>
 
