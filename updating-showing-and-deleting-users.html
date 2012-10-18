@@ -2189,7 +2189,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <p>You can also deploy the application and even populate the production database with sample users (using the <code>pg:reset</code> task to reset the production database):</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push heroku
-<span class="gp">$</span> heroku pg:reset &lt;DATABASE&gt;
+<span class="gp">$</span> heroku pg:reset DATABASE_URL
 <span class="gp">$</span> heroku run rake db:migrate
 <span class="gp">$</span> heroku run rake db:populate
 </pre></div>
