@@ -1848,7 +1848,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>Next, we need to run the migration on the production database to tell Heroku about the User data model:<sup class="footnote" id="fnref-7_12"><a href="#fn-7_12">12</a></sup></p>
+<p>Next, we need to run the migration on the production database to tell Heroku about the User data model:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku run rake db:migrate
 </pre></div>
@@ -2053,7 +2053,6 @@ THE SOFTWARE.
 <li id="fn-7_9">I figured this out by looking up <code>pluralize</code> in the <a href="http://api.rubyonrails.org/v3.2.0/classes/ActionView/Helpers/TextHelper.html#method-i-pluralize">Rails API</a>.&nbsp;<a class="arrow" href="#fnref-7_9">&uarr;</a></li>
 <li id="fn-7_10">Actually, we&rsquo;ll use the closely related <code>flash.now</code>, but we&rsquo;ll defer that subtlety until we need it.&nbsp;<a class="arrow" href="#fnref-7_10">&uarr;</a></li>
 <li id="fn-7_11">Technically, SSL is now TLS, for Transport Layer Security, but everyone I know still says &ldquo;SSL&rdquo;.&nbsp;<a class="arrow" href="#fnref-7_11">&uarr;</a></li>
-<li id="fn-7_12">Readers interested in using Heroku for real-life production applications might be interested in <a href="https://github.com/thoughtbot/kumade">Kumade</a>, which handles things like database migrations automatically.&nbsp;<a class="arrow" href="#fnref-7_12">&uarr;</a></li>
 </ol>
 </div>
 
