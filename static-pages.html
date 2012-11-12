@@ -414,14 +414,14 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 <p>Here we&rsquo;ve used the option <tt class="verb">--no-test-framework</tt> to suppress the generation of the default RSpec tests, which we won&rsquo;t be using. Instead, we&rsquo;ll create the tests by hand starting in <a class="ref" href="static-pages.html#sec-first_tests">Section&nbsp;3.2</a>. We&rsquo;ve also intentionally left off the <code>about</code> action from the command line arguments in <a class="ref" href="static-pages.html#code-generating_pages">Listing&nbsp;3.4</a> so that we can see how to add it using test-driven development, or TDD (<a class="ref" href="static-pages.html#sec-first_tests">Section&nbsp;3.2</a>).</p>
 
-<p>In <a class="ref" href="static-pages.html#code-generating_pages">Listing&nbsp;3.4</a>, note that we have passed the controller name as so-called <a href="https://en.wikipedia.org/wiki/CamelCase">CamelCase</a>, which leads to the creation of a controller file written in <a href="https://en.wikipedia.org/wiki/Snake_case">snake case</a>, so that a controller called StaticPages yields a file called static_pages_controller.rb. This is merely a convention, and in fact using snake case at the command line also works: the command</p>
+<p>In <a class="ref" href="static-pages.html#code-generating_pages">Listing&nbsp;3.4</a>, note that we have passed the controller name as so-called <a href="https://en.wikipedia.org/wiki/CamelCase">CamelCase</a>, which leads to the creation of a controller file written in <a href="https://en.wikipedia.org/wiki/Snake_case">snake case</a>, so that a controller called StaticPages yields a file called <code>static_pages_controller.rb</code>. This is merely a convention, and in fact using snake case at the command line also works: the command</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> rails generate controller static_pages ...
 </pre></div>
 </div>
 
 
-<p>also generates a controller called static_pages_controller.rb. Because Ruby uses CamelCase for class names (<a class="ref" href="rails-flavored-ruby.html#sec-ruby_classes">Section&nbsp;4.4</a>), my preference is to refer to controllers using their CamelCase names, but this is a matter of taste. (Since Ruby filenames typically use snake case, the Rails generator converts CamelCase to snake case using the <a href="http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html#method-i-underscore"><tt>underscore</tt></a> method.)</p>
+<p>also generates a controller called <code>static_pages_controller.rb</code>. Because Ruby uses CamelCase for class names (<a class="ref" href="rails-flavored-ruby.html#sec-ruby_classes">Section&nbsp;4.4</a>), my preference is to refer to controllers using their CamelCase names, but this is a matter of taste. (Since Ruby filenames typically use snake case, the Rails generator converts CamelCase to snake case using the <a href="http://api.rubyonrails.org/classes/ActiveSupport/Inflector.html#method-i-underscore"><tt>underscore</tt></a> method.)</p>
 
 <p>By the way, if you ever make a mistake when generating code, it&rsquo;s useful to know how to reverse the process. See <a class="ref" href="static-pages.html#sidebar-undoing_things">Box&nbsp;3.1</a> for some techniques on how to undo things in Rails.</p>
 
