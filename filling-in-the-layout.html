@@ -161,7 +161,7 @@ THE SOFTWARE.
 <span class="c">    &lt;![endif]--&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top&quot;</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
       <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-inner&quot;</span><span class="nt">&gt;</span>
         <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
           <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;sample app&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;logo&quot;</span> <span class="cp">%&gt;</span>
@@ -220,7 +220,7 @@ THE SOFTWARE.
 
 <p>The next section includes a <code>header</code> for the site&rsquo;s (plain-text) logo, a couple of divisions (using the <code>div</code> tag), and a list of elements with navigation links:</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top&quot;</span><span class="nt">&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-inner&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
       <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;sample app&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;logo&quot;</span> <span class="cp">%&gt;</span>
@@ -238,14 +238,14 @@ THE SOFTWARE.
 </div>
 
 
-<p>Here the <code>header</code> tag indicates elements that should go at the top of the page. We&rsquo;ve given the <code>header</code> tag two <em>CSS classes</em>,<sup class="footnote" id="fnref-5_3"><a href="#fn-5_3">3</a></sup> called <code>navbar</code> and <code>navbar-fixed-top</code>, separated with a space:</p>
+<p>Here the <code>header</code> tag indicates elements that should go at the top of the page. We&rsquo;ve given the <code>header</code> tag three <em>CSS classes</em>,<sup class="footnote" id="fnref-5_3"><a href="#fn-5_3">3</a></sup> called <code>navbar</code>, <code>navbar-fixed-top</code>, and <code>navbar-inverse</code>, separated by spaces:</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top&quot;</span><span class="nt">&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
 </pre></div>
 </div>
 
 
-<p>All HTML elements can be assigned both classes and <em>ids</em>; these are merely labels, and are useful for styling with CSS (<a class="ref" href="filling-in-the-layout.html#sec-custom_css">Section&nbsp;5.1.2</a>). The main difference between classes and ids is that classes can be used multiple times on a page, but ids can be used only once. In the present case, both of the <code>navbar</code> and <code>navbar-fixed-top</code> classes have special meaning to the Bootstrap framework, which we&rsquo;ll install and use in <a class="ref" href="filling-in-the-layout.html#sec-custom_css">Section&nbsp;5.1.2</a>.</p>
+<p>All HTML elements can be assigned both classes and <em>ids</em>; these are merely labels, and are useful for styling with CSS (<a class="ref" href="filling-in-the-layout.html#sec-custom_css">Section&nbsp;5.1.2</a>). The main difference between classes and ids is that classes can be used multiple times on a page, but ids can be used only once. In the present case, all the navbar classes have special meaning to the Bootstrap framework, which we&rsquo;ll install and use in <a class="ref" href="filling-in-the-layout.html#sec-custom_css">Section&nbsp;5.1.2</a>.</p>
 
 <p>Inside the <code>header</code> tag, we see a couple of <code>div</code> tags:</p>
 
@@ -383,7 +383,7 @@ the <code>home.html.erb</code> view (<a class="ref" href="filling-in-the-layout.
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.9&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span><span class="p">,</span> <span class="s1">&#39;2.0.4&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span><span class="p">,</span> <span class="s1">&#39;2.1&#39;</span>
 <span class="o">.</span>
 <span class="o">.</span>
 <span class="o">.</span>
@@ -428,7 +428,7 @@ the <code>home.html.erb</code> view (<a class="ref" href="filling-in-the-layout.
 </div></div>
 
 
-<p>This one line includes the entire Bootstrap CSS framework, with the result shown in in <a class="ref" href="filling-in-the-layout.html#fig-sample_app_only_bootstrap">Figure&nbsp;5.3</a>. (You may have to use <tt>Ctrl-C</tt> restart the local web server.) The placement of the text isn&rsquo;t good and the logo doesn&rsquo;t have any style, but the colors and signup button look promising.</p>
+<p>This one line includes the entire Bootstrap CSS framework, with the result shown in in <a class="ref" href="filling-in-the-layout.html#fig-sample_app_only_bootstrap">Figure&nbsp;5.3</a>. (You may have to use <tt>Ctrl-C</tt> restart the local web server. It&rsquo;s also worth noting that the screenshots use Bootstrap&nbsp;2.0, whereas the tutorial currently uses Bootstrap&nbsp;2.1, so there may be minor differences in appearance. These are not cause for concern.) The placement of the text isn&rsquo;t good and the logo doesn&rsquo;t have any style, but the colors and signup button look promising.</p>
 
 <div class="label" id="fig-sample_app_only_bootstrap"></div>
 
@@ -492,7 +492,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 </div>
 
 
-<p>puts 60&nbsp;pixels of padding at the top of the page. Because of the <code>navbar-fixed-top</code> class in the <code>header</code> tag, Bootstrap fixes the navigation bar to the top of the page, so the padding serves to separate the main text from the navigation. Meanwhile, the CSS in the rule</p>
+<p>puts 60&nbsp;pixels of padding at the top of the page. Because of the <code>navbar-fixed-top</code> class in the <code>header</code> tag, Bootstrap fixes the navigation bar to the top of the page, so the padding serves to separate the main text from the navigation. (Because the default navbar color changed between Boostrap 2.0 and 2.1, we need the <code>navbar-inverse</code> class to make it dark instead of light.) Meanwhile, the CSS in the rule</p>
 
 <div class="code"><div class="highlight"><pre><span class="nc">.center</span> <span class="p">{</span>
   <span class="na">text-align</span><span class="o">:</span> <span class="no">center</span><span class="p">;</span>
@@ -660,7 +660,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 
 <div class="codelisting">
 <div class="listing"><span class="header">Listing 5.10.</span> <span class="description">A partial for the site header. <br /> <code>app/views/layouts/_header.html.erb</code></span> </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top&quot;</span><span class="nt">&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-inner&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
       <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;sample app&quot;</span><span class="p">,</span> <span class="s1">&#39;#&#39;</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;logo&quot;</span> <span class="cp">%&gt;</span>
@@ -1644,7 +1644,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 
 <div class="codelisting">
 <div class="listing"><span class="header">Listing 5.24.</span> <span class="description">Header partial with links. <br /> <code>app/views/layouts/_header.html.erb</code></span> </div>
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top&quot;</span><span class="nt">&gt;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-inner&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
       <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="s2">&quot;sample app&quot;</span><span class="p">,</span> <span class="n">root_path</span><span class="p">,</span> <span class="nb">id</span><span class="p">:</span> <span class="s2">&quot;logo&quot;</span> <span class="cp">%&gt;</span>
