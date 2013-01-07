@@ -2228,7 +2228,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <p>with the equivalent</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (:followed_user_ids) OR user_id = :user_id&quot;</span><span class="p">,</span>
-      <span class="ss">followed_user_ids:</span> <span class="n">followed_user_ids</span><span class="p">,</span> <span class="ss">user_id:</span> <span class="n">user</span><span class="p">))</span>
+      <span class="ss">followed_user_ids:</span> <span class="n">followed_user_ids</span><span class="p">,</span> <span class="ss">user_id:</span> <span class="n">user</span><span class="p">)</span>
 </pre></div>
 </div>
 
