@@ -409,7 +409,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 </div></div>
 
 
-<p>To write the application code, we define the <code>belongs_to</code> relationship as usual. Rails infers the names of the foreign keys from the corresponding symbols (i.e., <code>follower_id</code> from <code>:follower</code>, and <code>followed_id</code> from <code>:followed</code>), but since there is neither a Followed nor a Follower model we need to supply the class name <code>User</code>. The result is shown in <a class="ref" href="following-users.html#code-relationship_belongs_to">Listing&nbsp;11.6</a>. Note that, unlike the default generate Relationship model, in this case only the <code>followed_id</code> is accessible.</p>
+<p>To write the application code, we define the <code>belongs_to</code> relationship as usual. Rails infers the names of the foreign keys from the corresponding symbols (i.e., <code>follower_id</code> from <code>:follower</code>, and <code>followed_id</code> from <code>:followed</code>), but since there is neither a Followed nor a Follower model we need to supply the class name <code>User</code>. The result is shown in <a class="ref" href="following-users.html#code-relationship_belongs_to">Listing&nbsp;11.6</a>. Note that, unlike the default generated Relationship model, in this case only the <code>followed_id</code> is accessible.</p>
 
 <div class="label" id="code-relationship_belongs_to"></div>
 
