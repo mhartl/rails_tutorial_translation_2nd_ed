@@ -762,7 +762,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 </div>
 
 
-<p>(This is known as a &ldquo;shallow copy&rdquo;. Making a &ldquo;deep copy&rdquo; is a much more difficult problem, and in fact has no general solution, but dropping &ldquo;ruby deep copy&rdquo; into a search engine should be enough get you started if you need to copy a more complicated structure such as a nested array.) Applying the <code>dup</code> method to the user&rsquo;s microposts gives us code like this:</p>
+<p>(This is known as a &ldquo;shallow copy&rdquo;. Making a &ldquo;deep copy&rdquo; is a much more difficult problem, and in fact has no general solution, but dropping &ldquo;ruby deep copy&rdquo; into a search engine should be enough to get you started if you need to copy a more complicated structure such as a nested array.) Applying the <code>dup</code> method to the user&rsquo;s microposts gives us code like this:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">microposts</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">dup</span>
 <span class="vi">@user</span><span class="o">.</span><span class="n">destroy</span>
