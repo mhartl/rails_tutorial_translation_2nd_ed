@@ -176,9 +176,10 @@ THE SOFTWARE.
 
 <p>Heroku recommends against using different databases in development and production, but for the sample application it won&rsquo;t make any difference, and SQLite is <em>much</em> easier than PostgreSQL to install and configure. Installing and configuring PostgreSQL on your local machine is left as an exercise (<a class="ref" href="static-pages.html#sec-static_pages_exercises">Section&nbsp;3.5</a>).</p>
 
-<p>To install and include the new gems, we run <code>bundle install</code>:</p>
+<p>To install and include the new gems, we run <code>bundle update</code> and <code>bundle install</code>:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle install --without production
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle update
+<span class="gp">$</span> bundle install --without production
 </pre></div>
 </div>
 
