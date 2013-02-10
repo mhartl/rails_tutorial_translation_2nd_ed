@@ -374,7 +374,7 @@ THE SOFTWARE.
     <span class="n">describe</span> <span class="s2">&quot;with valid information&quot;</span> <span class="k">do</span>
       <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">before</span> <span class="k">do</span>
-        <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+        <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">upcase</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span>
         <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="k">end</span>
@@ -397,7 +397,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>ensures that the anchor tag&nbsp;<code>a</code> has the right <code>href</code> (URI) attribute&mdash;in this case, a link to the user&rsquo;s profile page.</p>
+<p>ensures that the anchor tag&nbsp;<code>a</code> has the right <code>href</code> (URI) attribute&mdash;in this case, a link to the user&rsquo;s profile page. Note also that we take care to <code>upcase</code> the user&rsquo;s email address to make sure our ability to find the user in the database is case-insensitive.</p>
 
 <div class="label" id="sec-signin_form"></div>
 
@@ -1934,7 +1934,7 @@ if-else branching structure inside of Embedded Ruby:</p>
     <span class="n">describe</span> <span class="s2">&quot;with valid information&quot;</span> <span class="k">do</span>
       <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">before</span> <span class="k">do</span>
-        <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span>
+        <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">upcase</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span>
         <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="k">end</span> 
