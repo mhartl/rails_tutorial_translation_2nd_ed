@@ -2020,7 +2020,7 @@ THE SOFTWARE.
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
   <span class="n">has_secure_password</span>
 
-  <span class="n">before_save</span> <span class="p">{</span> <span class="nb">self</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">downcase!</span> <span class="p">}</span>
+  <span class="n">before_save</span> <span class="p">{</span> <span class="n">email</span><span class="o">.</span><span class="n">downcase!</span> <span class="p">}</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
