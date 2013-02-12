@@ -2303,14 +2303,12 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 <p>You can also push the app up to Heroku at this point. Because the data model has changed through the addition of the <code>microposts</code> table, you will also need to migrate the production database:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> git push heroku
-<span class="gp">$</span> heroku pg:reset &lt;DATABASE&gt;
+<span class="gp">$</span> heroku pg:reset DATABASE
 <span class="gp">$</span> heroku run rake db:migrate
 <span class="gp">$</span> heroku run rake db:populate
 </pre></div>
 </div>
 
-
-<p>Follow the instructions in <a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_and_deleting_users_conclusion">Section&nbsp;9.5</a> to find the right replacement for the <code>DATABASE</code> argument in the second command above.</p>
 
 <div class="label" id="sec-micropost_exercises"></div>
 
