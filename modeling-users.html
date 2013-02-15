@@ -1199,7 +1199,8 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>We&rsquo;re not quite done, though. Email addresses are case-insensitive&mdash;<code>foo@bar.com</code> goes to the same place as <code>FOO@BAR.COM</code> or <code>FoO@BAr.coM</code>&mdash;so our validation should cover this case as well. We test for this with the code in <a class="ref" href="modeling-users.html#code-validates_uniqueness_of_email_case_insensitive_test">Listing&nbsp;6.20</a>.</p>
+<p>We&rsquo;re not quite done, though. Email addresses are case-insensitive&mdash;<code>foo@bar.com</code> goes to the same place as <code>FOO@BAR.COM</code> or <code>FoO@BAr.coM</code>&mdash;so our validation should cover this case as well. We test for this with the code in <a class="ref" href="modeling-users.html#code-validates_uniqueness_of_email_case_insensitive_test">Listing&nbsp;6.20</a>, using the <code>update_attributes</code>
+method seen in <a class="ref" href="modeling-users.html#sec-updating_user_objects">Section&nbsp;6.1.5</a>.</p>
 
 <div class="label" id="code-validates_uniqueness_of_email_case_insensitive_test"></div>
 
@@ -1219,8 +1220,7 @@ THE SOFTWARE.
   <span class="n">describe</span> <span class="s2">&quot;when email address is already taken&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="k">do</span>
       <span class="n">user_with_same_email</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">dup</span>
-      <span class="n">user_with_same_email</span><span class="o">.</span><span class="n">email</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">upcase</span>
-      <span class="n">user_with_same_email</span><span class="o">.</span><span class="n">save</span>
+      <span class="n">user_with_same_email</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="nb">email</span><span class="p">:</span>  <span class="vi">@user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">upcase</span><span class="p">)</span>
     <span class="k">end</span>
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
