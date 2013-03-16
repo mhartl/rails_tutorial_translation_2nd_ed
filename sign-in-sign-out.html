@@ -815,7 +815,7 @@ This means that</p>
 <h3><a id="sec-8_2_1" href="sign-in-sign-out.html#sec-remember_me" class="heading"><span class="number">8.2.1</span> Remember me</a></h3>
 
 
-<p>We&rsquo;re now in a position to start implementing our signin model, namely, remembering user signin status &ldquo;forever&rdquo; and clearing the session only when the user explicitly signs out. The signin functions themselves will end up crossing the traditional Model-View-Controller lines; in particular, several signin functions will need to be available in both controllers and views. You may recall from <a class="ref" href="rails-flavored-ruby.html#sec-back_to_the_title_helper">Section&nbsp;4.2.5</a> that Ruby provides a <em>module</em> facility for packaging functions together and including them in multiple places, and that&rsquo;s the plan for the authentication functions. We could make an entirely new module for authentication, but the Sessions controller already comes equipped with a module, namely, <code>SessionsHelper</code>. Moreover, such helpers are automatically included in Rails views, so all we need to do to use the Sessions helper functions in controllers is to include the module into the Application controller (<a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a>).</p>
+<p>We&rsquo;re now in a position to start implementing our signin model, namely, remembering user signin status &ldquo;forever&rdquo; and clearing the session only when the user explicitly signs out. The signin functions themselves will end up crossing the traditional Model-View-Controller lines; in particular, several signin functions will need to be available in both controllers and views. You may recall from <a class="ref" href="rails-flavored-ruby.html#sec-back_to_the_title_helper">Section&nbsp;4.2.5</a> that Ruby provides a <em>module</em> facility for packaging functions together and including them in multiple places, and that&rsquo;s the plan for the authentication functions. We could make an entirely new module for authentication, but the Sessions controller already comes equipped with a module, namely, <code>SessionsHelper</code>. Moreover, such helpers are automatically included in Rails views, so all we need to do to use the Sessions helper functions in controllers is to include the module into the Application controller (<a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a>). (<a class="ref" href="sign-in-sign-out.html#code-sessions_helper_include">Listing&nbsp;8.14</a> also takes the opportunity to add an additional cross-site request forgery safeguard. It will start working once we define the <code>sign_out</code> method in <a class="ref" href="sign-in-sign-out.html#sec-signing_out">Section&nbsp;8.2.6</a>.)</p>
 
 <div class="label" id="code-sessions_helper_include"></div>
 
@@ -825,6 +825,12 @@ This means that</p>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">ApplicationController</span> <span class="o">&lt;</span> <span class="ss">ActionController::Base</span>
   <span class="n">protect_from_forgery</span>
   <span class="kp">include</span> <span class="no">SessionsHelper</span>
+
+  <span class="c1"># Force signout to prevent CSRF attacks</span>
+  <span class="k">def</span> <span class="nf">handle_unverified_request</span>
+    <span class="n">sign_out</span>
+    <span class="k">super</span>
+  <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
 </div></div>
