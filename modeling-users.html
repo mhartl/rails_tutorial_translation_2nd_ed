@@ -1199,7 +1199,7 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>We&rsquo;re not quite done, though. Email addresses are case-insensitive&mdash;<code>foo@bar.com</code> goes to the same place as <code>FOO@BAR.COM</code> or <code>FoO@BAr.coM</code>&mdash;so our validation should cover this case as well. We test for this with the code in <a class="ref" href="modeling-users.html#code-validates_uniqueness_of_email_case_insensitive_test">Listing&nbsp;6.20</a>.</p>
+<p>We&rsquo;re not quite done, though. Email addresses are typically processed as if they were case-insensitive&mdash;i.e., <code>foo@bar.com</code> is treated the same as <code>FOO@BAR.COM</code> or <code>FoO@BAr.coM</code>&mdash;so our validation should incorporate this as well.<sup class="footnote" id="fnref-6_14"><a href="#fn-6_14">14</a></sup> We test for case-insensitivity with the code in <a class="ref" href="modeling-users.html#code-validates_uniqueness_of_email_case_insensitive_test">Listing&nbsp;6.20</a>.</p>
 
 <div class="label" id="code-validates_uniqueness_of_email_case_insensitive_test"></div>
 
@@ -1293,7 +1293,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>Unlike the migration for users, the email uniqueness migration is not pre-defined, so we need to fill in its contents with <a class="ref" href="modeling-users.html#code-email_uniqueness_index">Listing&nbsp;6.22</a>.<sup class="footnote" id="fnref-6_14"><a href="#fn-6_14">14</a></sup></p>
+<p>Unlike the migration for users, the email uniqueness migration is not pre-defined, so we need to fill in its contents with <a class="ref" href="modeling-users.html#code-email_uniqueness_index">Listing&nbsp;6.22</a>.<sup class="footnote" id="fnref-6_15"><a href="#fn-6_15">15</a></sup></p>
 
 <div class="label" id="code-email_uniqueness_index"></div>
 
@@ -1325,7 +1325,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>Unfortunately, there&rsquo;s one more change we need to make to be assured of email uniqueness, which is to make sure that the email address is all lower-case before it gets saved to the database. The reason is that not all database adapters use case-sensitive indices.<sup class="footnote" id="fnref-6_15"><a href="#fn-6_15">15</a></sup> The way to do this is with a <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a>, which is a method that gets invoked at a particular point in the lifetime of an Active Record object (see the <a href="http://api.rubyonrails.org/v3.2.0/classes/ActiveRecord/Callbacks.html">Rails API entry on callbacks</a>). In the present case, we&rsquo;ll use a <code>before_save</code> callback to force Rails to downcase the email attribute before saving the user to the database, as shown in <a class="ref" href="modeling-users.html#code-email_downcase">Listing&nbsp;6.23</a>.</p>
+<p>Unfortunately, there&rsquo;s one more change we need to make to be assured of email uniqueness, which is to make sure that the email address is all lower-case before it gets saved to the database. The reason is that not all database adapters use case-sensitive indices.<sup class="footnote" id="fnref-6_16"><a href="#fn-6_16">16</a></sup> The way to do this is with a <a href="http://en.wikipedia.org/wiki/Callback_(computer_science)"><em>callback</em></a>, which is a method that gets invoked at a particular point in the lifetime of an Active Record object (see the <a href="http://api.rubyonrails.org/v3.2.0/classes/ActiveRecord/Callbacks.html">Rails API entry on callbacks</a>). In the present case, we&rsquo;ll use a <code>before_save</code> callback to force Rails to downcase the email attribute before saving the user to the database, as shown in <a class="ref" href="modeling-users.html#code-email_downcase">Listing&nbsp;6.23</a>.</p>
 
 <div class="label" id="code-email_downcase"></div>
 
@@ -1804,7 +1804,7 @@ THE SOFTWARE.
 <h3><a id="sec-6_3_4" href="modeling-users.html#sec-has_secure_password" class="heading"><span class="number">6.3.4</span> User has secure password</a></h3>
 
 
-<p>In previous versions of Rails, adding a secure password was difficult and time-consuming, as seen in the <a href="http://railstutorial.org/book?version=3.0">Rails&nbsp;3.0 version of the <em>Rails Tutorial</em></a>,<sup class="footnote" id="fnref-6_16"><a href="#fn-6_16">16</a></sup> which covers the creation of an authentication system from scratch. But web developers&rsquo; understanding of how best to authenticate users has matured enough that it now comes bundled with the latest version of Rails. As a result, we&rsquo;ll complete the implementation of secure passwords (and get to a green test suite) using only a few lines of code.</p>
+<p>In previous versions of Rails, adding a secure password was difficult and time-consuming, as seen in the <a href="http://railstutorial.org/book?version=3.0">Rails&nbsp;3.0 version of the <em>Rails Tutorial</em></a>,<sup class="footnote" id="fnref-6_17"><a href="#fn-6_17">17</a></sup> which covers the creation of an authentication system from scratch. But web developers&rsquo; understanding of how best to authenticate users has matured enough that it now comes bundled with the latest version of Rails. As a result, we&rsquo;ll complete the implementation of secure passwords (and get to a green test suite) using only a few lines of code.</p>
 
 <p>First, we need to make the <code>password</code> and <code>password_confirmation</code> columns accessible (<a class="ref" href="modeling-users.html#sec-accessible_attributes">Section&nbsp;6.1.2.2</a>) so that we can instantiate new users with an initialization hash:</p>
 
@@ -2050,9 +2050,10 @@ THE SOFTWARE.
 <li id="fn-6_11">If you find it as useful as I do, I encourage you to <a href="http://bit.ly/donate-to-rubular">donate to Rubular</a> to reward developer <a href="http://lovitt.net/">Michael Lovitt</a> for his wonderful work.&nbsp;<a class="arrow" href="#fnref-6_11">&uarr;</a></li>
 <li id="fn-6_12">Did you know that <code>"Michael Hartl"@example.com</code>, with quotation marks and a space in the middle, is a valid email address according to the standard? Incredibly, it is&mdash;but it&rsquo;s absurd. If you don&rsquo;t have an email address that contains only letters, numbers, underscores, and dots, then I recommend getting one. N.B. The regex in <a class="ref" href="modeling-users.html#code-validates_format_of_email">Listing&nbsp;6.17</a> allows plus signs, too, because Gmail (and possibly other email services) does something useful with them: to filter email from example.com, you can use <tt>username+example@gmail.com</tt>, which will go to the Gmail address <tt>username@gmail.com</tt>, allowing you to filter on the string <tt>example</tt>.&nbsp;<a class="arrow" href="#fnref-6_12">&uarr;</a></li>
 <li id="fn-6_13">As noted briefly in the introduction to this section, there is a dedicated test database, <code>db/test.sqlite3</code>, for this purpose.&nbsp;<a class="arrow" href="#fnref-6_13">&uarr;</a></li>
-<li id="fn-6_14">Of course, we could just edit the migration file for the <code>users</code> table in <a class="ref" href="modeling-users.html#code-users_migration">Listing&nbsp;6.2</a> but that would require rolling back and then migrating back up. The Rails Way is to use migrations every time we discover that our data model needs to change.&nbsp;<a class="arrow" href="#fnref-6_14">&uarr;</a></li>
-<li id="fn-6_15">Direct experimentation with SQLite on my system and PostgreSQL on Heroku show that this step is, in fact, necessary.&nbsp;<a class="arrow" href="#fnref-6_15">&uarr;</a></li>
-<li id="fn-6_16">http://railstutorial.org/book?version=3.0&nbsp;<a class="arrow" href="#fnref-6_16">&uarr;</a></li>
+<li id="fn-6_14">Technically, only the domain part of the email address is case-insensitive: foo@bar.com is actually different from Foo@bar.com. In practice, though, it is a bad idea to rely on this fact; as noted at <a href="http://email.about.com/od/emailbehindthescenes/f/email_case_sens.htm">about.com</a>, &ldquo;Since the case sensitivity of email addresses can create a lot of confusion, interoperability problems and widespread headaches, it would be foolish to require email addresses to be typed with the correct case. Hardly any email service or ISP does enforce case sensitive email addresses, returning messages whose recipient&rsquo;s email address was not typed correctly (in all upper case, for example). &rdquo; Thanks to reader Riley Moses for pointing this out.&nbsp;<a class="arrow" href="#fnref-6_14">&uarr;</a></li>
+<li id="fn-6_15">Of course, we could just edit the migration file for the <code>users</code> table in <a class="ref" href="modeling-users.html#code-users_migration">Listing&nbsp;6.2</a> but that would require rolling back and then migrating back up. The Rails Way is to use migrations every time we discover that our data model needs to change.&nbsp;<a class="arrow" href="#fnref-6_15">&uarr;</a></li>
+<li id="fn-6_16">Direct experimentation with SQLite on my system and PostgreSQL on Heroku show that this step is, in fact, necessary.&nbsp;<a class="arrow" href="#fnref-6_16">&uarr;</a></li>
+<li id="fn-6_17">http://railstutorial.org/book?version=3.0&nbsp;<a class="arrow" href="#fnref-6_17">&uarr;</a></li>
 </ol>
 </div>
 
