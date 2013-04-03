@@ -547,13 +547,13 @@ in the world is either broken or very difficult to use. So users dread software.
 <h3><a id="sec-1_2_3" href="beginning.html#sec-the_first_application" class="heading"><span class="number">1.2.3</span> The first application</a></h3>
 
 
-<p>Virtually all Rails applications start the same way, with the <code>rails</code> command. This handy program creates a skeleton Rails application in a directory of your choice. To get started, make a directory for your Rails projects and then run the <code>rails</code> command to make the first application (<a class="ref" href="beginning.html#code-rails_command">Listing&nbsp;1.3</a>):</p>
+<p>Virtually all Rails applications start the same way, by running <code>rails new</code> command. This handy command creates a skeleton Rails application in a directory of your choice. To get started, make a directory for your Rails projects and then run <code>rails new</code> to make the first application (<a class="ref" href="beginning.html#code-rails_command">Listing&nbsp;1.3</a>):</p>
 
 <div class="label" id="code-rails_command"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 1.3.</span> <span class="description">Running <code>rails</code> to generate a new application.</span> </div>
+<div class="listing"><span class="header">Listing 1.3.</span> <span class="description">Running <code>rails new</code> to generate a new application.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mkdir rails_projects
 <span class="gp">$</span> <span class="nb">cd </span>rails_projects
 <span class="gp">$</span> rails new first_app
@@ -594,7 +594,7 @@ in the world is either broken or very difficult to use. So users dread software.
 </div></div>
 
 
-<p>As seen at the end of <a class="ref" href="beginning.html#code-rails_command">Listing&nbsp;1.3</a>, running <code>rails</code> automatically runs the <code>bundle install</code> command after the file creation is done. If that step doesn&rsquo;t work right now, don&rsquo;t worry; follow the steps in <a class="ref" href="beginning.html#sec-bundler">Section&nbsp;1.2.4</a> and you should be able to get it to work.</p>
+<p>As seen at the end of <a class="ref" href="beginning.html#code-rails_command">Listing&nbsp;1.3</a>, running <code>rails new</code> automatically runs the <code>bundle install</code> command after the file creation is done. If that step doesn&rsquo;t work right now, don&rsquo;t worry; follow the steps in <a class="ref" href="beginning.html#sec-bundler">Section&nbsp;1.2.4</a> and you should be able to get it to work.</p>
 
 <p>Notice how many files and directories the <code>rails</code> command creates. This standard directory and file structure (<a class="ref" href="beginning.html#fig-directory_structure_rails_3_2">Figure&nbsp;1.2</a>) is one of the many advantages of Rails; it immediately gets you from zero to a functional (if minimal) application. Moreover, since the structure is common to all Rails apps, you can immediately get your bearings when looking at someone else&rsquo;s code. A summary of the default Rails files appears in <a class="ref" href="beginning.html#table-rails_directory_structure">Table&nbsp;1.1</a>; we&rsquo;ll learn about most of these files and directories throughout the rest of this book. In particular, starting in <a class="ref" href="filling-in-the-layout.html#sec-the_asset_pipeline">Section&nbsp;5.2.1</a> we&rsquo;ll discuss the <code>app/assets</code> directory, part of the <em>asset pipeline</em> (new as of Rails&nbsp;3.1) that makes it easier than ever to organize and deploy assets such as cascading style sheets and JavaScript files.</p>
 
