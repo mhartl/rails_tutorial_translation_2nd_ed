@@ -1905,9 +1905,9 @@ THE SOFTWARE.
 
 <li>Verify that the code in <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a> allows the <code>gravatar_for</code> helper defined in <a class="ref" href="sign-up.html#sec-a_gravatar_image">Section&nbsp;7.1.4</a> to take an optional <code>size</code> parameter, allowing code like <code>gravatar_for user, size: 40</code> in the view.</li>
 
-<li>Write tests for the error messages implemented in <a class="ref" href="sign-up.html#code-f_error_messages">Listing&nbsp;7.22</a>. A suggested start appears in <a class="ref" href="sign-up.html#code-error_messages_test">Listing&nbsp;7.31</a>.</li>
+<li>Write tests for the error messages implemented in <a class="ref" href="sign-up.html#code-f_error_messages">Listing&nbsp;7.22</a>. A suggested start appears in <a class="ref" href="sign-up.html#code-error_messages_test">Listing&nbsp;7.30</a>.</li>
 
-<li>Using the code in <a class="ref" href="sign-up.html#code-password_digest_message_fix">Listing&nbsp;7.30</a>, replace the error message for a missing password, currently &ldquo;Password digest can&rsquo;t be blank&rdquo;, with the more understandable &ldquo;Password can&rsquo;t be blank&rdquo;. (This uses Rails&rsquo; internationalization support to produce a functional but rather hacky solution. Take special care to use spaces and not tab characters; <a href="http://www.yaml.org/faq.html">the YAML format forbids tabs</a>.) Note that, to avoid duplication of error messages, you should also remove the password&rsquo;s <code>presence: true</code> validation in the User model.</li>
+<li>Using the code in <a class="ref" href="sign-up.html#code-password_digest_message_fix">Listing&nbsp;7.31</a>, replace the error message for a missing password, currently &ldquo;Password digest can&rsquo;t be blank&rdquo;, with the more understandable &ldquo;Password can&rsquo;t be blank&rdquo;. (This uses Rails&rsquo; internationalization support to produce a functional but rather hacky solution. Take special care to use spaces and not tab characters; <a href="http://www.yaml.org/faq.html">the YAML format forbids tabs</a>.) Note that, to avoid duplication of error messages, you should also remove the password&rsquo;s <code>presence: true</code> validation in the User model.</li>
 
 <li>By writing the test first or by intentionally breaking and then fixing the application code, verify that the tests in <a class="ref" href="sign-up.html#code-after_save_tests">Listing&nbsp;7.32</a> correctly specify the desired behavior after saving the user in the <code>create</code> action.</li>
 
@@ -1939,27 +1939,11 @@ THE SOFTWARE.
 
 
 
-<div class="label" id="code-password_digest_message_fix"></div>
-
-
-<div class="codelisting">
-<div class="listing"><span class="header">Listing 7.30.</span> <span class="description">Hacking a better error message for missing passwords. <br /> <code>config/locales/en.yml</code></span> </div>
-<div class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">activerecord</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
-        <span class="l-Scalar-Plain">password_digest</span><span class="p-Indicator">:</span> <span class="s">&quot;Password&quot;</span>
-</pre></div>
-</div></div>
-
-
-
-
 <div class="label" id="code-error_messages_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">Suggested error messages tests. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 7.30.</span> <span class="description">Suggested error messages tests. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre>  <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1982,6 +1966,22 @@ THE SOFTWARE.
       <span class="o">.</span>
       <span class="o">.</span>
       <span class="o">.</span>
+</pre></div>
+</div></div>
+
+
+
+
+<div class="label" id="code-password_digest_message_fix"></div>
+
+
+<div class="codelisting">
+<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">Hacking a better error message for missing passwords. <br /> <code>config/locales/en.yml</code></span> </div>
+<div class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
+  <span class="l-Scalar-Plain">activerecord</span><span class="p-Indicator">:</span>
+    <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
+      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
+        <span class="l-Scalar-Plain">password_digest</span><span class="p-Indicator">:</span> <span class="s">&quot;Password&quot;</span>
 </pre></div>
 </div></div>
 
