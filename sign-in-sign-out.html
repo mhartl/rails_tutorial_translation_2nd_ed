@@ -170,7 +170,7 @@ THE SOFTWARE.
 
   <span class="n">describe</span> <span class="s2">&quot;signin page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signin_path</span> <span class="p">}</span>
-
+    
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
   <span class="k">end</span>
@@ -322,10 +322,10 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;signin&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signin_path</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;with invalid information&quot;</span> <span class="k">do</span>
       <span class="n">before</span> <span class="p">{</span> <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span> <span class="p">}</span>
-
+      
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Invalid&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="k">end</span>
@@ -377,7 +377,7 @@ THE SOFTWARE.
         <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span>
         <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
       <span class="k">end</span>
-
+      
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_link</span><span class="p">(</span><span class="s1">&#39;Profile&#39;</span><span class="p">,</span> <span class="ss">href:</span> <span class="n">user_path</span><span class="p">(</span><span class="n">user</span><span class="p">))</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_link</span><span class="p">(</span><span class="s1">&#39;Sign out&#39;</span><span class="p">,</span> <span class="ss">href:</span> <span class="n">signout_path</span><span class="p">)</span> <span class="p">}</span>
@@ -643,7 +643,7 @@ This means that</p>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
-
+  
   <span class="k">def</span> <span class="nf">destroy</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -701,13 +701,13 @@ This means that</p>
   <span class="n">describe</span> <span class="s2">&quot;signin&quot;</span> <span class="k">do</span>
 
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signin_path</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;with invalid information&quot;</span> <span class="k">do</span>
       <span class="n">before</span> <span class="p">{</span> <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span> <span class="p">}</span>
-
+      
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Invalid&#39;</span><span class="p">)</span> <span class="p">}</span>
-
+      
       <span class="n">describe</span> <span class="s2">&quot;after visiting another page&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">click_link</span> <span class="s2">&quot;Home&quot;</span> <span class="p">}</span>
         <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">)</span> <span class="p">}</span>
@@ -751,7 +751,7 @@ This means that</p>
       <span class="n">render</span> <span class="s1">&#39;new&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
-
+  
   <span class="k">def</span> <span class="nf">destroy</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -940,12 +940,12 @@ This means that</p>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
-
+  
   <span class="n">before</span> <span class="k">do</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">email:</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span> 
                      <span class="ss">password:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">password_confirmation:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="vi">@user</span> <span class="p">}</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1029,7 +1029,7 @@ This means that</p>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="kp">private</span>
-
+  
     <span class="k">def</span> <span class="nf">create_remember_token</span>
       <span class="nb">self</span><span class="o">.</span><span class="n">remember_token</span> <span class="o">=</span> <span class="no">SecureRandom</span><span class="o">.</span><span class="n">urlsafe_base64</span>
     <span class="k">end</span>
@@ -1925,13 +1925,13 @@ if-else branching structure inside of Embedded Ruby:</p>
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
 
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-
+  
   <span class="n">describe</span> <span class="s2">&quot;signin&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signin_path</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;with invalid information&quot;</span> <span class="k">do</span>
       <span class="n">before</span> <span class="p">{</span> <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span> <span class="p">}</span>
-
+      
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Invalid&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="k">end</span>

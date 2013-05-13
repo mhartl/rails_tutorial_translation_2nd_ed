@@ -657,7 +657,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="kp">private</span>
-
+    
     <span class="k">def</span> <span class="nf">signed_in_user</span>
       <span class="n">redirect_to</span> <span class="n">signin_url</span><span class="p">,</span> <span class="ss">notice:</span> <span class="s2">&quot;Please sign in.&quot;</span> <span class="k">unless</span> <span class="n">signed_in?</span>
     <span class="k">end</span>
@@ -803,7 +803,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="k">def</span> <span class="nf">edit</span>
   <span class="k">end</span>
-
+  
   <span class="k">def</span> <span class="nf">update</span>
     <span class="k">if</span> <span class="vi">@user</span><span class="o">.</span><span class="n">update_attributes</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:user</span><span class="o">]</span><span class="p">)</span>
       <span class="n">flash</span><span class="o">[</span><span class="ss">:success</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Profile updated&quot;</span>
@@ -817,7 +817,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="kp">private</span>
-
+    
     <span class="k">def</span> <span class="nf">signed_in_user</span>
       <span class="n">redirect_to</span> <span class="n">signin_url</span><span class="p">,</span> <span class="ss">notice:</span> <span class="s2">&quot;Please sign in.&quot;</span> <span class="k">unless</span> <span class="n">signed_in?</span>
     <span class="k">end</span>
@@ -912,7 +912,7 @@ THE SOFTWARE.
         <span class="k">end</span>
 
         <span class="n">describe</span> <span class="s2">&quot;after signing in&quot;</span> <span class="k">do</span>
-
+          
           <span class="n">it</span> <span class="s2">&quot;should render the desired protected page&quot;</span> <span class="k">do</span>
             <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Edit user&#39;</span><span class="p">)</span>
           <span class="k">end</span>
@@ -976,7 +976,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="kp">private</span>
-
+    
     <span class="k">def</span> <span class="nf">signed_in_user</span>
       <span class="k">unless</span> <span class="n">signed_in?</span>
         <span class="n">store_location</span>
@@ -1132,7 +1132,7 @@ THE SOFTWARE.
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
 
   <span class="n">describe</span> <span class="s2">&quot;index&quot;</span> <span class="k">do</span>
@@ -1145,7 +1145,7 @@ THE SOFTWARE.
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
-
+    
     <span class="n">it</span> <span class="s2">&quot;should list each user&quot;</span> <span class="k">do</span>
       <span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span>
         <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;li&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -1534,21 +1534,21 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
 
   <span class="n">describe</span> <span class="s2">&quot;index&quot;</span> <span class="k">do</span>
-
+    
     <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
 
     <span class="n">before</span><span class="p">(</span><span class="ss">:each</span><span class="p">)</span> <span class="k">do</span>
       <span class="n">sign_in</span> <span class="n">user</span>
       <span class="n">visit</span> <span class="n">users_path</span>
     <span class="k">end</span>
-
+    
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;pagination&quot;</span> <span class="k">do</span>
 
       <span class="n">before</span><span class="p">(</span><span class="ss">:all</span><span class="p">)</span> <span class="p">{</span> <span class="mi">30</span><span class="o">.</span><span class="n">times</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span> <span class="p">}</span>
@@ -1986,21 +1986,21 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
 
   <span class="n">describe</span> <span class="s2">&quot;index&quot;</span> <span class="k">do</span>
-
+    
     <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-
+    
     <span class="n">before</span> <span class="k">do</span>
       <span class="n">sign_in</span> <span class="n">user</span>
       <span class="n">visit</span> <span class="n">users_path</span>
     <span class="k">end</span>
-
+    
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;pagination&quot;</span> <span class="k">do</span>
       <span class="o">.</span>
       <span class="o">.</span>
@@ -2114,9 +2114,9 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
     <span class="n">describe</span> <span class="s2">&quot;as non-admin user&quot;</span> <span class="k">do</span>
       <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">let</span><span class="p">(</span><span class="ss">:non_admin</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-
+      
       <span class="n">before</span> <span class="p">{</span> <span class="n">sign_in</span> <span class="n">non_admin</span> <span class="p">}</span>
-
+      
       <span class="n">describe</span> <span class="s2">&quot;submitting a DELETE request to the Users#destroy action&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
         <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="p">}</span>        
@@ -2363,7 +2363,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
         <span class="k">end</span>
 
         <span class="n">describe</span> <span class="s2">&quot;after signing in&quot;</span> <span class="k">do</span>
-
+          
           <span class="n">it</span> <span class="s2">&quot;should render the desired protected page&quot;</span> <span class="k">do</span>
             <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Edit user&#39;</span><span class="p">)</span>
           <span class="k">end</span>
@@ -2376,7 +2376,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
               <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span>
               <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
             <span class="k">end</span>
-
+            
             <span class="n">it</span> <span class="s2">&quot;should render the default (profile) page&quot;</span> <span class="k">do</span>
               <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
             <span class="k">end</span>

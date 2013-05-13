@@ -417,7 +417,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <div class="listing"><span class="header">Listing 11.6.</span> <span class="description">Adding the <code>belongs_to</code> associations to the Relationship model. <br /> <code>app/models/relationship.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord::Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:followed_id</span>
-
+  
   <span class="n">belongs_to</span> <span class="ss">:follower</span><span class="p">,</span> <span class="ss">class_name:</span> <span class="s2">&quot;User&quot;</span>
   <span class="n">belongs_to</span> <span class="ss">:followed</span><span class="p">,</span> <span class="ss">class_name:</span> <span class="s2">&quot;User&quot;</span>
 <span class="k">end</span>
@@ -476,10 +476,10 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <div class="listing"><span class="header">Listing 11.8.</span> <span class="description">Adding the Relationship model validations. <br /> <code>app/models/relationship.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Relationship</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord::Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:followed_id</span>
-
+  
   <span class="n">belongs_to</span> <span class="ss">:follower</span><span class="p">,</span> <span class="ss">class_name:</span> <span class="s2">&quot;User&quot;</span>
   <span class="n">belongs_to</span> <span class="ss">:followed</span><span class="p">,</span> <span class="ss">class_name:</span> <span class="s2">&quot;User&quot;</span>
-
+  
   <span class="n">validates</span> <span class="ss">:follower_id</span><span class="p">,</span> <span class="ss">presence:</span> <span class="kp">true</span>
   <span class="n">validates</span> <span class="ss">:followed_id</span><span class="p">,</span> <span class="ss">presence:</span> <span class="kp">true</span>
 <span class="k">end</span>
@@ -681,7 +681,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="k">def</span> <span class="nf">follow!</span><span class="p">(</span><span class="n">other_user</span><span class="p">)</span>
     <span class="n">relationships</span><span class="o">.</span><span class="n">create!</span><span class="p">(</span><span class="ss">followed_id:</span> <span class="n">other_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
   <span class="k">end</span>
-
+  
   <span class="k">def</span> <span class="nf">unfollow!</span><span class="p">(</span><span class="n">other_user</span><span class="p">)</span>
     <span class="n">relationships</span><span class="o">.</span><span class="n">find_by_followed_id</span><span class="p">(</span><span class="n">other_user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">destroy</span>
   <span class="k">end</span>
@@ -1001,7 +1001,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
         <span class="n">sign_in</span> <span class="n">user</span>
         <span class="n">visit</span> <span class="n">root_path</span>
       <span class="k">end</span>
-
+      
       <span class="n">it</span> <span class="s2">&quot;should render the user&#39;s feed&quot;</span> <span class="k">do</span>
         <span class="n">user</span><span class="o">.</span><span class="n">feed</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">item</span><span class="o">|</span>
           <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s2">&quot;li#</span><span class="si">#{</span><span class="n">item</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">item</span><span class="o">.</span><span class="n">content</span><span class="p">)</span>
@@ -1377,7 +1377,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
           <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">following_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
           <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
         <span class="k">end</span>
-
+        
         <span class="n">describe</span> <span class="s2">&quot;visiting the followers page&quot;</span> <span class="k">do</span>
           <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">followers_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
           <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign in&#39;</span><span class="p">)</span> <span class="p">}</span>
@@ -1564,7 +1564,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
     <span class="n">describe</span> <span class="s2">&quot;follow/unfollow buttons&quot;</span> <span class="k">do</span>
       <span class="n">let</span><span class="p">(</span><span class="ss">:other_user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">before</span> <span class="p">{</span> <span class="n">sign_in</span> <span class="n">user</span> <span class="p">}</span>
-
+      
       <span class="n">describe</span> <span class="s2">&quot;following a user&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">user_path</span><span class="p">(</span><span class="n">other_user</span><span class="p">)</span> <span class="p">}</span>
 
@@ -2487,7 +2487,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <div class="listing"><span class="header">Listing 11.47.</span> <span class="description">A compact refactoring of <a class="ref" href="following-users.html#code-relationships_controller_ajax">Listing&nbsp;11.38</a>.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">RelationshipsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span>
-
+  
   <span class="n">respond_to</span> <span class="ss">:html</span><span class="p">,</span> <span class="ss">:js</span>
 
   <span class="k">def</span> <span class="nf">create</span>
