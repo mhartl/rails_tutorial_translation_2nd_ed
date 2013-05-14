@@ -487,9 +487,9 @@ THE SOFTWARE.
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-  
+
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;signup page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signup_path</span> <span class="p">}</span>
 
@@ -588,13 +588,13 @@ THE SOFTWARE.
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-  
+
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;profile page&quot;</span> <span class="k">do</span>
     <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
-  
+
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
   <span class="k">end</span>
@@ -1959,7 +1959,7 @@ THE SOFTWARE.
       <span class="o">.</span>
       <span class="n">describe</span> <span class="s2">&quot;after submission&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">click_button</span> <span class="n">submit</span> <span class="p">}</span>
-                
+
         <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sign up&#39;</span><span class="p">)</span> <span class="p">}</span>
         <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_content</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">)</span> <span class="p">}</span>
       <span class="k">end</span>

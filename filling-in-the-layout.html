@@ -1394,7 +1394,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
       <span class="n">visit</span> <span class="n">root_path</span>
       <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span>
     <span class="k">end</span>
-    
+
     <span class="n">it</span> <span class="s2">&quot;should have the base title&quot;</span> <span class="k">do</span>
       <span class="n">visit</span> <span class="n">root_path</span>
       <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span>
@@ -1434,7 +1434,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
                     <span class="ss">text:</span> <span class="s2">&quot;Ruby on Rails Tutorial Sample App | About Us&quot;</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;Contact page&quot;</span> <span class="k">do</span>
 
     <span class="n">it</span> <span class="s2">&quot;should have the h1 &#39;Contact&#39;&quot;</span> <span class="k">do</span>
@@ -1713,7 +1713,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
     <span class="n">visit</span> <span class="n">root_path</span>
     <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should have the base title&quot;</span> <span class="k">do</span>
     <span class="n">visit</span> <span class="n">root_path</span>
     <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span>
@@ -1737,7 +1737,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
   <span class="n">it</span> <span class="s2">&quot;should have the h1 &#39;Sample App&#39;&quot;</span> <span class="k">do</span>
     <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span>
   <span class="k">end</span>
-  
+
   <span class="n">it</span> <span class="s2">&quot;should have the base title&quot;</span> <span class="k">do</span>
     <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span>
                       <span class="ss">text:</span> <span class="s2">&quot;Ruby on Rails Tutorial Sample App&quot;</span><span class="p">)</span>
@@ -1793,7 +1793,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <p>Applying these changes gives much more compact tests for the Home page:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;Home page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span> 
 
@@ -1837,7 +1837,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <p>Files in the <code>spec/support</code> directory are automatically included by RSpec, which means that we can write the Home tests as follows:</p>
 
 <div class="code"><div class="highlight"><pre>  <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;Home page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span> 
 
@@ -1871,21 +1871,21 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 
   <span class="n">describe</span> <span class="s2">&quot;Help page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">help_path</span> <span class="p">}</span>
-    
+
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;Help&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">full_title</span><span class="p">(</span><span class="s1">&#39;Help&#39;</span><span class="p">))</span> <span class="p">}</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;About page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">about_path</span> <span class="p">}</span>
-    
+
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;About&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">full_title</span><span class="p">(</span><span class="s1">&#39;About Us&#39;</span><span class="p">))</span> <span class="p">}</span>
   <span class="k">end</span>
 
   <span class="n">describe</span> <span class="s2">&quot;Contact page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">contact_path</span> <span class="p">}</span>
-    
+
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;Contact&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">full_title</span><span class="p">(</span><span class="s1">&#39;Contact&#39;</span><span class="p">))</span> <span class="p">}</span>
   <span class="k">end</span>
@@ -1995,9 +1995,9 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-  
+
   <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
-  
+
   <span class="n">describe</span> <span class="s2">&quot;signup page&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">signup_path</span> <span class="p">}</span>
 
