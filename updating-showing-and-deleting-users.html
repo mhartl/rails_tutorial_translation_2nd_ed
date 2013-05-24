@@ -670,8 +670,10 @@ THE SOFTWARE.
 
 <p>Note that <a class="ref" href="updating-showing-and-deleting-users.html#code-authorize_before_filter">Listing&nbsp;9.12</a> uses a shortcut for setting <code>flash[:notice]</code> by passing an options hash to the <code>redirect_to</code> function. The code in <a class="ref" href="updating-showing-and-deleting-users.html#code-authorize_before_filter">Listing&nbsp;9.12</a> is equivalent to the more verbose</p>
 
-<div class="code"><div class="highlight"><pre><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Please sign in.&quot;</span>
-<span class="n">redirect_to</span> <span class="n">signin_url</span>
+<div class="code"><div class="highlight"><pre><span class="k">unless</span> <span class="n">signed_in?</span>
+  <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Please sign in.&quot;</span>
+  <span class="n">redirect_to</span> <span class="n">signin_url</span>
+<span class="k">end</span>
 </pre></div>
 </div>
 
