@@ -307,7 +307,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
       <span class="n">expect</span> <span class="k">do</span>
         <span class="no">Relationship</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">follower_id:</span> <span class="n">follower</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
       <span class="k">end</span><span class="o">.</span><span class="n">to</span> <span class="n">raise_error</span><span class="p">(</span><span class="ss">ActiveModel::MassAssignmentSecurity</span><span class="o">::</span><span class="no">Error</span><span class="p">)</span>
-    <span class="k">end</span>    
+    <span class="k">end</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -397,7 +397,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">describe</span> <span class="s2">&quot;follower methods&quot;</span> <span class="k">do</span>    
+  <span class="n">describe</span> <span class="s2">&quot;follower methods&quot;</span> <span class="k">do</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:follower</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:followed</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">its</span><span class="p">(</span><span class="ss">:follower</span><span class="p">)</span> <span class="p">{</span> <span class="n">should</span> <span class="o">==</span> <span class="n">follower</span> <span class="p">}</span>
@@ -560,14 +560,14 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:followed_users</span><span class="p">)</span> <span class="p">}</span>  
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:followed_users</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:following?</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:follow!</span><span class="p">)</span> <span class="p">}</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;following&quot;</span> <span class="k">do</span>
-    <span class="n">let</span><span class="p">(</span><span class="ss">:other_user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>    
+    <span class="n">let</span><span class="p">(</span><span class="ss">:other_user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">before</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">save</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">follow!</span><span class="p">(</span><span class="n">other_user</span><span class="p">)</span>
@@ -1269,9 +1269,9 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 </div></div>
 
 
-<p>These two forms both use <code>form_for</code> to manipulate a Relationship model object; the main difference between the two is that <a class="ref" href="following-users.html#code-follow_form">Listing&nbsp;11.25</a> builds a <em>new</em> relationship, whereas <a class="ref" href="following-users.html#code-unfollow_form">Listing&nbsp;11.26</a> finds the existing relationship. Naturally, the former sends a <tt>POST</tt> request to the Relationships controller to <code>create</code> a relationship, while the latter sends a <tt>DELETE</tt> request to <code>destroy</code> a relationship. (We&rsquo;ll write these actions in <a class="ref" href="following-users.html#sec-a_working_follow_button_the_standard_way">Section&nbsp;11.2.4</a>.) Finally, you&rsquo;ll note that the follow/unfollow form doesn&rsquo;t have any content other than the button, but it still needs to send the <code>followed_id</code>, which we accomplish with the <code>hidden_field</code> method, which produces HTML of the form</p>
+<p>These two forms both use <code>form_for</code> to manipulate a Relationship model object; the main difference between the two is that <a class="ref" href="following-users.html#code-follow_form">Listing&nbsp;11.25</a> builds a <em>new</em> relationship, whereas <a class="ref" href="following-users.html#code-unfollow_form">Listing&nbsp;11.26</a> finds the existing relationship. Naturally, the former sends a <tt>POST</tt> request to the Relationships controller to <code>create</code> a relationship, while the latter sends a <tt>DELETE</tt> request to <code>destroy</code> a relationship. (We&rsquo;ll write these actions in <a class="ref" href="following-users.html#sec-a_working_follow_button_the_standard_way">Section&nbsp;11.2.4</a>.) Finally, you&rsquo;ll note that the follow form doesn&rsquo;t have any content other than the button, but it still needs to send the <code>followed_id</code> to the controller. We accomplish this with the <code>hidden_field</code> method in <a class="ref" href="following-users.html#code-follow_form">Listing&nbsp;11.25</a>, which produces HTML of the form</p>
 
-<div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;followed_relationship_followed_id&quot;</span>
+<div class="code"><div class="highlight"><pre><span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;relationship_followed_id&quot;</span>
 <span class="na">name=</span><span class="s">&quot;followed_relationship[followed_id]&quot;</span>
 <span class="na">type=</span><span class="s">&quot;hidden&quot;</span> <span class="na">value=</span><span class="s">&quot;3&quot;</span> <span class="nt">/&gt;</span>
 </pre></div>
@@ -1304,9 +1304,9 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
     <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;follow_form&#39;</span> <span class="k">if</span> <span class="n">signed_in?</span> <span class="cp">%&gt;</span>
     .
     .
-    .       
+    .
   <span class="nt">&lt;/div&gt;</span>
-<span class="nt">&lt;/div&gt;</span> 
+<span class="nt">&lt;/div&gt;</span>
 </pre></div>
 </div></div>
 
@@ -1452,7 +1452,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <div class="codelisting">
 <div class="listing"><span class="header">Listing 11.30.</span> <span class="description">The <code>following</code> and <code>followers</code> actions. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-  <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> 
+  <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span>
                 <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="p">,</span> <span class="ss">:following</span><span class="p">,</span> <span class="ss">:followers</span><span class="o">]</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1614,7 +1614,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-<span class="k">end</span>  
+<span class="k">end</span>
 </pre></div>
 </div></div>
 
@@ -1647,7 +1647,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 
         <span class="n">describe</span> <span class="s2">&quot;submitting to the destroy action&quot;</span> <span class="k">do</span>
           <span class="n">before</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">relationship_path</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">}</span>
-          <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">signin_path</span><span class="p">)</span> <span class="p">}</span>          
+          <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">signin_path</span><span class="p">)</span> <span class="p">}</span>
         <span class="k">end</span>
       <span class="k">end</span>
       <span class="o">.</span>
@@ -1985,7 +1985,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;micropost associations&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span> <span class="p">}</span>
-    <span class="n">let!</span><span class="p">(</span><span class="ss">:older_micropost</span><span class="p">)</span> <span class="k">do</span> 
+    <span class="n">let!</span><span class="p">(</span><span class="ss">:older_micropost</span><span class="p">)</span> <span class="k">do</span>
       <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">user:</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">created_at:</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">ago</span><span class="p">)</span>
     <span class="k">end</span>
     <span class="n">let!</span><span class="p">(</span><span class="ss">:newer_micropost</span><span class="p">)</span> <span class="k">do</span>
@@ -2280,7 +2280,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
   <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">from_users_followed_by</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
     <span class="n">followed_user_ids</span> <span class="o">=</span> <span class="s2">&quot;SELECT followed_id FROM relationships</span>
 <span class="s2">                         WHERE follower_id = :user_id&quot;</span>
-    <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_user_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id&quot;</span><span class="p">,</span> 
+    <span class="n">where</span><span class="p">(</span><span class="s2">&quot;user_id IN (</span><span class="si">#{</span><span class="n">followed_user_ids</span><span class="si">}</span><span class="s2">) OR user_id = :user_id&quot;</span><span class="p">,</span>
           <span class="ss">user_id:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -2357,8 +2357,6 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 </pre></div>
 </div>
 
-
-<p></p>
 
 <div class="label" id="sec-extensions_to_the_sample_application"></div>
 
