@@ -319,9 +319,9 @@ but this is not cause for concern.</p>
 <p>Instead of using an IDE, I prefer to use a <em>text editor</em> to edit text, and a <em>command line</em> to issue commands (<a class="ref" href="beginning.html#fig-editor_shell">Figure&nbsp;1.1</a>). Which combination you use depends on your tastes and your platform.</p>
 
 <ul>
-<li><strong>Text editor:</strong> I recommend <a href="http://www.sublimetext.com/2">Sublime Text&nbsp;2</a>, an outstanding cross-platform text editor that is in beta as of this writing but has already proven to be exceptionally powerful. Sublime Text is heavily influenced by <a href="http://macromates.com">TextMate</a>, and in fact is compatible with most TextMate customizations, such as snippets and color schemes. (TextMate, which is available only on OS&nbsp;X, is still a good choice if you use a Mac.) A second excellent choice is <a href="http://www.vim.org/">Vim</a>,<sup class="footnote" id="fnref-1_9"><a href="#fn-1_9">9</a></sup> versions of which are available for all major platforms. Sublime Text can be obtained commercially, whereas Vim can be obtained at no cost; both are industrial-strength editors, but in my experience Sublime Text is <em>much</em> more accessible to beginners. </li>
+<li><strong>Text editor:</strong> I recommend <a href="http://www.sublimetext.com/2">Sublime Text&nbsp;2</a>, an outstanding cross-platform text editor that is in beta as of this writing but has already proven to be exceptionally powerful. Sublime Text is heavily influenced by <a href="http://macromates.com">TextMate</a>, and in fact is compatible with most TextMate customizations, such as snippets and color schemes. (TextMate, which is available only on OS&nbsp;X, is still a good choice if you use a Mac.) A second excellent choice is <a href="http://www.vim.org/">Vim</a>,<sup class="footnote" id="fnref-1_9"><a href="#fn-1_9">9</a></sup> versions of which are available for all major platforms. Sublime Text can be obtained commercially, whereas Vim can be obtained at no cost; both are industrial-strength editors, but in my experience Sublime Text is <em>much</em> more accessible to beginners.</li>
 
-<li><strong>Terminal:</strong> On OS&nbsp;X, I recommend either use <a href="http://iterm.sourceforge.net/">iTerm</a> or the native Terminal app. On Linux, the default terminal is fine. On Windows, many users prefer to develop Rails applications in a virtual machine running Linux, in which case your command-line options reduce to the previous case. If developing within Windows itself, I recommend using the command prompt that comes with <a href="http://railsinstaller.org/">Rails Installer</a> (<a class="ref" href="beginning.html#sec-rails_installer_windows">Section&nbsp;1.2.2.1</a>). </li>
+<li><strong>Terminal:</strong> On OS&nbsp;X, I recommend either use <a href="http://iterm.sourceforge.net/">iTerm</a> or the native Terminal app. On Linux, the default terminal is fine. On Windows, many users prefer to develop Rails applications in a virtual machine running Linux, in which case your command-line options reduce to the previous case. If developing within Windows itself, I recommend using the command prompt that comes with <a href="http://railsinstaller.org/">Rails Installer</a> (<a class="ref" href="beginning.html#sec-rails_installer_windows">Section&nbsp;1.2.2.1</a>).</li>
 </ul>
 
 
@@ -556,7 +556,7 @@ in the world is either broken or very difficult to use. So users dread software.
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> mkdir rails_projects
 <span class="gp">$</span> <span class="nb">cd </span>rails_projects
 <span class="gp">$</span> rails new first_app
-<span class="go">      create  </span>
+<span class="go">      create</span>
 <span class="go">      create  README.rdoc</span>
 <span class="go">      create  Rakefile</span>
 <span class="go">      create  config.ru</span>
@@ -1097,15 +1097,15 @@ doc/
 
 <p>GitHub has a variety of paid plans, but for open-source code their services are free, so sign up for a <a href="https://github.com/signup/free">free GitHub account</a> if you don&rsquo;t have one already. (You might have to follow the <a href="http://help.github.com/key-setup-redirect">GitHub tutorial on creating SSH keys</a> first.) After signing up, click on the link to <a href="http://github.com/new">create a repository</a> and fill in the information as in <a class="ref" href="beginning.html#fig-create_first_repository">Figure&nbsp;1.6</a>. (Take care <em>not</em> to initialize the repository with a <code>README</code> file, as <code>rails new</code> creates one of those automatically.) After submitting the form, push up your first application as follows:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;username&gt;/first_app.git
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin https://github.com/&lt;username&gt;/first_app.git
 <span class="gp">$</span> git push -u origin master
 </pre></div>
 </div>
 
 
-<p>These commands tell Git that you want to add GitHub as the origin for your main (<em>master</em>) branch and then push your repository up to GitHub. (Don&rsquo;t worry about what the <tt>-u</tt> flag does; if you&rsquo;re curious, do a web search for &ldquo;git set upstream&rdquo;.) Of course, you should replace <tt class="verb">&lt;username&gt;</tt> with your actual username. For example, the command I ran for the <code>railstutorial</code> user was</p>
+<p>These commands tell Git that you want to add GitHub as the origin for your main (<em>master</em>) branch and then push your repository up to GitHub. (Don&rsquo;t worry about what the <tt>-u</tt> flag does; if you&rsquo;re curious, do a web search for &ldquo;git set upstream&rdquo;.) Of course, you should replace <tt class="verb">&lt;username&gt;</tt> with your actual username. For example, the command I ran was</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:railstutorial/first_app.git
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin https://github.com/mhartl/first_app.git
 </pre></div>
 </div>
 

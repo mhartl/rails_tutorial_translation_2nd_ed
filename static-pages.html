@@ -237,7 +237,7 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 <p>Since we&rsquo;ll be using this sample app throughout the rest of the book, it&rsquo;s a good idea to make a repository at GitHub (<a class="ref" href="static-pages.html#fig-create_repository">Figure&nbsp;3.1</a>) and push it up:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin git@github.com:&lt;username&gt;/sample_app.git
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> git remote add origin https://github.com/&lt;username&gt;/sample_app.git
 <span class="gp">$</span> git push -u origin master
 </pre></div>
 </div>
@@ -1552,9 +1552,9 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 <li>Make a Contact page for the sample app. Following the model in <a class="ref" href="static-pages.html#code-pages_controller_spec_title">Listing&nbsp;3.18</a>, first write a test for the existence of a page at the URI /static_pages/contact by testing for the right <code>h1</code> content, and then write a second test for the title &ldquo;Ruby on Rails Tutorial Sample App | Contact&rdquo;. Get your tests to pass, and then fill in the Contact page with the content from <a class="ref" href="static-pages.html#code-proposed_contact_page">Listing&nbsp;3.29</a>. (This exercise is solved as part of <a class="ref" href="filling-in-the-layout.html#sec-layout_links">Section&nbsp;5.3</a>.)</li>
 
-<li>You may have noticed some repetition in the StaticPages controller spec (<a class="ref" href="static-pages.html#code-pages_controller_spec_title">Listing&nbsp;3.18</a>). In particular, the base title, &ldquo;Ruby on Rails Tutorial Sample App&rdquo;, is the same for every title test. Using the RSpec <code>let</code> function, which creates a variable corresponding to its argument, verify that the tests in <a class="ref" href="static-pages.html#code-pages_controller_spec_exercise">Listing&nbsp;3.30</a> still pass. <a class="ref" href="static-pages.html#code-pages_controller_spec_exercise">Listing&nbsp;3.30</a> introduces <em>string interpolation</em>, which is covered further in <a class="ref" href="rails-flavored-ruby.html#sec-strings">Section&nbsp;4.2.2</a>. </li>
+<li>You may have noticed some repetition in the StaticPages controller spec (<a class="ref" href="static-pages.html#code-pages_controller_spec_title">Listing&nbsp;3.18</a>). In particular, the base title, &ldquo;Ruby on Rails Tutorial Sample App&rdquo;, is the same for every title test. Using the RSpec <code>let</code> function, which creates a variable corresponding to its argument, verify that the tests in <a class="ref" href="static-pages.html#code-pages_controller_spec_exercise">Listing&nbsp;3.30</a> still pass. <a class="ref" href="static-pages.html#code-pages_controller_spec_exercise">Listing&nbsp;3.30</a> introduces <em>string interpolation</em>, which is covered further in <a class="ref" href="rails-flavored-ruby.html#sec-strings">Section&nbsp;4.2.2</a>.</li>
 
-<li><strong>(advanced)</strong> As noted on the <a href="http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development">Heroku page on using <tt>sqlite3</tt> for development</a>, it&rsquo;s a good idea to use the same database in development, test, and production environments to minimize the possibility of subtle incompatibilities. Follow the <a href="http://devcenter.heroku.com/articles/local-postgresql">Heroku instructions for local PostgreSQL installation</a> to install the PostgreSQL database on your local system. Update your <code>Gemfile</code> to eliminate the <tt>sqlite3</tt> gem and use the <tt>pg</tt> gem exclusively, as shown in <a class="ref" href="static-pages.html#code-Gemfile_pg_gem">Listing&nbsp;3.31</a>. You will also have to learn about the <code>config/database.yml</code> file and how to run PostgreSQL locally. Your goal should be to create and configure both the development database and the test database to use PostgreSQL. <strong>Warning:</strong> You may find this exercise challenging, and I recommend it only for advanced users. If you get stuck, don&rsquo;t hesitate to skip it; as noted previously, the sample application developed in this tutorial is fully compatible with both SQLite and PostgreSQL. </li>
+<li><strong>(advanced)</strong> As noted on the <a href="http://devcenter.heroku.com/articles/how-do-i-use-sqlite3-for-development">Heroku page on using <tt>sqlite3</tt> for development</a>, it&rsquo;s a good idea to use the same database in development, test, and production environments to minimize the possibility of subtle incompatibilities. Follow the <a href="http://devcenter.heroku.com/articles/local-postgresql">Heroku instructions for local PostgreSQL installation</a> to install the PostgreSQL database on your local system. Update your <code>Gemfile</code> to eliminate the <tt>sqlite3</tt> gem and use the <tt>pg</tt> gem exclusively, as shown in <a class="ref" href="static-pages.html#code-Gemfile_pg_gem">Listing&nbsp;3.31</a>. You will also have to learn about the <code>config/database.yml</code> file and how to run PostgreSQL locally. Your goal should be to create and configure both the development database and the test database to use PostgreSQL. <strong>Warning:</strong> You may find this exercise challenging, and I recommend it only for advanced users. If you get stuck, don&rsquo;t hesitate to skip it; as noted previously, the sample application developed in this tutorial is fully compatible with both SQLite and PostgreSQL.</li>
 
 </ol>
 
@@ -1862,7 +1862,7 @@ bundler_stubs/
   <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.2&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;rb-fsevent&#39;</span><span class="p">,</span> <span class="s1">&#39;0.9.1&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="kp">false</span>
   <span class="n">gem</span> <span class="s1">&#39;growl&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.3&#39;</span>
-<span class="k">end</span> 
+<span class="k">end</span>
 </pre></div>
 </div>
 
@@ -1872,7 +1872,7 @@ bundler_stubs/
   <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.2&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;rb-inotify&#39;</span><span class="p">,</span> <span class="s1">&#39;0.8.8&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;libnotify&#39;</span><span class="p">,</span> <span class="s1">&#39;0.5.9&#39;</span>
-<span class="k">end</span> 
+<span class="k">end</span>
 </pre></div>
 </div>
 
@@ -1883,7 +1883,7 @@ bundler_stubs/
   <span class="n">gem</span> <span class="s1">&#39;rb-fchange&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0.5&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;rb-notifu&#39;</span><span class="p">,</span> <span class="s1">&#39;0.0.4&#39;</span>
   <span class="n">gem</span> <span class="s1">&#39;win32console&#39;</span><span class="p">,</span> <span class="s1">&#39;1.3.0&#39;</span>
-<span class="k">end</span> 
+<span class="k">end</span>
 </pre></div>
 </div>
 
@@ -1921,11 +1921,11 @@ bundler_stubs/
     <span class="o">[</span><span class="s2">&quot;spec/routing/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_routing_spec.rb&quot;</span><span class="p">,</span>
      <span class="s2">&quot;spec/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="si">}</span><span class="s2">s/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">2</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span><span class="p">,</span>
      <span class="s2">&quot;spec/acceptance/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span><span class="p">,</span>
-     <span class="p">(</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="sr">/_pages/</span><span class="o">]</span> <span class="p">?</span> <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">:</span> 
+     <span class="p">(</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="sr">/_pages/</span><span class="o">]</span> <span class="p">?</span> <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">:</span>
                        <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">singularize</span><span class="si">}</span><span class="s2">_pages_spec.rb&quot;</span><span class="p">)</span><span class="o">]</span>
   <span class="k">end</span>
   <span class="n">watch</span><span class="p">(</span><span class="sr">%r{^app/views/(.+)/}</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">m</span><span class="o">|</span>
-    <span class="p">(</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="sr">/_pages/</span><span class="o">]</span> <span class="p">?</span> <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">:</span> 
+    <span class="p">(</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">][</span><span class="sr">/_pages/</span><span class="o">]</span> <span class="p">?</span> <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span><span class="si">}</span><span class="s2">_spec.rb&quot;</span> <span class="p">:</span>
                        <span class="s2">&quot;spec/requests/</span><span class="si">#{</span><span class="n">m</span><span class="o">[</span><span class="mi">1</span><span class="o">].</span><span class="n">singularize</span><span class="si">}</span><span class="s2">_pages_spec.rb&quot;</span><span class="p">)</span>
   <span class="k">end</span>
   <span class="o">.</span>
@@ -2024,7 +2024,7 @@ bundler_stubs/
 <span class="nb">require</span> <span class="s1">&#39;spork&#39;</span>
 
 <span class="no">Spork</span><span class="o">.</span><span class="n">prefork</span> <span class="k">do</span>
-  <span class="c1"># Loading more in this block will cause your tests to run faster. However, </span>
+  <span class="c1"># Loading more in this block will cause your tests to run faster. However,</span>
   <span class="c1"># if you change any configuration or code from libraries loaded here, you&#39;ll</span>
   <span class="c1"># need to restart spork for it take effect.</span>
   <span class="c1"># This file is copied to spec/ when you run &#39;rails generate rspec:install&#39;</span>
