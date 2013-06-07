@@ -429,7 +429,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>(A second option is to use <code>form_tag</code> in place of <code>form_for</code>; this might be more even idiomatically correct Rails, but it has less in common with the signup form, and at this stage I want to emphasize the parallel structure. Making a working form with <code>form_tag</code> is left as an exercise (<a class="ref" href="sign-in-sign-out.html#sec-sign_in_out_exercises">Section&nbsp;8.5</a>).)</p>
+<p>(A second option is to use <code>form_tag</code> in place of <code>form_for</code>; this might be even more idiomatically correct Rails, but it has less in common with the signup form, and at this stage I want to emphasize the parallel structure. Making a working form with <code>form_tag</code> is left as an exercise (<a class="ref" href="sign-in-sign-out.html#sec-sign_in_out_exercises">Section&nbsp;8.5</a>).)</p>
 
 <p>With the proper <code>form_for</code> in hand, it&rsquo;s easy to make a signin form to match the mockup in <a class="ref" href="sign-in-sign-out.html#fig-signin_mockup">Figure&nbsp;8.1</a> using the signup form (<a class="ref" href="sign-up.html#code-signup_form">Listing&nbsp;7.17</a>) as a model, as shown in <a class="ref" href="sign-in-sign-out.html#code-signin_form">Listing&nbsp;8.7</a>.</p>
 
@@ -483,10 +483,10 @@ THE SOFTWARE.
   <span class="nt">&lt;/div&gt;</span>
   <span class="nt">&lt;div&gt;</span>
     <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;session_password&quot;</span><span class="nt">&gt;</span>Password<span class="nt">&lt;/label&gt;</span>
-    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;session_password&quot;</span> <span class="na">name=</span><span class="s">&quot;session[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> 
+    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;session_password&quot;</span> <span class="na">name=</span><span class="s">&quot;session[password]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span>
            <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
   <span class="nt">&lt;/div&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;btn btn-large btn-primary&quot;</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> 
+  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;btn btn-large btn-primary&quot;</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span>
        <span class="na">value=</span><span class="s">&quot;Sign in&quot;</span> <span class="nt">/&gt;</span>
 <span class="nt">&lt;/form&gt;</span>
 </pre></div>
@@ -553,8 +553,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>
-This means that</p>
+<p>This means that</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">params</span><span class="o">[</span><span class="ss">:session</span><span class="o">]</span>
 </pre></div>
@@ -878,7 +877,7 @@ This means that</p>
   <span class="o">.</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:password_confirmation</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:remember_token</span><span class="p">)</span> <span class="p">}</span>
-  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:authenticate</span><span class="p">)</span> <span class="p">}</span>  
+  <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:authenticate</span><span class="p">)</span> <span class="p">}</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -942,7 +941,7 @@ This means that</p>
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
 
   <span class="n">before</span> <span class="k">do</span>
-    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">email:</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span> 
+    <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">email:</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span>
                      <span class="ss">password:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">password_confirmation:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
   <span class="k">end</span>
 
@@ -1658,7 +1657,7 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <p>This completes the signup/signin/signout triumvirate, and the test suite should pass:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/ 
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
 </pre></div>
 </div>
 
@@ -1770,12 +1769,12 @@ if-else branching structure inside of Embedded Ruby:</p>
 <div class="codelisting">
 <div class="listing"><span class="header">Listing 8.32.</span> <span class="description">Cucumber features to test user signin. <br /> <code>features/signing_in.feature</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">Feature:</span><span class="nf"> Signing in</span>
-<span class="nf">  </span>
+
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Unsuccessful signin</span>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
 <span class="nf">    </span><span class="k">When </span><span class="nf">he submits invalid signin information</span>
 <span class="nf">    </span><span class="k">Then </span><span class="nf">he should see an error message</span>
-<span class="nf">  </span>
+
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Successful signin</span>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
 <span class="nf">      </span><span class="k">And </span><span class="nf">the user has an account</span>
@@ -1890,7 +1889,7 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <span class="no">When</span> <span class="sr">/^the user submits valid signin information$/</span> <span class="k">do</span>
   <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">email</span>
-  <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">password</span> 
+  <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">password</span>
   <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
 <span class="k">end</span>
 
@@ -1942,7 +1941,7 @@ if-else branching structure inside of Embedded Ruby:</p>
         <span class="n">fill_in</span> <span class="s2">&quot;Email&quot;</span><span class="p">,</span>    <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">email</span><span class="o">.</span><span class="n">upcase</span>
         <span class="n">fill_in</span> <span class="s2">&quot;Password&quot;</span><span class="p">,</span> <span class="ss">with:</span> <span class="n">user</span><span class="o">.</span><span class="n">password</span>
         <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
-      <span class="k">end</span> 
+      <span class="k">end</span>
 
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">}</span>
       <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;Sign out&#39;</span><span class="p">,</span> <span class="ss">href:</span> <span class="n">signout_path</span><span class="p">)</span> <span class="p">}</span>
