@@ -191,8 +191,8 @@ THE SOFTWARE.
 <span class="nv">$grayMediumLight</span><span class="o">:</span> <span class="mh">#eaeaea</span><span class="p">;</span>
 
 <span class="k">@mixin</span><span class="nf"> box_sizing</span> <span class="p">{</span>
-  <span class="na">-moz-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span> 
-  <span class="na">-webkit-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span> 
+  <span class="na">-moz-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+  <span class="na">-webkit-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
   <span class="na">box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="nc">.</span>
@@ -230,8 +230,8 @@ THE SOFTWARE.
   <span class="na">.</span>
   <span class="na">.</span>
   <span class="na">.</span>
-  <span class="na">-moz-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span> 
-  <span class="na">-webkit-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span> 
+  <span class="na">-moz-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
+  <span class="na">-webkit-box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
   <span class="na">box-sizing</span><span class="o">:</span> <span class="no">border</span><span class="o">-</span><span class="n">box</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -279,7 +279,7 @@ THE SOFTWARE.
 <div class="sidebar"><span class="title"><span class="header">Box 7.1.</span><span class="description">Rails environments</span></span>
 <p>Rails comes equipped with three environments: <tt>test</tt>, <tt>development</tt>, and <tt>production</tt>. The default environment for the Rails console is <tt>development</tt>:</p>
 
-<pre class="verbatim">  $ rails console 
+<pre class="verbatim">  $ rails console
   Loading development environment
   &gt;&gt; Rails.env
   =&gt; &quot;development&quot;
@@ -538,7 +538,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-<span class="k">end</span> 
+<span class="k">end</span>
 </pre></div>
 </div></div>
 
@@ -695,7 +695,7 @@ THE SOFTWARE.
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="n">email</span> <span class="o">=</span> <span class="s2">&quot;MHARTL@example.COM&quot;</span><span class="o">.</span>
 <span class="gp">&gt;&gt; </span><span class="ss">Digest::MD5</span><span class="o">::</span><span class="n">hexdigest</span><span class="p">(</span><span class="n">email</span><span class="o">.</span><span class="n">downcase</span><span class="p">)</span>
-<span class="go">=&gt; &quot;1fda4469bcbec3badf5418269ffc5968&quot; </span>
+<span class="go">=&gt; &quot;1fda4469bcbec3badf5418269ffc5968&quot;</span>
 </pre></div>
 </div>
 
@@ -1202,12 +1202,12 @@ THE SOFTWARE.
          <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
 
   <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;user_password_confirmation&quot;</span><span class="nt">&gt;</span>Confirmation<span class="nt">&lt;/label&gt;</span>
-  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password_confirmation&quot;</span> 
+  <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;user_password_confirmation&quot;</span>
          <span class="na">name=</span><span class="s">&quot;user[password_confirmation]&quot;</span> <span class="na">size=</span><span class="s">&quot;30&quot;</span> <span class="na">type=</span><span class="s">&quot;password&quot;</span> <span class="nt">/&gt;</span>
 
-  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;btn btn-large btn-primary&quot;</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span> 
+  <span class="nt">&lt;input</span> <span class="na">class=</span><span class="s">&quot;btn btn-large btn-primary&quot;</span> <span class="na">name=</span><span class="s">&quot;commit&quot;</span> <span class="na">type=</span><span class="s">&quot;submit&quot;</span>
          <span class="na">value=</span><span class="s">&quot;Create my account&quot;</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/form&gt;</span> 
+<span class="nt">&lt;/form&gt;</span>
 </pre></div>
 </div></div>
 
@@ -1523,7 +1523,7 @@ THE SOFTWARE.
 
 <div class="code"><div class="highlight"><pre><span class="gp">&gt;&gt; </span><span class="kp">include</span> <span class="ss">ActionView::Helpers</span><span class="o">::</span><span class="no">TextHelper</span>
 <span class="gp">&gt;&gt; </span><span class="n">pluralize</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span>
-<span class="go">=&gt; &quot;1 error&quot; </span>
+<span class="go">=&gt; &quot;1 error&quot;</span>
 <span class="gp">&gt;&gt; </span><span class="n">pluralize</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">)</span>
 <span class="go">=&gt; &quot;5 errors&quot;</span>
 </pre></div>
@@ -1727,7 +1727,7 @@ THE SOFTWARE.
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">flash</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="o">|</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;alert alert-</span><span class="cp">&lt;%=</span> <span class="n">key</span> <span class="cp">%&gt;</span><span class="s">&quot;</span><span class="nt">&gt;</span><span class="cp">&lt;%=</span> <span class="n">value</span> <span class="cp">%&gt;</span><span class="nt">&lt;/div&gt;</span>
-<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span> 
+<span class="cp">&lt;%</span> <span class="k">end</span> <span class="cp">%&gt;</span>
 </pre></div>
 </div>
 
@@ -1832,7 +1832,7 @@ THE SOFTWARE.
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
-  <span class="c1"># Force all access to the app over SSL, use Strict-Transport-Security, </span>
+  <span class="c1"># Force all access to the app over SSL, use Strict-Transport-Security,</span>
   <span class="c1"># and use secure cookies.</span>
   <span class="n">config</span><span class="o">.</span><span class="n">force_ssl</span> <span class="o">=</span> <span class="kp">true</span>
   <span class="o">.</span>
@@ -1907,7 +1907,7 @@ THE SOFTWARE.
 
 <li>Write tests for the error messages implemented in <a class="ref" href="sign-up.html#code-f_error_messages">Listing&nbsp;7.22</a>. A suggested start appears in <a class="ref" href="sign-up.html#code-error_messages_test">Listing&nbsp;7.30</a>.</li>
 
-<li>Using the code in <a class="ref" href="sign-up.html#code-password_digest_message_fix">Listing&nbsp;7.31</a>, replace the error message for a missing password, currently &ldquo;Password digest can&rsquo;t be blank&rdquo;, with the more understandable &ldquo;Password can&rsquo;t be blank&rdquo;. (This uses Rails&rsquo; internationalization support to produce a functional but rather hacky solution. Take special care to use spaces and not tab characters; <a href="http://www.yaml.org/faq.html">the YAML format forbids tabs</a>.) Note that, to avoid duplication of error messages, you should also remove the password&rsquo;s <code>presence: true</code> validation in the User model.</li>
+<li>Using the <code>after_validation</code> callback shown in <a class="ref" href="sign-up.html#code-password_digest_message_fix">Listing&nbsp;7.31</a>, remove the &ldquo;Password digest can&rsquo;t be blank&rdquo; error message mentioned in <a class="ref" href="sign-up.html#sec-signup_error_messages">Section&nbsp;7.3.2</a>.</li>
 
 <li>By writing the test first or by intentionally breaking and then fixing the application code, verify that the tests in <a class="ref" href="sign-up.html#code-after_save_tests">Listing&nbsp;7.32</a> correctly specify the desired behavior after saving the user in the <code>create</code> action.</li>
 
@@ -1976,12 +1976,17 @@ THE SOFTWARE.
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">Hacking a better error message for missing passwords. <br /> <code>config/locales/en.yml</code></span> </div>
-<div class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">en</span><span class="p-Indicator">:</span>
-  <span class="l-Scalar-Plain">activerecord</span><span class="p-Indicator">:</span>
-    <span class="l-Scalar-Plain">attributes</span><span class="p-Indicator">:</span>
-      <span class="l-Scalar-Plain">user</span><span class="p-Indicator">:</span>
-        <span class="l-Scalar-Plain">password_digest</span><span class="p-Indicator">:</span> <span class="s">&quot;Password&quot;</span>
+<div class="listing"><span class="header">Listing 7.31.</span> <span class="description">Hacking a better error message for missing passwords. <br /> <code>app/models/user.rb</code></span> </div>
+<div class="code"><div class="highlight"><pre><span class="l-Scalar-Plain">class User &lt; ActiveRecord::Base</span>
+  <span class="l-Scalar-Plain">.</span>
+  <span class="l-Scalar-Plain">.</span>
+  <span class="l-Scalar-Plain">.</span>
+  <span class="l-Scalar-Plain">validates :password_confirmation, presence</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">true</span>
+  <span class="l-Scalar-Plain">after_validation { self.errors.messages.delete(:password_digest) }</span>
+  <span class="l-Scalar-Plain">.</span>
+  <span class="l-Scalar-Plain">.</span>
+  <span class="l-Scalar-Plain">.</span>
+<span class="l-Scalar-Plain">end</span>
 </pre></div>
 </div></div>
 
