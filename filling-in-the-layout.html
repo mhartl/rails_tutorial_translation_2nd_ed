@@ -616,7 +616,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
     <span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span>    <span class="s2">&quot;application&quot;</span><span class="p">,</span> <span class="ss">media:</span> <span class="s2">&quot;all&quot;</span> <span class="cp">%&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">javascript_include_tag</span> <span class="s2">&quot;application&quot;</span> <span class="cp">%&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">csrf_meta_tags</span> <span class="cp">%&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/shim&#39;</span> <span class="cp">%&gt;</span>    
+    <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/shim&#39;</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/header&#39;</span> <span class="cp">%&gt;</span>
@@ -717,7 +717,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
     <span class="cp">&lt;%=</span> <span class="n">stylesheet_link_tag</span>    <span class="s2">&quot;application&quot;</span><span class="p">,</span> <span class="ss">media:</span> <span class="s2">&quot;all&quot;</span> <span class="cp">%&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">javascript_include_tag</span> <span class="s2">&quot;application&quot;</span> <span class="cp">%&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">csrf_meta_tags</span> <span class="cp">%&gt;</span>
-    <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/shim&#39;</span> <span class="cp">%&gt;</span>    
+    <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/shim&#39;</span> <span class="cp">%&gt;</span>
   <span class="nt">&lt;/head&gt;</span>
   <span class="nt">&lt;body&gt;</span>
     <span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;layouts/header&#39;</span> <span class="cp">%&gt;</span>
@@ -753,9 +753,9 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 
 <span class="nt">footer</span> <span class="nt">a</span> <span class="p">{</span>
   <span class="na">color</span><span class="o">:</span> <span class="mh">#555</span><span class="p">;</span>
-<span class="p">}</span>  
+<span class="p">}</span>
 
-<span class="nt">footer</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span> 
+<span class="nt">footer</span> <span class="nt">a</span><span class="nd">:hover</span> <span class="p">{</span>
   <span class="na">color</span><span class="o">:</span> <span class="mh">#222</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -849,10 +849,10 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <span class="cm"> * This is a manifest file that&#39;ll automatically include all the stylesheets</span>
 <span class="cm"> * available in this directory and any sub-directories. You&#39;re free to add</span>
 <span class="cm"> * application-wide styles to this file and they&#39;ll appear at the top of the</span>
-<span class="cm"> * compiled file, but it&#39;s generally better to create a new file per style </span>
+<span class="cm"> * compiled file, but it&#39;s generally better to create a new file per style</span>
 <span class="cm"> * scope.</span>
 <span class="cm"> *= require_self</span>
-<span class="cm"> *= require_tree . </span>
+<span class="cm"> *= require_tree .</span>
 <span class="cm">*/</span>
 </pre></div>
 </div></div>
@@ -865,7 +865,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <span class="cm"> .</span>
 <span class="cm"> .</span>
 <span class="cm"> *= require_self</span>
-<span class="cm"> *= require_tree . </span>
+<span class="cm"> *= require_tree .</span>
 <span class="cm">*/</span>
 </pre></div>
 </div>
@@ -941,7 +941,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
   <span class="na">text-align</span><span class="o">:</span> <span class="no">center</span><span class="p">;</span>
   <span class="nt">h1</span> <span class="p">{</span>
     <span class="na">margin-bottom</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span><span class="p">;</span>
-  <span class="p">}</span>  
+  <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 </div>
@@ -1003,12 +1003,12 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
   <span class="na">color</span><span class="o">:</span> <span class="mh">#999</span><span class="p">;</span>
   <span class="nt">a</span> <span class="p">{</span>
     <span class="na">color</span><span class="o">:</span> <span class="mh">#555</span><span class="p">;</span>
-    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="p">{</span> 
+    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="p">{</span>
       <span class="na">color</span><span class="o">:</span> <span class="mh">#222</span><span class="p">;</span>
     <span class="p">}</span>
-  <span class="p">}</span>  
-  <span class="nt">small</span> <span class="p">{</span> 
-    <span class="na">float</span><span class="o">:</span> <span class="no">left</span><span class="p">;</span> 
+  <span class="p">}</span>
+  <span class="nt">small</span> <span class="p">{</span>
+    <span class="na">float</span><span class="o">:</span> <span class="no">left</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nt">ul</span> <span class="p">{</span>
     <span class="na">float</span><span class="o">:</span> <span class="no">right</span><span class="p">;</span>
@@ -1202,12 +1202,12 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
   <span class="na">color</span><span class="o">:</span> <span class="nv">$grayLight</span><span class="p">;</span>
   <span class="nt">a</span> <span class="p">{</span>
     <span class="na">color</span><span class="o">:</span> <span class="nv">$gray</span><span class="p">;</span>
-    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="p">{</span> 
+    <span class="k">&amp;</span><span class="nd">:hover</span> <span class="p">{</span>
       <span class="na">color</span><span class="o">:</span> <span class="nv">$grayDarker</span><span class="p">;</span>
     <span class="p">}</span>
-  <span class="p">}</span>  
-  <span class="nt">small</span> <span class="p">{</span> 
-    <span class="na">float</span><span class="o">:</span> <span class="no">left</span><span class="p">;</span> 
+  <span class="p">}</span>
+  <span class="nt">small</span> <span class="p">{</span>
+    <span class="na">float</span><span class="o">:</span> <span class="no">left</span><span class="p">;</span>
   <span class="p">}</span>
   <span class="nt">ul</span> <span class="p">{</span>
     <span class="na">float</span><span class="o">:</span> <span class="no">right</span><span class="p">;</span>
@@ -1579,7 +1579,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 
   <span class="n">match</span> <span class="s1">&#39;/help&#39;</span><span class="p">,</span>    <span class="ss">to:</span> <span class="s1">&#39;static_pages#help&#39;</span>
   <span class="n">match</span> <span class="s1">&#39;/about&#39;</span><span class="p">,</span>   <span class="ss">to:</span> <span class="s1">&#39;static_pages#about&#39;</span>
-  <span class="n">match</span> <span class="s1">&#39;/contact&#39;</span><span class="p">,</span> <span class="ss">to:</span> <span class="s1">&#39;static_pages#contact&#39;</span>  
+  <span class="n">match</span> <span class="s1">&#39;/contact&#39;</span><span class="p">,</span> <span class="ss">to:</span> <span class="s1">&#39;static_pages#contact&#39;</span>
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1732,7 +1732,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <p>One thing we notice is that all three examples include a visit to the root path. We can eliminate this duplication with a <code>before</code> block:</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;Home page&quot;</span> <span class="k">do</span>
-  <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span> 
+  <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span>
 
   <span class="n">it</span> <span class="s2">&quot;should have the h1 &#39;Sample App&#39;&quot;</span> <span class="k">do</span>
     <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span>
@@ -1795,7 +1795,7 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <div class="code"><div class="highlight"><pre>  <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
 
   <span class="n">describe</span> <span class="s2">&quot;Home page&quot;</span> <span class="k">do</span>
-    <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span> 
+    <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span>
@@ -1839,10 +1839,11 @@ The result of the CSS in <a class="ref" href="filling-in-the-layout.html#code-un
 <div class="code"><div class="highlight"><pre>  <span class="n">subject</span> <span class="p">{</span> <span class="n">page</span> <span class="p">}</span>
 
   <span class="n">describe</span> <span class="s2">&quot;Home page&quot;</span> <span class="k">do</span>
-    <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span> 
+    <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span>
 
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;h1&#39;</span><span class="p">,</span>    <span class="ss">text:</span> <span class="s1">&#39;Sample App&#39;</span><span class="p">)</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="n">full_title</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">))</span> <span class="p">}</span>
+    <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">have_selector</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;| Home&#39;</span> <span class="p">}</span>
   <span class="k">end</span>
 </pre></div>
 </div>
