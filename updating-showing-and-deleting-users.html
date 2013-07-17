@@ -2197,12 +2197,9 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>You may have to redeploy to Heroku to force an app restart. Here&rsquo;s a hack that will force Heroku to restart the application:</p>
+<p>To get the changes to show up, you may have to force an app restart at Heroku:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> touch foo
-<span class="gp">$</span> git add foo
-<span class="gp">$</span> git commit -m <span class="s2">&quot;foo&quot;</span>
-<span class="gp">$</span> git push heroku
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku restart
 </pre></div>
 </div>
 
