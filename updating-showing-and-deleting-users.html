@@ -772,7 +772,7 @@ THE SOFTWARE.
 
       <span class="n">describe</span> <span class="s2">&quot;submitting a PUT request to the Users#update action&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">put</span> <span class="n">user_path</span><span class="p">(</span><span class="n">wrong_user</span><span class="p">)</span> <span class="p">}</span>
-        <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="p">}</span>
+        <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span> <span class="p">}</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -826,7 +826,7 @@ THE SOFTWARE.
 
     <span class="k">def</span> <span class="nf">correct_user</span>
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
     <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -988,7 +988,7 @@ THE SOFTWARE.
 
     <span class="k">def</span> <span class="nf">correct_user</span>
       <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
+      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user?</span><span class="p">(</span><span class="vi">@user</span><span class="p">)</span>
     <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -1347,7 +1347,7 @@ THE SOFTWARE.
 <div class="listing"><span class="header">Listing 9.29.</span> <span class="description">Adding the Faker gem to the <code>Gemfile</code>.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.13&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span><span class="p">,</span> <span class="s1">&#39;2.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bcrypt-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;faker&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.1&#39;</span>
@@ -1439,7 +1439,7 @@ THE SOFTWARE.
 <div class="listing"><span class="header">Listing 9.31.</span> <span class="description">Including <tt>will_paginate</tt> in the <code>Gemfile</code>.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.13&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span><span class="p">,</span> <span class="s1">&#39;2.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bcrypt-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;faker&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.1&#39;</span>
@@ -2121,7 +2121,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
       <span class="n">describe</span> <span class="s2">&quot;submitting a DELETE request to the Users#destroy action&quot;</span> <span class="k">do</span>
         <span class="n">before</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
-        <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="p">}</span>
+        <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span> <span class="p">}</span>
       <span class="k">end</span>
     <span class="k">end</span>
   <span class="k">end</span>
@@ -2151,7 +2151,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
     <span class="o">.</span>
     <span class="o">.</span>
     <span class="k">def</span> <span class="nf">admin_user</span>
-      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_path</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user</span><span class="o">.</span><span class="n">admin?</span>
+      <span class="n">redirect_to</span><span class="p">(</span><span class="n">root_url</span><span class="p">)</span> <span class="k">unless</span> <span class="n">current_user</span><span class="o">.</span><span class="n">admin?</span>
     <span class="k">end</span>
 <span class="k">end</span>
 </pre></div>
@@ -2213,7 +2213,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <div class="listing"><span class="header">Listing 9.49.</span> <span class="description">The final <code>Gemfile</code> for the sample application.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
-<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.13&#39;</span>
+<span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bootstrap-sass&#39;</span><span class="p">,</span> <span class="s1">&#39;2.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;bcrypt-ruby&#39;</span><span class="p">,</span> <span class="s1">&#39;3.0.1&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;faker&#39;</span><span class="p">,</span> <span class="s1">&#39;1.0.1&#39;</span>
