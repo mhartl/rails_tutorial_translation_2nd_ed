@@ -1,6 +1,6 @@
 # Translation of the Ruby on Rails Tutorial, 2nd Edition
 
-This repository contains the HTML source for the [Ruby on Rails Tutorial, 2nd edition](http://railstutorial.org/), with the goal of allowing translation of the tutorial to languages other than the [*lingua franca*](http://en.wikipedia.org/wiki/Lingua_franca). 
+This repository contains the HTML source for the [Ruby on Rails Tutorial, 2nd edition](http://railstutorial.org/book?version=3.2), with the goal of allowing translation of the tutorial to languages other than the [*lingua franca*](http://en.wikipedia.org/wiki/Lingua_franca). **Note:** A more recent version of the tutorial is available. See the [HTML source of the Rails 4.0 version of the tutorial](https://github.com/mhartl/rails_tutorial_translation_4_0_version).
 
 ## Getting started
 
@@ -14,7 +14,7 @@ The repository contains an HTML source file for each chapter of the Ruby on Rail
 
     images/figures/foo.png
 
-with no leading slash. This is so that when you view the HTML files locally all the images load correctly. 
+with no leading slash. This is so that when you view the HTML files locally all the images load correctly.
 
 For a fully deployed version of the book, you may have to change the image paths from relative to absolute, such as
 
