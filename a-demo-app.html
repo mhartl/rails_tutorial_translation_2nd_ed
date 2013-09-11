@@ -997,7 +997,9 @@ page for making a new user is at <a href="http://localhost:3000/users/new">/user
 
 <p>At this point, you can also deploy the demo app to Heroku as in <a class="ref" href="beginning.html#sec-deploying">Section&nbsp;1.4</a>:</p>
 
-<div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create --stack cedar
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku create
+<span class="gp">$</span> rake assets:precompile
+<span class="gp">$</span> git commit -a -m <span class="s2">&quot;Add precompiled assets for Heroku&quot;</span>
 <span class="gp">$</span> git push heroku master
 </pre></div>
 </div>

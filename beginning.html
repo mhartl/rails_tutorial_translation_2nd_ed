@@ -1383,6 +1383,16 @@ by [Michael Hartl](http://michaelhartl.com/).
 
 <p>The <tt class="verb">--without production</tt> option prevents the local installation of any production gems, which in this case is just&nbsp;<tt>pg</tt>. (Because the only gem we&rsquo;ve added is restricted to a production environment, right now this command doesn&rsquo;t actually install any additional local gems, but it&rsquo;s needed to update <code>Gemfile.lock</code> since that&rsquo;s what Heroku uses to infer the gem requirements of our application.)</p>
 
+<p>There&rsquo;s one last bit of configuration left, which is to create the files Heroku needs to serve static assets like images and CSS:</p>
+
+<div class="code"><div class="highlight"><pre><span class="gp">$</span> rake assets:precompile
+<span class="gp">$</span> git commit -a -m <span class="s2">&quot;Add precompiled assets for Heroku&quot;</span>
+</pre></div>
+</div>
+
+
+<p>(This uses the <code>rake</code> command, which we&rsquo;ll cover in more detail in <a class="ref" href="a-demo-app.html#sec-demo_users_resource">Section&nbsp;2.2</a>.)</p>
+
 <p>Next we have to create and configure a new Heroku account. The first step is to <a href="http://api.heroku.com/signup">sign up for Heroku</a>; after checking your email to complete the creation of your account, install the necessary Heroku software using the <a href="https://toolbelt.heroku.com/">Heroku Toolbelt</a>.<sup class="footnote" id="fnref-1_24"><a href="#fn-1_24">24</a></sup> Then use the <code>heroku</code> command to log in at the command line (you may have to exit and restart your terminal program first):</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> heroku login
