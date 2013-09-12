@@ -1153,7 +1153,9 @@ THE SOFTWARE.
 </div>
 
 
-<p>The purpose of this line is to create <code>current_user</code>, accessible in both controllers and views, which will allow constructions such as</p>
+<p>Setting the current user to <code>user</code> isn&rsquo;t currently necessary because of the immediate redirect in the <code>create</code> action (<a class="ref" href="sign-in-sign-out.html#code-sign_in_success_not_yet_working">Listing&nbsp;8.13</a>), but it&rsquo;s a good idea in case we ever want to use <code>sign_in</code> without a redirect.</p>
+
+<p>The purpose of <code>current_user</code>, accessible in both controllers and views, is to allow constructions such as</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">name</span> <span class="cp">%&gt;</span>
 </pre></div>
