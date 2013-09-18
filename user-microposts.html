@@ -1074,7 +1074,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 </div>
 
 
-<p>If you compare this with the analogous line on the user index page, <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.34</a>, you&rsquo;ll see that before we had just</p>
+<p>If you compare this with the analogous line on the user index page, <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.33</a>, you&rsquo;ll see that before we had just</p>
 
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">will_paginate</span> <span class="cp">%&gt;</span>
 </pre></div>
@@ -1374,7 +1374,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 </div></div>
 
 
-<p>Rather than using the (yet-to-be-built) web interface for microposts, the code in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> operates at the level of the individual micropost actions, a strategy we first saw in <a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_wrong_user_tests">Listing&nbsp;9.14</a>. In this case, a non-signed-in user is redirected upon submitting a <tt>POST</tt> request to /microposts (<code>post microposts_path</code>, which hits the <code>create</code> action) or submitting a <tt>DELETE</tt> request to /microposts/1 (<code>delete micropost_path(micropost)</code>, which hits the <code>destroy</code> action).</p>
+<p>Rather than using the (yet-to-be-built) web interface for microposts, the code in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> operates at the level of the individual micropost actions, a strategy we first saw in <a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_wrong_user_tests">Listing&nbsp;9.13</a>. In this case, a non-signed-in user is redirected upon submitting a <tt>POST</tt> request to /microposts (<code>post microposts_path</code>, which hits the <code>create</code> action) or submitting a <tt>DELETE</tt> request to /microposts/1 (<code>delete micropost_path(micropost)</code>, which hits the <code>destroy</code> action).</p>
 
 <p>Writing the application code needed to get the tests in <a class="ref" href="user-microposts.html#code-micropost_access_control">Listing&nbsp;10.26</a> to pass requires a little refactoring first. Recall from <a class="ref" href="updating-showing-and-deleting-users.html#sec-requiring_signed_in_users">Section&nbsp;9.2.1</a> that we enforced the signin requirement using a before filter that called the <code>signed_in_user</code> method (<a class="ref" href="updating-showing-and-deleting-users.html#code-authorize_before_filter">Listing&nbsp;9.12</a>). At the time, we only needed that method in the Users controller, but now we find that we need it in the Microposts controller as well, so we&rsquo;ll move it into the Sessions helper, as shown in <a class="ref" href="user-microposts.html#code-sessions_helper_authenticate">Listing&nbsp;10.27</a>.<sup class="footnote" id="fnref-10_9"><a href="#fn-10_9">9</a></sup></p>
 
@@ -1608,7 +1608,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 </div></div>
 
 
-<p>As in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.25</a>, the code in <a class="ref" href="user-microposts.html#code-user_info">Listing&nbsp;10.32</a> uses the version of the <code>gravatar_for</code> helper defined in <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a>.</p>
+<p>As in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.24</a>, the code in <a class="ref" href="user-microposts.html#code-user_info">Listing&nbsp;10.32</a> uses the version of the <code>gravatar_for</code> helper defined in <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a>.</p>
 
 <p>Note that, as in the profile sidebar (<a class="ref" href="user-microposts.html#code-user_show_microposts">Listing&nbsp;10.20</a>), the user info in <a class="ref" href="user-microposts.html#code-user_info">Listing&nbsp;10.32</a> displays the total number of microposts for the user. There&rsquo;s a slight difference in the display, though; in the profile sidebar, &ldquo;Microposts&rdquo; is a label, and showing &ldquo;Microposts (1)&rdquo; makes sense. In the present case, though, saying &ldquo;1 microposts&rdquo; is ungrammatical, so we arrange to display &ldquo;1 micropost&rdquo; (but &ldquo;2 microposts&rdquo;) using <code>pluralize</code>.</p>
 
@@ -1719,7 +1719,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 </div>
 
 
-<p>Unfortunately, the User request spec is now broken because the signup and edit forms use the old version of the error messages partial. To fix them, we&rsquo;ll update them with the more general version, as shown in <a class="ref" href="user-microposts.html#code-signup_errors_updated">Listing&nbsp;10.36</a> and <a class="ref" href="user-microposts.html#code-edit_errors_updated">Listing&nbsp;10.37</a>. (<em>Note</em>: Your code will differ if you implemented <a class="ref" href="updating-showing-and-deleting-users.html#code-new_edit_partial">Listing&nbsp;9.50</a> and <a class="ref" href="updating-showing-and-deleting-users.html#code-new_user_with_partial">Listing&nbsp;9.51</a> from the exercises in <a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>. <a href="http://en.wikipedia.org/wiki/Mutatis_mutandis"><em>Mutatis mutandis</em>.</a>)</p>
+<p>Unfortunately, the User request spec is now broken because the signup and edit forms use the old version of the error messages partial. To fix them, we&rsquo;ll update them with the more general version, as shown in <a class="ref" href="user-microposts.html#code-signup_errors_updated">Listing&nbsp;10.36</a> and <a class="ref" href="user-microposts.html#code-edit_errors_updated">Listing&nbsp;10.37</a>. (<em>Note</em>: Your code will differ if you implemented <a class="ref" href="updating-showing-and-deleting-users.html#code-new_edit_partial">Listing&nbsp;9.49</a> and <a class="ref" href="updating-showing-and-deleting-users.html#code-new_user_with_partial">Listing&nbsp;9.50</a> from the exercises in <a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>. <a href="http://en.wikipedia.org/wiki/Mutatis_mutandis"><em>Mutatis mutandis</em>.</a>)</p>
 
 <div class="label" id="code-signup_errors_updated"></div>
 
@@ -2211,7 +2211,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
 </div></div>
 
 
-<p>The application code is also analogous to the user case in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_destroy_before_filter">Listing&nbsp;9.48</a>; the main difference is that, rather than using an <code>admin_user</code> before filter, in the case of microposts we have a <code>correct_user</code> before filter to check that the current user actually has a micropost with the given id. The code appears in <a class="ref" href="user-microposts.html#code-microposts_destroy_action">Listing&nbsp;10.49</a>, and the result of destroying the second-most-recent post appears in <a class="ref" href="user-microposts.html#fig-home_post_delete">Figure&nbsp;10.17</a>.</p>
+<p>The application code is also analogous to the user case in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_destroy_before_filter">Listing&nbsp;9.47</a>; the main difference is that, rather than using an <code>admin_user</code> before filter, in the case of microposts we have a <code>correct_user</code> before filter to check that the current user actually has a micropost with the given id. The code appears in <a class="ref" href="user-microposts.html#code-microposts_destroy_action">Listing&nbsp;10.49</a>, and the result of destroying the second-most-recent post appears in <a class="ref" href="user-microposts.html#fig-home_post_delete">Figure&nbsp;10.17</a>.</p>
 
 <div class="label" id="code-microposts_destroy_action"></div>
 

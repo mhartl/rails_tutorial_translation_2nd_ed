@@ -350,7 +350,7 @@ THE SOFTWARE.
 </div>
 
 
-<p>This is necessary when using one of the HTTP request methods directly (<code>get</code>, <code>post</code>, <code>put</code>, or <code>delete</code>), as we&rsquo;ll see in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_destroy_test">Listing&nbsp;9.47</a>. (Note that the test <code>cookies</code> object isn&rsquo;t a perfect simulation of the real cookies object; in particular, the <code>cookies.permanent</code> method seen in <a class="ref" href="sign-in-sign-out.html#code-sign_in_function">Listing&nbsp;8.19</a> doesn&rsquo;t work inside tests.) As you might suspect, the <code>sign_in</code> method will prove useful in future tests, and in fact it can already be used to eliminate some duplication (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>).</p>
+<p>This is necessary when using one of the HTTP request methods directly (<code>get</code>, <code>post</code>, <code>put</code>, or <code>delete</code>), as we&rsquo;ll see in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_destroy_test">Listing&nbsp;9.46</a>. (Note that the test <code>cookies</code> object isn&rsquo;t a perfect simulation of the real cookies object; in particular, the <code>cookies.permanent</code> method seen in <a class="ref" href="sign-in-sign-out.html#code-sign_in_function">Listing&nbsp;8.19</a> doesn&rsquo;t work inside tests.) As you might suspect, the <code>sign_in</code> method will prove useful in future tests, and in fact it can already be used to eliminate some duplication (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>).</p>
 
 <p>The application code to add the URI for the &ldquo;Settings&rdquo; link is simple: we just use the named route <code>edit_user_path</code> from <a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>, together with the handy <code>current_user</code> helper method defined in <a class="ref" href="sign-in-sign-out.html#code-current_user_working">Listing&nbsp;8.22</a>:</p>
 
@@ -466,7 +466,7 @@ THE SOFTWARE.
 <div class="figure"><div class="center"><span class="graphic"><img src="images/figures/gravatar_cropper.png" alt="gravatar_cropper" /></span></div><div class="caption"><span class="header">Figure 9.4: </span><span class="description">The  <a href="http://gravatar.com/">Gravatar</a> image-cropping interface, with a picture of <a href="http://michaelhartl.com/">some dude</a>.</span></div></div>
 
 
-<p>The tests for the <code>update</code> action are similar to those for <code>create</code>. <a class="ref" href="updating-showing-and-deleting-users.html#code-user_update_specs">Listing&nbsp;9.9</a> show how to use Capybara to fill in the form fields with valid information and then test that the resulting behavior is correct. This is a lot of code; see if you can work through it by referring back to the tests in <a class="ref" href="sign-up.html#top">Chapter&nbsp;7</a>.</p>
+<p>The tests for the <code>update</code> action are similar to those for <code>create</code>. <a class="ref" href="updating-showing-and-deleting-users.html#code-user_update_specs">Listing&nbsp;9.9</a> shows how to use Capybara to fill in the form fields with valid information and then test that the resulting behavior is correct. This is a lot of code; see if you can work through it by referring back to the tests in <a class="ref" href="sign-up.html#top">Chapter&nbsp;7</a>.</p>
 
 <div class="label" id="code-user_update_specs"></div>
 
@@ -510,6 +510,8 @@ THE SOFTWARE.
 </pre></div>
 </div></div>
 
+
+<p>Note that <a class="ref" href="updating-showing-and-deleting-users.html#code-user_update_specs">Listing&nbsp;9.9</a> adds the <code>sign_in</code> method from <a class="ref" href="updating-showing-and-deleting-users.html#code-sign_in_helper">Listing&nbsp;9.6</a> to the <code>before</code> block, which is required for the &ldquo;Sign out&rdquo; link test to pass, and also anticipates protecting the <code>edit</code> action from non-signed-in users (<a class="ref" href="updating-showing-and-deleting-users.html#sec-requiring_signed_in_users">Section&nbsp;9.2.1</a>).</p>
 
 <p>The only real novelty in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_update_specs">Listing&nbsp;9.9</a> is the <code>reload</code> method, which appears in the test for changing the user&rsquo;s attributes:</p>
 
@@ -691,46 +693,6 @@ THE SOFTWARE.
 <div class="figure"><div class="center"><span class="graphic"><img src="images/figures/protected_sign_in_bootstrap.png" alt="protected_sign_in_bootstrap" /></span></div><div class="caption"><span class="header">Figure 9.6: </span><span class="description">The signin form after trying to access a protected page.&nbsp;<a href="http://railstutorial.org/images/figures/protected_sign_in_bootstrap-full.png">(full size)</a></span></div></div>
 
 
-<p>Unfortunately, in the process of getting the authorization tests from <a class="ref" href="updating-showing-and-deleting-users.html#code-protected_edit_update_tests">Listing&nbsp;9.11</a> to pass, we&rsquo;ve broken the tests in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_edit_specs">Listing&nbsp;9.1</a>. Code like</p>
-
-<div class="code"><div class="highlight"><pre><span class="n">describe</span> <span class="s2">&quot;edit&quot;</span> <span class="k">do</span>
-  <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-  <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">edit_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span> <span class="p">}</span>
-  <span class="o">.</span>
-  <span class="o">.</span>
-  <span class="o">.</span>
-</pre></div>
-</div>
-
-
-<p>no longer works because visiting the edit user path requires a signed-in user. The solution is to sign in the user with the <code>sign_in</code> utility from <a class="ref" href="updating-showing-and-deleting-users.html#code-sign_in_helper">Listing&nbsp;9.6</a>, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_tests_with_signin">Listing&nbsp;9.13</a>.</p>
-
-<div class="label" id="code-edit_update_tests_with_signin"></div>
-
-
-<div class="codelisting">
-<div class="listing"><span class="header">Listing 9.13.</span> <span class="description">Adding a signin step to the edit and update tests. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
-<div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
-
-<span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
-  <span class="o">.</span>
-  <span class="o">.</span>
-  <span class="o">.</span>
-  <span class="n">describe</span> <span class="s2">&quot;edit&quot;</span> <span class="k">do</span>
-    <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
-    <span class="n">before</span> <span class="k">do</span>
-      <span class="n">sign_in</span> <span class="n">user</span>
-      <span class="n">visit</span> <span class="n">edit_user_path</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-    <span class="k">end</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-    <span class="o">.</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</pre></div>
-</div></div>
-
-
 <p>At this point, our test suite should be green:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
@@ -746,13 +708,13 @@ THE SOFTWARE.
 <h3><a id="sec-9_2_2" href="updating-showing-and-deleting-users.html#sec-requiring_the_right_user" class="heading"><span class="number">9.2.2</span> Requiring the right user</a></h3>
 
 
-<p>Of course, requiring users to sign in isn&rsquo;t quite enough; users should only be allowed to edit their <em>own</em> information. We can test for this by first signing in as an incorrect user and then hitting the <code>edit</code> and <code>update</code> actions (<a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_wrong_user_tests">Listing&nbsp;9.14</a>). Note that, since users should never even <em>try</em> to edit another user&rsquo;s profile, we redirect not to the signin page but to the root URL.</p>
+<p>Of course, requiring users to sign in isn&rsquo;t quite enough; users should only be allowed to edit their <em>own</em> information. We can test for this by first signing in as an incorrect user and then hitting the <code>edit</code> and <code>update</code> actions (<a class="ref" href="updating-showing-and-deleting-users.html#code-edit_update_wrong_user_tests">Listing&nbsp;9.13</a>). Note that, since users should never even <em>try</em> to edit another user&rsquo;s profile, we redirect not to the signin page but to the root URL.</p>
 
 <div class="label" id="code-edit_update_wrong_user_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.14.</span> <span class="description">Testing that the <code>edit</code> and <code>update</code> actions require the right user. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.13.</span> <span class="description">Testing that the <code>edit</code> and <code>update</code> actions require the right user. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
@@ -793,13 +755,13 @@ THE SOFTWARE.
 
 <p>This creates a user with a different email address from the default. The tests specify that the original user should not have access to the wrong user&rsquo;s <code>edit</code> or <code>update</code> actions.</p>
 
-<p>The application code adds a second before filter to call the <code>correct_user</code> method, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-correct_user_before_filter">Listing&nbsp;9.15</a>.</p>
+<p>The application code adds a second before filter to call the <code>correct_user</code> method, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-correct_user_before_filter">Listing&nbsp;9.14</a>.</p>
 
 <div class="label" id="code-correct_user_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.15.</span> <span class="description">A <code>correct_user</code> before filter to protect the edit/update pages. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.14.</span> <span class="description">A <code>correct_user</code> before filter to protect the edit/update pages. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
   <span class="n">before_filter</span> <span class="ss">:correct_user</span><span class="p">,</span>   <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -836,13 +798,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>The <code>correct_user</code> filter uses the <code>current_user?</code> boolean method, which  we define in the Sessions helper (<a class="ref" href="updating-showing-and-deleting-users.html#code-current_user_p">Listing&nbsp;9.16</a>).</p>
+<p>The <code>correct_user</code> filter uses the <code>current_user?</code> boolean method, which  we define in the Sessions helper (<a class="ref" href="updating-showing-and-deleting-users.html#code-current_user_p">Listing&nbsp;9.15</a>).</p>
 
 <div class="label" id="code-current_user_p"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.16.</span> <span class="description">The <code>current_user?</code> method. <br /> <code>app/helpers/sessions_helper.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.15.</span> <span class="description">The <code>current_user?</code> method. <br /> <code>app/helpers/sessions_helper.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -862,7 +824,7 @@ THE SOFTWARE.
 </div></div>
 
 
-<p><a class="ref" href="updating-showing-and-deleting-users.html#code-correct_user_before_filter">Listing&nbsp;9.15</a> also shows the updated <code>edit</code> and <code>update</code> actions. Before, in <a class="ref" href="updating-showing-and-deleting-users.html#code-initial_edit_action">Listing&nbsp;9.2</a>, we had</p>
+<p><a class="ref" href="updating-showing-and-deleting-users.html#code-correct_user_before_filter">Listing&nbsp;9.14</a> also shows the updated <code>edit</code> and <code>update</code> actions. Before, in <a class="ref" href="updating-showing-and-deleting-users.html#code-initial_edit_action">Listing&nbsp;9.2</a>, we had</p>
 
 <div class="code"><div class="highlight"><pre><span class="k">def</span> <span class="nf">edit</span>
   <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
@@ -890,13 +852,13 @@ THE SOFTWARE.
 
 <p>Our site authorization is complete as written, but there is one minor blemish: when users try to access a protected page, they are currently redirected to their profile pages regardless of where they were trying to go. In other words, if a non-logged-in user tries to visit the edit page, after signing in the user will be redirected to /users/1 instead of /users/1/edit. It would be much friendlier to redirect them to their intended destination instead.</p>
 
-<p>To test for such &ldquo;friendly forwarding&rdquo;, we first visit the user edit page, which redirects to the signin page. We then enter valid signin information and click the &ldquo;Sign in&rdquo; button. The resulting page, which by default is the user&rsquo;s profile, should in this case be the &ldquo;Edit user&rdquo; page. The test for this sequence appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_test">Listing&nbsp;9.17</a>.</p>
+<p>To test for such &ldquo;friendly forwarding&rdquo;, we first visit the user edit page, which redirects to the signin page. We then enter valid signin information and click the &ldquo;Sign in&rdquo; button. The resulting page, which by default is the user&rsquo;s profile, should in this case be the &ldquo;Edit user&rdquo; page. The test for this sequence appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_test">Listing&nbsp;9.16</a>.</p>
 
 <div class="label" id="code-friendly_forwarding_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.17.</span> <span class="description">A test for friendly forwarding. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.16.</span> <span class="description">A test for friendly forwarding. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
@@ -936,13 +898,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>Now for the implementation.<sup class="footnote" id="fnref-9_4"><a href="#fn-9_4">4</a></sup> In order to forward users to their intended destination, we need to store the location of the requested page somewhere, and then redirect to that location instead. We accomplish this with a pair of methods, <code>store_location</code> and <code>redirect_back_or</code>, both defined in the Sessions helper (<a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_code">Listing&nbsp;9.18</a>).</p>
+<p>Now for the implementation.<sup class="footnote" id="fnref-9_4"><a href="#fn-9_4">4</a></sup> In order to forward users to their intended destination, we need to store the location of the requested page somewhere, and then redirect to that location instead. We accomplish this with a pair of methods, <code>store_location</code> and <code>redirect_back_or</code>, both defined in the Sessions helper (<a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_code">Listing&nbsp;9.17</a>).</p>
 
 <div class="label" id="code-friendly_forwarding_code"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.18.</span> <span class="description">Code to implement friendly forwarding. <br /> <code>app/helpers/sessions_helper.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.17.</span> <span class="description">Code to implement friendly forwarding. <br /> <code>app/helpers/sessions_helper.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">module</span> <span class="nn">SessionsHelper</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -962,13 +924,13 @@ THE SOFTWARE.
 
 <p>The storage mechanism is the <code>session</code> facility provided by Rails, which you can think of as being like an instance of the <code>cookies</code> variable from <a class="ref" href="sign-in-sign-out.html#sec-remember_me">Section&nbsp;8.2.1</a> that automatically expires upon browser close. We also use the <code>request</code> object to get the <code>url</code>, i.e., the URI/URL of the requested page. The <code>store_location</code> method puts the requested URI in the <code>session</code> variable under the key <code>:return_to</code>.</p>
 
-<p>To make use of <code>store_location</code>, we need to add it to the <code>signed_in_user</code> before filter, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-add_store_location">Listing&nbsp;9.19</a>.</p>
+<p>To make use of <code>store_location</code>, we need to add it to the <code>signed_in_user</code> before filter, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-add_store_location">Listing&nbsp;9.18</a>.</p>
 
 <div class="label" id="code-add_store_location"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.19.</span> <span class="description">Adding <code>store_location</code> to the signed-in user before filter. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.18.</span> <span class="description">Adding <code>store_location</code> to the signed-in user before filter. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
   <span class="n">before_filter</span> <span class="ss">:correct_user</span><span class="p">,</span>   <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -998,20 +960,20 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>To implement the forwarding itself, we use the <code>redirect_back_or</code> method to redirect to the requested URI if it exists, or some default URI otherwise, which we add to the Sessions controller <code>create</code> action to redirect after successful signin (<a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_session_create">Listing&nbsp;9.20</a>). The <code>redirect_back_or</code> method uses the or operator&nbsp;<code>||</code> through</p>
+<p>To implement the forwarding itself, we use the <code>redirect_back_or</code> method to redirect to the requested URI if it exists, or some default URI otherwise, which we add to the Sessions controller <code>create</code> action to redirect after successful signin (<a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_session_create">Listing&nbsp;9.19</a>). The <code>redirect_back_or</code> method uses the or operator&nbsp;<code>||</code> through</p>
 
 <div class="code"><div class="highlight"><pre><span class="n">session</span><span class="o">[</span><span class="ss">:return_to</span><span class="o">]</span> <span class="o">||</span> <span class="n">default</span>
 </pre></div>
 </div>
 
 
-<p>This evaluates to <code>session[:return_to]</code> unless it&rsquo;s <code>nil</code>, in which case it evaluates to the given default URI. Note that <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_code">Listing&nbsp;9.18</a> is careful to remove the forwarding URI; otherwise, subsequent signin attempts would forward to the protected page until the user closed his browser. (Testing for this is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>.)</p>
+<p>This evaluates to <code>session[:return_to]</code> unless it&rsquo;s <code>nil</code>, in which case it evaluates to the given default URI. Note that <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_code">Listing&nbsp;9.17</a> is careful to remove the forwarding URI; otherwise, subsequent signin attempts would forward to the protected page until the user closed his browser. (Testing for this is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>.)</p>
 
 <div class="label" id="code-friendly_session_create"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.20.</span> <span class="description">The Sessions <code>create</code> action with friendly forwarding. <br /> <code>app/controllers/sessions_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.19.</span> <span class="description">The Sessions <code>create</code> action with friendly forwarding. <br /> <code>app/controllers/sessions_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SessionsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -1034,9 +996,9 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>(If you completed the first exercise in <a class="ref" href="sign-in-sign-out.html#top">Chapter&nbsp;8</a>, be sure to use the proper <code>params</code> hash in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_session_create">Listing&nbsp;9.20</a>.)</p>
+<p>(If you completed the first exercise in <a class="ref" href="sign-in-sign-out.html#top">Chapter&nbsp;8</a>, be sure to use the proper <code>params</code> hash in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_session_create">Listing&nbsp;9.19</a>.)</p>
 
-<p>With that, the friendly forwarding integration test in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_test">Listing&nbsp;9.17</a> should pass, and the basic user authentication and page protection implementation is complete. As usual, it&rsquo;s a good idea to verify that the test suite is green before proceeding:</p>
+<p>With that, the friendly forwarding integration test in <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forwarding_test">Listing&nbsp;9.16</a> should pass, and the basic user authentication and page protection implementation is complete. As usual, it&rsquo;s a good idea to verify that the test suite is green before proceeding:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
 </pre></div>
@@ -1067,13 +1029,13 @@ THE SOFTWARE.
 <h3><a id="sec-9_3_1" href="updating-showing-and-deleting-users.html#sec-user_index" class="heading"><span class="number">9.3.1</span> User index</a></h3>
 
 
-<p>Although we&rsquo;ll keep individual user <code>show</code> pages visible to all site visitors, the user <code>index</code> will be restricted to signed-in users so that there&rsquo;s a limit to how much unregistered users can see by default. We&rsquo;ll start by testing that the <code>index</code> action is protected by visiting the <code>users_path</code> (<a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>) and verifying that we are redirected to the signin page. As with other authorization tests, we&rsquo;ll put this example in the authentication integration test, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-protected_index_test">Listing&nbsp;9.21</a>.</p>
+<p>Although we&rsquo;ll keep individual user <code>show</code> pages visible to all site visitors, the user <code>index</code> will be restricted to signed-in users so that there&rsquo;s a limit to how much unregistered users can see by default. We&rsquo;ll start by testing that the <code>index</code> action is protected by visiting the <code>users_path</code> (<a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>) and verifying that we are redirected to the signin page. As with other authorization tests, we&rsquo;ll put this example in the authentication integration test, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-protected_index_test">Listing&nbsp;9.20</a>.</p>
 
 <div class="label" id="code-protected_index_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.21.</span> <span class="description">Testing that the <code>index</code> action is protected. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.20.</span> <span class="description">Testing that the <code>index</code> action is protected. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
@@ -1105,13 +1067,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>The corresponding application code simply involves adding <code>index</code> to the list of actions protected by the <code>signed_in_user</code> before filter, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-signed_in_user_index">Listing&nbsp;9.22</a>.</p>
+<p>The corresponding application code simply involves adding <code>index</code> to the list of actions protected by the <code>signed_in_user</code> before filter, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-signed_in_user_index">Listing&nbsp;9.21</a>.</p>
 
 <div class="label" id="code-signed_in_user_index"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.22.</span> <span class="description">Requiring a signed-in user for the <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.21.</span> <span class="description">Requiring a signed-in user for the <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
   <span class="o">.</span>
@@ -1127,13 +1089,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>The next set of tests makes sure that, for signed-in users, the index page has the right title/heading and lists all of the site&rsquo;s users. The method is to make three factory users (signing in as the first one) and then verify that the index page has a list element (<code>li</code>) tag for the name of each one. Note that we&rsquo;ve taken care to give the users different names so that each element in the list of users has a unique entry, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_tests">Listing&nbsp;9.23</a>.</p>
+<p>The next set of tests makes sure that, for signed-in users, the index page has the right title/heading and lists all of the site&rsquo;s users. The method is to make three factory users (signing in as the first one) and then verify that the index page has a list element (<code>li</code>) tag for the name of each one. Note that we&rsquo;ve taken care to give the users different names so that each element in the list of users has a unique entry, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_tests">Listing&nbsp;9.22</a>.</p>
 
 <div class="label" id="code-user_index_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.23.</span> <span class="description">Tests for the user index page. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.22.</span> <span class="description">Tests for the user index page. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
@@ -1165,13 +1127,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>As you may recall from the corresponding action in the demo app (<a class="ref" href="a-demo-app.html#code-demo_index_action">Listing&nbsp;2.4</a>), the application code uses <code>User.all</code> to pull all the users out of the database, assigning them to an <code>@users</code> instance variable for use in the view, as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index">Listing&nbsp;9.24</a>. (If displaying all the users at once seems like a bad idea, you&rsquo;re right, and we&rsquo;ll remove this blemish in <a class="ref" href="updating-showing-and-deleting-users.html#sec-pagination">Section&nbsp;9.3.3</a>.)</p>
+<p>As you may recall from the corresponding action in the demo app (<a class="ref" href="a-demo-app.html#code-demo_index_action">Listing&nbsp;2.4</a>), the application code uses <code>User.all</code> to pull all the users out of the database, assigning them to an <code>@users</code> instance variable for use in the view, as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index">Listing&nbsp;9.23</a>. (If displaying all the users at once seems like a bad idea, you&rsquo;re right, and we&rsquo;ll remove this blemish in <a class="ref" href="updating-showing-and-deleting-users.html#sec-pagination">Section&nbsp;9.3.3</a>.)</p>
 
 <div class="label" id="code-user_index"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.24.</span> <span class="description">The user <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.23.</span> <span class="description">The user <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
   <span class="o">.</span>
@@ -1188,13 +1150,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>To make the actual index page, we need to make a view that iterates through the users and wraps each one in an&nbsp;<code>li</code> tag. We do this with the <code>each</code> method, displaying each user&rsquo;s Gravatar and name, while wrapping the whole thing in an unordered list (<code>ul</code>) tag (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.25</a>). The code in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.25</a> uses the result of  <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a> from <a class="ref" href="sign-up.html#sec-signup_exercises">Section&nbsp;7.6</a>, which allows us to pass an option to the Gravatar helper specifying a size other than the default. If you didn&rsquo;t do that exercise, update your Users helper file with the contents of <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a> before proceeding.</p>
+<p>To make the actual index page, we need to make a view that iterates through the users and wraps each one in an&nbsp;<code>li</code> tag. We do this with the <code>each</code> method, displaying each user&rsquo;s Gravatar and name, while wrapping the whole thing in an unordered list (<code>ul</code>) tag (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.24</a>). The code in <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_view">Listing&nbsp;9.24</a> uses the result of  <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a> from <a class="ref" href="sign-up.html#sec-signup_exercises">Section&nbsp;7.6</a>, which allows us to pass an option to the Gravatar helper specifying a size other than the default. If you didn&rsquo;t do that exercise, update your Users helper file with the contents of <a class="ref" href="sign-up.html#code-gravatar_option">Listing&nbsp;7.29</a> before proceeding.</p>
 
 <div class="label" id="code-user_index_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.25.</span> <span class="description">The user index view. <br /> <code>app/views/users/index.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.24.</span> <span class="description">The user index view. <br /> <code>app/views/users/index.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">provide</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1210,13 +1172,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>Let&rsquo;s also add a little CSS (or, rather, SCSS) for style (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_css">Listing&nbsp;9.26</a>).</p>
+<p>Let&rsquo;s also add a little CSS (or, rather, SCSS) for style (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_css">Listing&nbsp;9.25</a>).</p>
 
 <div class="label" id="code-user_index_css"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.26.</span> <span class="description">CSS for the user index. <br /> <code>app/assets/stylesheets/custom.css.scss</code></span> </div>
+<div class="listing"><span class="header">Listing 9.25.</span> <span class="description">CSS for the user index. <br /> <code>app/assets/stylesheets/custom.css.scss</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nc">.</span>
 <span class="nc">.</span>
 <span class="nc">.</span>
@@ -1239,13 +1201,13 @@ THE SOFTWARE.
 </div></div>
 
 
-<p>Finally, we&rsquo;ll add the URI to the users link in the site&rsquo;s navigation header using <code>users_path</code>, thereby using the last of the unused named routes in <a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>. The test (<a class="ref" href="updating-showing-and-deleting-users.html#code-users_link_test">Listing&nbsp;9.27</a>) and application code (<a class="ref" href="updating-showing-and-deleting-users.html#code-users_link">Listing&nbsp;9.28</a>) are both straightforward.</p>
+<p>Finally, we&rsquo;ll add the URI to the users link in the site&rsquo;s navigation header using <code>users_path</code>, thereby using the last of the unused named routes in <a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>. The test (<a class="ref" href="updating-showing-and-deleting-users.html#code-users_link_test">Listing&nbsp;9.26</a>) and application code (<a class="ref" href="updating-showing-and-deleting-users.html#code-users_link">Listing&nbsp;9.27</a>) are both straightforward.</p>
 
 <div class="label" id="code-users_link_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.27.</span> <span class="description">A test for the &ldquo;Users&rdquo; link URI. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.26.</span> <span class="description">A test for the &ldquo;Users&rdquo; link URI. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
@@ -1280,7 +1242,7 @@ THE SOFTWARE.
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.28.</span> <span class="description">Adding the URI to the users link. <br /> <code>app/views/layouts/_header.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.27.</span> <span class="description">Adding the URI to the users link. <br /> <code>app/views/layouts/_header.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar navbar-fixed-top navbar-inverse&quot;</span><span class="nt">&gt;</span>
   <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;navbar-inner&quot;</span><span class="nt">&gt;</span>
     <span class="nt">&lt;div</span> <span class="na">class=</span><span class="s">&quot;container&quot;</span><span class="nt">&gt;</span>
@@ -1341,13 +1303,13 @@ THE SOFTWARE.
 
 <p>In this section, we&rsquo;ll give our lonely sample user some company. Of course, to create enough users to make a decent user index, we <em>could</em> use our web browser to visit the signup page and make the new users one by one, but far a better solution is to use Ruby (and Rake) to make the users for us.</p>
 
-<p>First, we&rsquo;ll add the <em>Faker</em> gem to the <code>Gemfile</code>, which will allow us to make sample users with semi-realistic names and email addresses (<a class="ref" href="updating-showing-and-deleting-users.html#code-faker_gemfile">Listing&nbsp;9.29</a>).</p>
+<p>First, we&rsquo;ll add the <em>Faker</em> gem to the <code>Gemfile</code>, which will allow us to make sample users with semi-realistic names and email addresses (<a class="ref" href="updating-showing-and-deleting-users.html#code-faker_gemfile">Listing&nbsp;9.28</a>).</p>
 
 <div class="label" id="code-faker_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.29.</span> <span class="description">Adding the Faker gem to the <code>Gemfile</code>.</span> </div>
+<div class="listing"><span class="header">Listing 9.28.</span> <span class="description">Adding the Faker gem to the <code>Gemfile</code>.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
@@ -1368,13 +1330,13 @@ THE SOFTWARE.
 </div>
 
 
-<p>Next, we&rsquo;ll add a Rake task to create sample users. Rake tasks live in the <code>lib/tasks</code> directory, and are defined using <em>namespaces</em> (in this case, <code>:db</code>), as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-db_populate">Listing&nbsp;9.30</a>. (This is a bit advanced, so don&rsquo;t worry too much about the details.)</p>
+<p>Next, we&rsquo;ll add a Rake task to create sample users. Rake tasks live in the <code>lib/tasks</code> directory, and are defined using <em>namespaces</em> (in this case, <code>:db</code>), as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-db_populate">Listing&nbsp;9.29</a>. (This is a bit advanced, so don&rsquo;t worry too much about the details.)</p>
 
 <div class="label" id="code-db_populate"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.30.</span> <span class="description">A Rake task for populating the database with sample users. <br /> <code>lib/tasks/sample_data.rake</code></span> </div>
+<div class="listing"><span class="header">Listing 9.29.</span> <span class="description">A Rake task for populating the database with sample users. <br /> <code>lib/tasks/sample_data.rake</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
   <span class="n">desc</span> <span class="s2">&quot;Fill database with sample data&quot;</span>
   <span class="n">task</span> <span class="ss">populate:</span> <span class="ss">:environment</span> <span class="k">do</span>
@@ -1406,7 +1368,7 @@ THE SOFTWARE.
 
 <p>ensures that the Rake task has access to the local Rails environment, including the User model (and hence <code>User.create!</code>). Here <code>create!</code> is just like the <code>create</code> method, except it raises an exception (<a class="ref" href="modeling-users.html#sec-finding_user_objects">Section&nbsp;6.1.4</a>) for an invalid user rather than returning <code>false</code>. This noisier construction makes debugging easier by avoiding silent errors.</p>
 
-<p>With the <code>:db</code> namespace as in <a class="ref" href="updating-showing-and-deleting-users.html#code-db_populate">Listing&nbsp;9.30</a>, we can invoke the Rake task as follows:</p>
+<p>With the <code>:db</code> namespace as in <a class="ref" href="updating-showing-and-deleting-users.html#code-db_populate">Listing&nbsp;9.29</a>, we can invoke the Rake task as follows:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rake db:reset
 <span class="gp">$</span> bundle <span class="nb">exec </span>rake db:populate
@@ -1433,13 +1395,13 @@ THE SOFTWARE.
 
 <p>Our original user doesn&rsquo;t suffer from loneliness any more, but now we have the opposite problem: our user has <em>too many</em> companions, and they all appear on the same page. Right now there are a hundred, which is already a reasonably large number, and on a real site it could be thousands. The solution is to <em>paginate</em> the users, so that (for example) only 30 show up on a page at any one time.</p>
 
-<p>There are several pagination methods in Rails; we&rsquo;ll use one of the simplest and most robust, called <a href="http://wiki.github.com/mislav/will_paginate/">will_paginate</a>. To use it, we need to include both the <tt>will_paginate</tt> gem and <tt>bootstrap-will_paginate</tt>, which configures will_paginate to use Bootstrap&rsquo;s pagination styles. The updated <code>Gemfile</code> appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_gem">Listing&nbsp;9.31</a>.</p>
+<p>There are several pagination methods in Rails; we&rsquo;ll use one of the simplest and most robust, called <a href="http://wiki.github.com/mislav/will_paginate/">will_paginate</a>. To use it, we need to include both the <tt>will_paginate</tt> gem and <tt>bootstrap-will_paginate</tt>, which configures will_paginate to use Bootstrap&rsquo;s pagination styles. The updated <code>Gemfile</code> appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_gem">Listing&nbsp;9.30</a>.</p>
 
 <div class="label" id="code-will_paginate_gem"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.31.</span> <span class="description">Including <tt>will_paginate</tt> in the <code>Gemfile</code>.</span> </div>
+<div class="listing"><span class="header">Listing 9.30.</span> <span class="description">Including <tt>will_paginate</tt> in the <code>Gemfile</code>.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
@@ -1500,13 +1462,13 @@ THE SOFTWARE.
 
 
 <p>The block variable <code>n</code> is automatically incremented, so that the first user has name &ldquo;Person&nbsp;1&rdquo; and email address &ldquo;person_1@example.com&rdquo;, the second user has name &ldquo;Person&nbsp;2&rdquo; and email address &ldquo;person_2@example.com&rdquo;, and so on. The full
-code appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-factory_sequence">Listing&nbsp;9.32</a>.</p>
+code appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-factory_sequence">Listing&nbsp;9.31</a>.</p>
 
 <div class="label" id="code-factory_sequence"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.32.</span> <span class="description">Defining a Factory Girl sequence. <br /> <code>spec/factories.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.31.</span> <span class="description">Defining a Factory Girl sequence. <br /> <code>spec/factories.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="no">FactoryGirl</span><span class="o">.</span><span class="n">define</span> <span class="k">do</span>
   <span class="n">factory</span> <span class="ss">:user</span> <span class="k">do</span>
     <span class="n">sequence</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>  <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">&quot;Person </span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
@@ -1529,13 +1491,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <p>Note here the use of <code>before(:all)</code>, which ensures that the sample users are created <em>once</em>, before all the tests in the block. This is an optimization for speed, as creating 30 users can be slow on some systems. We use the complementary method <code>after(:all)</code> to delete the users once we&rsquo;re done.</p>
 
-<p>The tests for the appearance of the pagination <code>div</code> and the right users appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_test">Listing&nbsp;9.33</a>. Note the replacement of the <code>User.all</code> array from <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_tests">Listing&nbsp;9.23</a> with <code>User.paginate(page: 1)</code>, which (as we&rsquo;ll see momentarily) is how to pull out the first page of users from the database. Note also that <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_test">Listing&nbsp;9.33</a> uses <code>before(:each)</code> to emphasize the contrast with <code>before(:all)</code>.</p>
+<p>The tests for the appearance of the pagination <code>div</code> and the right users appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_test">Listing&nbsp;9.32</a>. Note the replacement of the <code>User.all</code> array from <a class="ref" href="updating-showing-and-deleting-users.html#code-user_index_tests">Listing&nbsp;9.22</a> with <code>User.paginate(page: 1)</code>, which (as we&rsquo;ll see momentarily) is how to pull out the first page of users from the database. Note also that <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_test">Listing&nbsp;9.32</a> uses <code>before(:each)</code> to emphasize the contrast with <code>before(:all)</code>.</p>
 
 <div class="label" id="code-will_paginate_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.33.</span> <span class="description">Tests for pagination. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.32.</span> <span class="description">Tests for pagination. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
@@ -1576,13 +1538,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>To get pagination working, we need to add some code to the index view telling Rails to paginate the users, and we need to replace <code>User.all</code> in the <code>index</code> action with an object that knows about pagination. We&rsquo;ll start by adding the special <code>will_paginate</code> method in the view (<a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.34</a>); we&rsquo;ll see in a moment why the code appears both above and below the user list.</p>
+<p>To get pagination working, we need to add some code to the index view telling Rails to paginate the users, and we need to replace <code>User.all</code> in the <code>index</code> action with an object that knows about pagination. We&rsquo;ll start by adding the special <code>will_paginate</code> method in the view (<a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.33</a>); we&rsquo;ll see in a moment why the code appears both above and below the user list.</p>
 
 <div class="label" id="code-will_paginate_index_view"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.34.</span> <span class="description">The user index with pagination. <br /> <code>app/views/users/index.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.33.</span> <span class="description">The user index with pagination. <br /> <code>app/views/users/index.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">provide</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1602,7 +1564,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>The <code>will_paginate</code> method is a little magical; inside a <code>users</code> view, it automatically looks for an <code>@users</code> object, and then displays pagination links to access other pages. The view in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.34</a> doesn&rsquo;t work yet, though, because currently <code>@users</code> contains the results of <code>User.all</code> (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index">Listing&nbsp;9.24</a>), which is of class <code>Array</code>, whereas <code>will_paginate</code> expects an object of class <code>ActiveRecord::Relation</code>. Happily, this is just the kind of object returned by the <code>paginate</code> method added by the <tt>will_paginate</tt> gem to all Active Record objects:</p>
+<p>The <code>will_paginate</code> method is a little magical; inside a <code>users</code> view, it automatically looks for an <code>@users</code> object, and then displays pagination links to access other pages. The view in <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.33</a> doesn&rsquo;t work yet, though, because currently <code>@users</code> contains the results of <code>User.all</code> (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_index">Listing&nbsp;9.23</a>), which is of class <code>Array</code>, whereas <code>will_paginate</code> expects an object of class <code>ActiveRecord::Relation</code>. Happily, this is just the kind of object returned by the <code>paginate</code> method added by the <tt>will_paginate</tt> gem to all Active Record objects:</p>
 
 <div class="code"><div class="highlight"><pre><span class="go">$ rails console</span>
 <span class="gp">&gt;&gt; </span><span class="no">User</span><span class="o">.</span><span class="n">all</span><span class="o">.</span><span class="n">class</span>
@@ -1615,13 +1577,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <p>Note that <code>paginate</code> takes a hash argument with key <code>:page</code> and value equal to the page requested. <code>User.paginate</code> pulls the users out of the database one chunk at a time (30 by default), based on the <code>:page</code> parameter. So, for example, page&nbsp;1 is users 1&ndash;30, page&nbsp;2 is users 31&ndash;60, etc. If the page is <code>nil</code>, <code>paginate</code> simply returns the first page.</p>
 
-<p>Using the <code>paginate</code> method, we can paginate the users in the sample application by using <code>paginate</code> in place of <code>all</code> in the <code>index</code> action (<a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_action">Listing&nbsp;9.35</a>). Here the <code>:page</code> parameter comes from <code>params[:page]</code>, which is generated automatically by <code>will_paginate</code>.</p>
+<p>Using the <code>paginate</code> method, we can paginate the users in the sample application by using <code>paginate</code> in place of <code>all</code> in the <code>index</code> action (<a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_action">Listing&nbsp;9.34</a>). Here the <code>:page</code> parameter comes from <code>params[:page]</code>, which is generated automatically by <code>will_paginate</code>.</p>
 
 <div class="label" id="code-will_paginate_index_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.35.</span> <span class="description">Paginating the users in the <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.34.</span> <span class="description">Paginating the users in the <code>index</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
   <span class="o">.</span>
@@ -1671,13 +1633,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <p>The paginated user index is now complete, but there&rsquo;s one improvement I can&rsquo;t resist including: Rails has some incredibly slick tools for making compact views, and in this section we&rsquo;ll refactor the index page to use them. Because our code is well-tested, we can refactor with confidence, assured that we are unlikely to break our site&rsquo;s functionality.</p>
 
-<p>The first step in our refactoring is to replace the user&nbsp;<code>li</code> from <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.34</a> with a <code>render</code> call (<a class="ref" href="updating-showing-and-deleting-users.html#code-index_view_first_refactoring">Listing&nbsp;9.36</a>).</p>
+<p>The first step in our refactoring is to replace the user&nbsp;<code>li</code> from <a class="ref" href="updating-showing-and-deleting-users.html#code-will_paginate_index_view">Listing&nbsp;9.33</a> with a <code>render</code> call (<a class="ref" href="updating-showing-and-deleting-users.html#code-index_view_first_refactoring">Listing&nbsp;9.35</a>).</p>
 
 <div class="label" id="code-index_view_first_refactoring"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.36.</span> <span class="description">The first refactoring attempt at the index view. <br /> <code>app/views/users/index.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.35.</span> <span class="description">The first refactoring attempt at the index view. <br /> <code>app/views/users/index.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">provide</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1694,13 +1656,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>Here we call <code>render</code> not on a string with the name of a partial, but rather on a <code>user</code> variable of class <code>User</code>;<sup class="footnote" id="fnref-9_6"><a href="#fn-9_6">6</a></sup> in this context, Rails automatically looks for a partial called <code>_user.html.erb</code>, which we must create (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_partial">Listing&nbsp;9.37</a>).</p>
+<p>Here we call <code>render</code> not on a string with the name of a partial, but rather on a <code>user</code> variable of class <code>User</code>;<sup class="footnote" id="fnref-9_6"><a href="#fn-9_6">6</a></sup> in this context, Rails automatically looks for a partial called <code>_user.html.erb</code>, which we must create (<a class="ref" href="updating-showing-and-deleting-users.html#code-user_partial">Listing&nbsp;9.36</a>).</p>
 
 <div class="label" id="code-user_partial"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.37.</span> <span class="description">A partial to render a single user. <br /> <code>app/views/users/_user.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.36.</span> <span class="description">A partial to render a single user. <br /> <code>app/views/users/_user.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="n">user</span><span class="p">,</span> <span class="ss">size:</span> <span class="mi">52</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span> <span class="cp">%&gt;</span>
@@ -1709,13 +1671,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>This is a definite improvement, but we can do even better: we can call <code>render</code> <em>directly</em> on the <code>@users</code> variable (<a class="ref" href="updating-showing-and-deleting-users.html#code-index_final_refactoring">Listing&nbsp;9.38</a>).</p>
+<p>This is a definite improvement, but we can do even better: we can call <code>render</code> <em>directly</em> on the <code>@users</code> variable (<a class="ref" href="updating-showing-and-deleting-users.html#code-index_final_refactoring">Listing&nbsp;9.37</a>).</p>
 
 <div class="label" id="code-index_final_refactoring"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.38.</span> <span class="description">The fully refactored user index. <br /> <code>app/views/users/index.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.37.</span> <span class="description">The fully refactored user index. <br /> <code>app/views/users/index.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">provide</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="s1">&#39;All users&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;h1&gt;</span>All users<span class="nt">&lt;/h1&gt;</span>
 
@@ -1730,7 +1692,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>Here Rails infers that <code>@users</code> is a list of <code>User</code> objects; moreover, when called with a collection of users, Rails automatically iterates through them and renders each one with the <code>_user.html.erb</code> partial. The result is the impressively compact code in <a class="ref" href="updating-showing-and-deleting-users.html#code-index_final_refactoring">Listing&nbsp;9.38</a>. As with any refactoring, you should verify that the test suite is still green after changing the application code:</p>
+<p>Here Rails infers that <code>@users</code> is a list of <code>User</code> objects; moreover, when called with a collection of users, Rails automatically iterates through them and renders each one with the <code>_user.html.erb</code> partial. The result is the impressively compact code in <a class="ref" href="updating-showing-and-deleting-users.html#code-index_final_refactoring">Listing&nbsp;9.37</a>. As with any refactoring, you should verify that the test suite is still green after changing the application code:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/
 </pre></div>
@@ -1761,13 +1723,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <h3><a id="sec-9_4_1" href="updating-showing-and-deleting-users.html#sec-administrative_users" class="heading"><span class="number">9.4.1</span> Administrative users</a></h3>
 
 
-<p>We will identify privileged administrative users with a boolean <code>admin</code> attribute in the User model, which, as we&rsquo;ll see, will automatically lead to an <code>admin?</code> boolean method to test for admin status. We can write tests for this attribute as in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_specs">Listing&nbsp;9.39</a>.</p>
+<p>We will identify privileged administrative users with a boolean <code>admin</code> attribute in the User model, which, as we&rsquo;ll see, will automatically lead to an <code>admin?</code> boolean method to test for admin status. We can write tests for this attribute as in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_specs">Listing&nbsp;9.38</a>.</p>
 
 <div class="label" id="code-admin_specs"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.39.</span> <span class="description">Tests for an <code>admin</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.38.</span> <span class="description">Tests for an <code>admin</code> attribute. <br /> <code>spec/models/user_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
@@ -1812,13 +1774,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>The migration simply adds the <code>admin</code> column to the <code>users</code> table (<a class="ref" href="updating-showing-and-deleting-users.html#code-admin_migration">Listing&nbsp;9.40</a>), yielding the data model in <a class="ref" href="updating-showing-and-deleting-users.html#fig-user_model_admin">Figure&nbsp;9.13</a>.</p>
+<p>The migration simply adds the <code>admin</code> column to the <code>users</code> table (<a class="ref" href="updating-showing-and-deleting-users.html#code-admin_migration">Listing&nbsp;9.39</a>), yielding the data model in <a class="ref" href="updating-showing-and-deleting-users.html#fig-user_model_admin">Figure&nbsp;9.13</a>.</p>
 
 <div class="label" id="code-admin_migration"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.40.</span> <span class="description">The migration to add a boolean <code>admin</code> attribute to users. <br /> <code>db/migrate/[timestamp]_add_admin_to_users.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.39.</span> <span class="description">The migration to add a boolean <code>admin</code> attribute to users. <br /> <code>db/migrate/[timestamp]_add_admin_to_users.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">AddAdminToUsers</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord::Migration</span>
   <span class="k">def</span> <span class="nf">change</span>
     <span class="n">add_column</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:admin</span><span class="p">,</span> <span class="ss">:boolean</span><span class="p">,</span> <span class="ss">default:</span> <span class="kp">false</span>
@@ -1828,7 +1790,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>Note that we&rsquo;ve added the argument <code>default: false</code> to <code>add_column</code> in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_migration">Listing&nbsp;9.40</a>, which means that users will <em>not</em> be administrators by default. (Without the <code>default: false</code> argument, <code>admin</code> will be <code>nil</code> by default, which is still <code>false</code>, so this step is not strictly necessary. It is more explicit, though, and communicates our intentions more clearly both to Rails and to readers of our code.)</p>
+<p>Note that we&rsquo;ve added the argument <code>default: false</code> to <code>add_column</code> in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_migration">Listing&nbsp;9.39</a>, which means that users will <em>not</em> be administrators by default. (Without the <code>default: false</code> argument, <code>admin</code> will be <code>nil</code> by default, which is still <code>false</code>, so this step is not strictly necessary. It is more explicit, though, and communicates our intentions more clearly both to Rails and to readers of our code.)</p>
 
 <div class="label" id="fig-user_model_admin"></div>
 
@@ -1865,13 +1827,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>As a final step, let&rsquo;s update our sample data populator to make the first user an admin by default (<a class="ref" href="updating-showing-and-deleting-users.html#code-populator_with_admin">Listing&nbsp;9.41</a>).</p>
+<p>As a final step, let&rsquo;s update our sample data populator to make the first user an admin by default (<a class="ref" href="updating-showing-and-deleting-users.html#code-populator_with_admin">Listing&nbsp;9.40</a>).</p>
 
 <div class="label" id="code-populator_with_admin"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.41.</span> <span class="description">The sample data populator code with an admin user. <br /> <code>lib/tasks/sample_data.rake</code></span> </div>
+<div class="listing"><span class="header">Listing 9.40.</span> <span class="description">The sample data populator code with an admin user. <br /> <code>lib/tasks/sample_data.rake</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">namespace</span> <span class="ss">:db</span> <span class="k">do</span>
   <span class="n">desc</span> <span class="s2">&quot;Fill database with sample data&quot;</span>
   <span class="n">task</span> <span class="ss">populate:</span> <span class="ss">:environment</span> <span class="k">do</span>
@@ -1904,13 +1866,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <h4><a id="sec-9_4_1_1" href="updating-showing-and-deleting-users.html#sec-revisiting_attr_accessible" class="heading">Revisiting <tt>attr_accessible</tt></a></h4>
 
 
-<p>You might have noticed that <a class="ref" href="updating-showing-and-deleting-users.html#code-populator_with_admin">Listing&nbsp;9.41</a> makes the user an admin with <code>toggle!(:admin)</code>, but why not just add <code>admin: true</code> to the initialization hash? The answer is, it won&rsquo;t work, and this is by design: only <code>attr_accessible</code> attributes can be assigned through mass assignment (that is, using an initialization hash, as in <code>User.new(name: "Foo", ...)</code>), and the <code>admin</code> attribute isn&rsquo;t accessible. <a class="ref" href="updating-showing-and-deleting-users.html#code-attr_accessible_review">Listing&nbsp;9.42</a> reproduces the most recent list of <code>attr_accessible</code> attributes&mdash;note that <code>:admin</code> is <em>not</em> on the list.</p>
+<p>You might have noticed that <a class="ref" href="updating-showing-and-deleting-users.html#code-populator_with_admin">Listing&nbsp;9.40</a> makes the user an admin with <code>toggle!(:admin)</code>, but why not just add <code>admin: true</code> to the initialization hash? The answer is, it won&rsquo;t work, and this is by design: only <code>attr_accessible</code> attributes can be assigned through mass assignment (that is, using an initialization hash, as in <code>User.new(name: "Foo", ...)</code>), and the <code>admin</code> attribute isn&rsquo;t accessible. <a class="ref" href="updating-showing-and-deleting-users.html#code-attr_accessible_review">Listing&nbsp;9.41</a> reproduces the most recent list of <code>attr_accessible</code> attributes&mdash;note that <code>:admin</code> is <em>not</em> on the list.</p>
 
 <div class="label" id="code-attr_accessible_review"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.42.</span> <span class="description">The <code>attr_accessible</code> attributes for the User model <em>without</em> an <code>:admin</code> attribute.  <br /> <code>app/models/user.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.41.</span> <span class="description">The <code>attr_accessible</code> attributes for the User model <em>without</em> an <code>:admin</code> attribute.  <br /> <code>app/models/user.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord::Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:name</span><span class="p">,</span> <span class="ss">:email</span><span class="p">,</span> <span class="ss">:password</span><span class="p">,</span> <span class="ss">:password_confirmation</span>
   <span class="o">.</span>
@@ -1938,13 +1900,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <p>The final step needed to complete the Users resource is to add delete links and a <code>destroy</code> action. We&rsquo;ll start by adding a delete link for each user on the user index page, restricting access to administrative users.</p>
 
-<p>To write tests for the delete functionality, it&rsquo;s helpful to be able to have a factory to create admins. We can accomplish this by adding an <code>:admin</code> block to our factories, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_factory">Listing&nbsp;9.43</a>.</p>
+<p>To write tests for the delete functionality, it&rsquo;s helpful to be able to have a factory to create admins. We can accomplish this by adding an <code>:admin</code> block to our factories, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_factory">Listing&nbsp;9.42</a>.</p>
 
 <div class="label" id="code-admin_factory"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.43.</span> <span class="description">Adding a factory for administrative users. <br /> <code>spec/factories.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.42.</span> <span class="description">Adding a factory for administrative users. <br /> <code>spec/factories.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="no">FactoryGirl</span><span class="o">.</span><span class="n">define</span> <span class="k">do</span>
   <span class="n">factory</span> <span class="ss">:user</span> <span class="k">do</span>
     <span class="n">sequence</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>  <span class="p">{</span> <span class="o">|</span><span class="n">n</span><span class="o">|</span> <span class="s2">&quot;Person </span><span class="si">#{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span> <span class="p">}</span>
@@ -1961,7 +1923,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>With the code in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_factory">Listing&nbsp;9.43</a>, we can now use <code>FactoryGirl.create(:admin)</code> to create an administrative user in our tests.</p>
+<p>With the code in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_factory">Listing&nbsp;9.42</a>, we can now use <code>FactoryGirl.create(:admin)</code> to create an administrative user in our tests.</p>
 
 <p>Our security model requires that ordinary users not see delete links:</p>
 
@@ -1981,13 +1943,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>Note that we have added a test to verify that the admin does not see a link to delete himself. The full set of delete link tests appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_link_tests">Listing&nbsp;9.44</a>.</p>
+<p>Note that we have added a test to verify that the admin does not see a link to delete himself. The full set of delete link tests appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_link_tests">Listing&nbsp;9.43</a>.</p>
 
 <div class="label" id="code-delete_link_tests"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.44.</span> <span class="description">Tests for delete links. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.43.</span> <span class="description">Tests for delete links. <br /> <code>spec/requests/user_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;User pages&quot;</span> <span class="k">do</span>
@@ -2039,13 +2001,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>The application code links to <code>"delete"</code> if the current user is an admin (<a class="ref" href="updating-showing-and-deleting-users.html#code-delete_links">Listing&nbsp;9.45</a>). Note the <code>method: :delete</code> argument, which arranges for the link to issue the necessary <tt>DELETE</tt> request. We&rsquo;ve also wrapped each link inside an&nbsp;<code>if</code> statement so that only admins can see them. The result for our admin user appears in <a class="ref" href="updating-showing-and-deleting-users.html#fig-index_delete_links_rails_3">Figure&nbsp;9.14</a>.</p>
+<p>The application code links to <code>"delete"</code> if the current user is an admin (<a class="ref" href="updating-showing-and-deleting-users.html#code-delete_links">Listing&nbsp;9.44</a>). Note the <code>method: :delete</code> argument, which arranges for the link to issue the necessary <tt>DELETE</tt> request. We&rsquo;ve also wrapped each link inside an&nbsp;<code>if</code> statement so that only admins can see them. The result for our admin user appears in <a class="ref" href="updating-showing-and-deleting-users.html#fig-index_delete_links_rails_3">Figure&nbsp;9.14</a>.</p>
 
 <div class="label" id="code-delete_links"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.45.</span> <span class="description">User delete links (viewable only by admins). <br /> <code>app/views/users/_user.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.44.</span> <span class="description">User delete links (viewable only by admins). <br /> <code>app/views/users/_user.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nt">&lt;li&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">gravatar_for</span> <span class="n">user</span><span class="p">,</span> <span class="ss">size:</span> <span class="mi">52</span> <span class="cp">%&gt;</span>
   <span class="cp">&lt;%=</span> <span class="n">link_to</span> <span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">user</span> <span class="cp">%&gt;</span>
@@ -2066,13 +2028,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 <div class="figure"><div class="center"><span class="graphic"><img src="images/figures/index_delete_links_rails_3_bootstrap.png" alt="index_delete_links_rails_3_bootstrap" /></span></div><div class="caption"><span class="header">Figure 9.14: </span><span class="description">The user index <a href="http://localhost:3000/users">/users</a> with delete links.&nbsp;<a href="http://railstutorial.org/images/figures/index_delete_links_rails_3_bootstrap-full.png">(full size)</a></span></div></div>
 
 
-<p>To get the delete links to work, we need to add a <code>destroy</code> action (<a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>), which finds the corresponding user and destroys it with the Active Record <code>destroy</code> method, finally redirecting to the user index, as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-destroy_action">Listing&nbsp;9.46</a>. Note that we also add <code>:destroy</code> to the <code>signed_in_user</code> before filter.</p>
+<p>To get the delete links to work, we need to add a <code>destroy</code> action (<a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>), which finds the corresponding user and destroys it with the Active Record <code>destroy</code> method, finally redirecting to the user index, as seen in <a class="ref" href="updating-showing-and-deleting-users.html#code-destroy_action">Listing&nbsp;9.45</a>. Note that we also add <code>:destroy</code> to the <code>signed_in_user</code> before filter.</p>
 
 <div class="label" id="code-destroy_action"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.46.</span> <span class="description">Adding a working <code>destroy</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.45.</span> <span class="description">Adding a working <code>destroy</code> action. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
   <span class="n">before_filter</span> <span class="ss">:correct_user</span><span class="p">,</span>   <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -2099,13 +2061,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>As constructed, only admins can destroy users through the web, because only admins can see the delete links. Unfortunately, there&rsquo;s still a terrible security hole: any sufficiently sophisticated attacker could simply issue <tt>DELETE</tt> requests directly from the command line to delete any user on the site. To secure the site properly, we also need access control on the <code>destroy</code> action, so our tests should check not only that admins <em>can</em> delete users, but also that other users <em>can&rsquo;t</em>. The results appear in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_destroy_test">Listing&nbsp;9.47</a>. Note that, in analogy with the <code>put</code> method from <a class="ref" href="updating-showing-and-deleting-users.html#code-protected_edit_update_tests">Listing&nbsp;9.11</a>, we use <code>delete</code> to issue a <tt>DELETE</tt> request directly to the specified URI (in this case, the user path, as required by <a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>).</p>
+<p>As constructed, only admins can destroy users through the web, because only admins can see the delete links. Unfortunately, there&rsquo;s still a terrible security hole: any sufficiently sophisticated attacker could simply issue <tt>DELETE</tt> requests directly from the command line to delete any user on the site. To secure the site properly, we also need access control on the <code>destroy</code> action, so our tests should check not only that admins <em>can</em> delete users, but also that other users <em>can&rsquo;t</em>. The results appear in <a class="ref" href="updating-showing-and-deleting-users.html#code-delete_destroy_test">Listing&nbsp;9.46</a>. Note that, in analogy with the <code>put</code> method from <a class="ref" href="updating-showing-and-deleting-users.html#code-protected_edit_update_tests">Listing&nbsp;9.11</a>, we use <code>delete</code> to issue a <tt>DELETE</tt> request directly to the specified URI (in this case, the user path, as required by <a class="ref" href="sign-up.html#table-RESTful_users">Table&nbsp;7.1</a>).</p>
 
 <div class="label" id="code-delete_destroy_test"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.47.</span> <span class="description">A test for protecting the <code>destroy</code> action. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.46.</span> <span class="description">A test for protecting the <code>destroy</code> action. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
@@ -2135,13 +2097,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <p>In principle, there&rsquo;s still a minor security hole, which is that an admin could delete himself by issuing a <tt>DELETE</tt> request directly. One might argue that such an admin is only getting what he deserves, but it would be nice to prevent such an occurrence, and doing so is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>).</p>
 
-<p>As you might suspect by now, the application code uses a before filter, this time to restrict access to the <code>destroy</code> action to admins. The resulting <code>admin_user</code> before filter appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_destroy_before_filter">Listing&nbsp;9.48</a>.</p>
+<p>As you might suspect by now, the application code uses a before filter, this time to restrict access to the <code>destroy</code> action to admins. The resulting <code>admin_user</code> before filter appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_destroy_before_filter">Listing&nbsp;9.47</a>.</p>
 
 <div class="label" id="code-admin_destroy_before_filter"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.48.</span> <span class="description">A before filter restricting the <code>destroy</code> action to admins. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.47.</span> <span class="description">A before filter restricting the <code>destroy</code> action to admins. <br /> <code>app/controllers/users_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UsersController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:index</span><span class="p">,</span> <span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
   <span class="n">before_filter</span> <span class="ss">:correct_user</span><span class="p">,</span>   <span class="ss">only:</span> <span class="o">[</span><span class="ss">:edit</span><span class="p">,</span> <span class="ss">:update</span><span class="o">]</span>
@@ -2207,13 +2169,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div>
 
 
-<p>It&rsquo;s also worth noting that this chapter saw the last of the necessary gem installations. For reference, the final <code>Gemfile</code> is shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-final_gemfile">Listing&nbsp;9.49</a>. (Optional gems may be system-dependent and are commented out. You can uncomment them to see if they work on your system.)</p>
+<p>It&rsquo;s also worth noting that this chapter saw the last of the necessary gem installations. For reference, the final <code>Gemfile</code> is shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-final_gemfile">Listing&nbsp;9.48</a>. (Optional gems may be system-dependent and are commented out. You can uncomment them to see if they work on your system.)</p>
 
 <div class="label" id="code-final_gemfile"></div>
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.49.</span> <span class="description">The final <code>Gemfile</code> for the sample application.</span> </div>
+<div class="listing"><span class="header">Listing 9.48.</span> <span class="description">The final <code>Gemfile</code> for the sample application.</span> </div>
 <div class="code"><div class="highlight"><pre><span class="n">source</span> <span class="s1">&#39;https://rubygems.org&#39;</span>
 
 <span class="n">gem</span> <span class="s1">&#39;rails&#39;</span><span class="p">,</span> <span class="s1">&#39;3.2.14&#39;</span>
@@ -2278,13 +2240,13 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 <li>Use the <code>sign_in</code> test helper from <a class="ref" href="updating-showing-and-deleting-users.html#code-sign_in_helper">Listing&nbsp;9.6</a> in as many places as you can find.</li>
 
-<li>Remove the duplicated form code by refactoring the <code>new.html.erb</code> and <code>edit.html.erb</code> views to use the partial in <a class="ref" href="updating-showing-and-deleting-users.html#code-new_edit_partial">Listing&nbsp;9.50</a>. Note that you will have to pass the form variable&nbsp;<code>f</code> explicitly as a local variable, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-new_user_with_partial">Listing&nbsp;9.51</a>. You will also have to update the tests, as the forms aren&rsquo;t currently <em>exactly</em> the same; identify the slight difference and update the tests accordingly.</li>
+<li>Remove the duplicated form code by refactoring the <code>new.html.erb</code> and <code>edit.html.erb</code> views to use the partial in <a class="ref" href="updating-showing-and-deleting-users.html#code-new_edit_partial">Listing&nbsp;9.49</a>. Note that you will have to pass the form variable&nbsp;<code>f</code> explicitly as a local variable, as shown in <a class="ref" href="updating-showing-and-deleting-users.html#code-new_user_with_partial">Listing&nbsp;9.50</a>. You will also have to update the tests, as the forms aren&rsquo;t currently <em>exactly</em> the same; identify the slight difference and update the tests accordingly.</li>
 
 <li>Signed-in users have no reason to access the <code>new</code> and <code>create</code> actions in the Users controller. Arrange for such users to be redirected to the root URL if they do try to hit those pages.</li>
 
 <li>Learn about the <code>request</code> object by inserting some of the methods listed in the <a href="http://api.rubyonrails.org/v3.2.0/classes/ActionDispatch/Request.html">Rails API</a><sup class="footnote" id="fnref-9_8"><a href="#fn-9_8">8</a></sup> into the site layout. (Refer to <a class="ref" href="sign-up.html#code-rails_debug">Listing&nbsp;7.1</a> if you get stuck.)</li>
 
-<li>Write a test to make sure that the friendly forwarding only forwards to the given URI the first time. On subsequent signin attempts, the forwarding URI should revert to the default (i.e., the profile page). See <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forgetting_test">Listing&nbsp;9.52</a> for a hint (and, by a hint, I mean the solution).</li>
+<li>Write a test to make sure that the friendly forwarding only forwards to the given URI the first time. On subsequent signin attempts, the forwarding URI should revert to the default (i.e., the profile page). See <a class="ref" href="updating-showing-and-deleting-users.html#code-friendly_forgetting_test">Listing&nbsp;9.51</a> for a hint (and, by a hint, I mean the solution).</li>
 
 <li>Modify the <code>destroy</code> action to prevent admin users from destroying themselves. (Write a test first.)</li>
 
@@ -2297,7 +2259,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.50.</span> <span class="description">A partial for the new and edit form fields. <br /> <code>app/views/users/_fields.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.49.</span> <span class="description">A partial for the new and edit form fields. <br /> <code>app/views/users/_fields.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%=</span> <span class="n">render</span> <span class="s1">&#39;shared/error_messages&#39;</span> <span class="cp">%&gt;</span>
 
 <span class="cp">&lt;%=</span> <span class="n">f</span><span class="o">.</span><span class="n">label</span> <span class="ss">:name</span> <span class="cp">%&gt;</span>
@@ -2321,7 +2283,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.51.</span> <span class="description">The new user view with partial. <br /> <code>app/views/users/new.html.erb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.50.</span> <span class="description">The new user view with partial. <br /> <code>app/views/users/new.html.erb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="cp">&lt;%</span> <span class="n">provide</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="s1">&#39;Sign up&#39;</span><span class="p">)</span> <span class="cp">%&gt;</span>
 <span class="nt">&lt;h1&gt;</span>Sign up<span class="nt">&lt;/h1&gt;</span>
 
@@ -2343,7 +2305,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 
 
 <div class="codelisting">
-<div class="listing"><span class="header">Listing 9.52.</span> <span class="description">A test for forwarding to the default page after friendly forwarding. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
+<div class="listing"><span class="header">Listing 9.51.</span> <span class="description">A test for forwarding to the default page after friendly forwarding. <br /> <code>spec/requests/authentication_pages_spec.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="s2">&quot;Authentication&quot;</span> <span class="k">do</span>
