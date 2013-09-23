@@ -1301,7 +1301,7 @@ THE SOFTWARE.
 <p>Our first step is to eliminate the error that currently results when submitting the signup form, as you can verify in your browser or by running the test for signup with invalid information:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/requests/user_pages_spec.rb <span class="se">\</span>
-<span class="go">-e &quot;signup with invalid information&quot;</span>
+<span class="gp">&gt;</span> -e <span class="s2">&quot;signup with invalid information&quot;</span>
 </pre></div>
 </div>
 
@@ -1424,7 +1424,7 @@ THE SOFTWARE.
 <p>As you might guess, now that we can submit a form without generating an error, the test for invalid submission should pass:</p>
 
 <div class="code"><div class="highlight"><pre><span class="gp">$</span> bundle <span class="nb">exec </span>rspec spec/requests/user_pages_spec.rb <span class="se">\</span>
-<span class="go">-e &quot;signup with invalid information&quot;</span>
+<span class="gp">&gt;</span> -e <span class="s2">&quot;signup with invalid information&quot;</span>
 </pre></div>
 </div>
 
