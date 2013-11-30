@@ -2095,7 +2095,7 @@ code appears in <a class="ref" href="updating-showing-and-deleting-users.html#co
 </div></div>
 
 
-<p>In principle, there&rsquo;s still a minor security hole, which is that an admin could delete himself by issuing a <tt>DELETE</tt> request directly. One might argue that such an admin is only getting what he deserves, but it would be nice to prevent such an occurrence, and doing so is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>).</p>
+<p>In principle, there&rsquo;s still a minor security hole, which is that an admin could delete himself by issuing a <tt>DELETE</tt> request directly. One might argue that such an admin is only getting what they deserve, but it would be nice to prevent such an occurrence, and doing so is left as an exercise (<a class="ref" href="updating-showing-and-deleting-users.html#sec-updating_deleting_exercises">Section&nbsp;9.6</a>).</p>
 
 <p>As you might suspect by now, the application code uses a before filter, this time to restrict access to the <code>destroy</code> action to admins. The resulting <code>admin_user</code> before filter appears in <a class="ref" href="updating-showing-and-deleting-users.html#code-admin_destroy_before_filter">Listing&nbsp;9.47</a>.</p>
 

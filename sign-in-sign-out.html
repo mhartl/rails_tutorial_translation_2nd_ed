@@ -1747,8 +1747,8 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <div class="code"><div class="highlight"><pre><span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Unsuccessful signin</span>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
-<span class="nf">    </span><span class="k">When </span><span class="nf">he submits invalid signin information</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">he should see an error message</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">they submit invalid signin information</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">they should see an error message</span>
 </pre></div>
 </div>
 
@@ -1759,8 +1759,8 @@ if-else branching structure inside of Embedded Ruby:</p>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
 <span class="nf">      </span><span class="k">And </span><span class="nf">the user has an account</span>
 <span class="nf">    </span><span class="k">When </span><span class="nf">the user submits valid signin information</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">he should see his profile page</span>
-<span class="nf">      </span><span class="k">And </span><span class="nf">he should see a signout link</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">they should see their profile page</span>
+<span class="nf">      </span><span class="k">And </span><span class="nf">they should see a signout link</span>
 </pre></div>
 </div>
 
@@ -1776,15 +1776,15 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Unsuccessful signin</span>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
-<span class="nf">    </span><span class="k">When </span><span class="nf">he submits invalid signin information</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">he should see an error message</span>
+<span class="nf">    </span><span class="k">When </span><span class="nf">they submit invalid signin information</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">they should see an error message</span>
 
 <span class="nf">  </span><span class="k">Scenario:</span><span class="nf"> Successful signin</span>
 <span class="k">    Given </span><span class="nf">a user visits the signin page</span>
 <span class="nf">      </span><span class="k">And </span><span class="nf">the user has an account</span>
 <span class="nf">    </span><span class="k">When </span><span class="nf">the user submits valid signin information</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">he should see his profile page</span>
-<span class="nf">      </span><span class="k">And </span><span class="nf">he should see a signout link</span>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">they should see their profile page</span>
+<span class="nf">      </span><span class="k">And </span><span class="nf">they should see a signout link</span>
 </pre></div>
 </div></div>
 
@@ -1839,19 +1839,19 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <p>If this looks familiar, it should: it&rsquo;s just Capybara, which is included by default in Cucumber step files. The next two lines should also look familiar; the scenario steps</p>
 
-<div class="code"><div class="highlight"><pre><span class="k">When </span><span class="nf">he submits invalid signin information</span>
-<span class="k">Then </span><span class="nf">he should see an error message</span>
+<div class="code"><div class="highlight"><pre><span class="k">When </span><span class="nf">they submit invalid signin information</span>
+<span class="k">Then </span><span class="nf">they should see an error message</span>
 </pre></div>
 </div>
 
 
 <p>in the feature file are handled by these steps:</p>
 
-<div class="code"><div class="highlight"><pre><span class="no">When</span> <span class="sr">/^he submits invalid signin information$/</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="no">When</span> <span class="sr">/^they submit invalid signin information$/</span> <span class="k">do</span>
   <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
 <span class="k">end</span>
 
-<span class="no">Then</span> <span class="sr">/^he should see an error message$/</span> <span class="k">do</span>
+<span class="no">Then</span> <span class="sr">/^they should see an error message$/</span> <span class="k">do</span>
   <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
@@ -1878,11 +1878,11 @@ if-else branching structure inside of Embedded Ruby:</p>
   <span class="n">visit</span> <span class="n">signin_path</span>
 <span class="k">end</span>
 
-<span class="no">When</span> <span class="sr">/^he submits invalid signin information$/</span> <span class="k">do</span>
+<span class="no">When</span> <span class="sr">/^they submits invalid signin information$/</span> <span class="k">do</span>
   <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
 <span class="k">end</span>
 
-<span class="no">Then</span> <span class="sr">/^he should see an error message$/</span> <span class="k">do</span>
+<span class="no">Then</span> <span class="sr">/^they should see an error message$/</span> <span class="k">do</span>
   <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 
@@ -1897,11 +1897,11 @@ if-else branching structure inside of Embedded Ruby:</p>
   <span class="n">click_button</span> <span class="s2">&quot;Sign in&quot;</span>
 <span class="k">end</span>
 
-<span class="no">Then</span> <span class="sr">/^he should see his profile page$/</span> <span class="k">do</span>
+<span class="no">Then</span> <span class="sr">/^they should see their profile page$/</span> <span class="k">do</span>
   <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="vi">@user</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="k">end</span>
 
-<span class="no">Then</span> <span class="sr">/^he should see a signout link$/</span> <span class="k">do</span>
+<span class="no">Then</span> <span class="sr">/^they should see a signout link$/</span> <span class="k">do</span>
   <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_link</span><span class="p">(</span><span class="s1">&#39;Sign out&#39;</span><span class="p">,</span> <span class="ss">href:</span> <span class="n">signout_path</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
@@ -1960,14 +1960,14 @@ if-else branching structure inside of Embedded Ruby:</p>
 
 <p>One nice effect of Cucumber&rsquo;s separation of concerns is that it operates at a higher level of abstraction. For example, we write</p>
 
-<div class="code"><div class="highlight"><pre><span class="k">Then </span><span class="nf">he should see an error message</span>
+<div class="code"><div class="highlight"><pre><span class="k">Then </span><span class="nf">they should see an error message</span>
 </pre></div>
 </div>
 
 
 <p>to express the expectation of seeing an error message, and</p>
 
-<div class="code"><div class="highlight"><pre><span class="no">Then</span> <span class="sr">/^he should see an error message$/</span> <span class="k">do</span>
+<div class="code"><div class="highlight"><pre><span class="no">Then</span> <span class="sr">/^they should see an error message$/</span> <span class="k">do</span>
   <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_selector</span><span class="p">(</span><span class="s1">&#39;div.alert.alert-error&#39;</span><span class="p">,</span> <span class="ss">text:</span> <span class="s1">&#39;Invalid&#39;</span><span class="p">)</span>
 <span class="k">end</span>
 </pre></div>
