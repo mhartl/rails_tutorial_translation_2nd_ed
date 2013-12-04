@@ -1884,6 +1884,34 @@ THE SOFTWARE.
 </div>
 
 
+<p><em>Note</em>: If you get a deprecation warning like</p>
+
+<div class="code"><div class="highlight"><pre>[deprecated] I18n.enforce_available_locales will default to true in the future
+</pre></div>
+</div>
+
+
+<p>you can can get rid of it by editing <code>config/application.rb</code> as follows:</p>
+
+<div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="no">File</span><span class="o">.</span><span class="n">expand_path</span><span class="p">(</span><span class="s1">&#39;../boot&#39;</span><span class="p">,</span> <span class="bp">__FILE__</span><span class="p">)</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="o">.</span>
+<span class="k">module</span> <span class="nn">SampleApp</span>
+  <span class="k">class</span> <span class="nc">Application</span> <span class="o">&lt;</span> <span class="ss">Rails::Application</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="no">I18n</span><span class="o">.</span><span class="n">enforce_available_locales</span> <span class="o">=</span> <span class="kp">true</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+    <span class="o">.</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+
+
 
 
 <div class="label" id="sec-creating_a_user"></div>
