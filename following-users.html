@@ -2288,7 +2288,7 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 </div></div>
 
 
-<p>This code has a formidable combination of Rails, Ruby, and SQL, but it does the job, and does it well. (Of course, even the subselect won&rsquo;t scale forever. For bigger sites, you would probably need to generate the feed asynchronously using a background job. Such scaling subtleties are beyond the scope of this tutorial, but the <a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a> screencasts are a good place to start.)</p>
+<p>This code has a formidable combination of Rails, Ruby, and SQL, but it does the job, and does it well. (Of course, even the subselect won&rsquo;t scale forever. For bigger sites, you would probably need to generate the feed asynchronously using a background job. Such scaling subtleties are beyond the scope of this tutorial.)</p>
 
 <div class="label" id="sec-the_new_status_feed"></div>
 
@@ -2449,8 +2449,6 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 
 <li><a href="http://railscasts.com/">RailsCasts</a>: It&rsquo;s hard to overemphasize what a great resource RailsCasts is. I suggest starting by visiting the <a href="http://railscasts.com/episodes/archive">RailsCasts episode archive</a> and clicking on subjects that catch your eye.</li>
 
-<li><a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a>: One topic we&rsquo;ve hardly covered in the <em>Ruby on Rails Tutorial</em> book is performance, optimization, and scaling. Luckily, most sites will never run into serious scaling issues, and using anything beyond plain Rails is probably premature optimization. If you do run into performance issues, the <a href="http://railslab.newrelic.com/scaling-rails">Scaling Rails</a> series from Gregg Pollack of <a href="http://envylabs.com/">Envy Labs</a> is a good place to start. I also recommend investigating the site monitoring applications <a href="http://scoutapp.com/">Scout</a> and <a href="http://www.newrelic.com/">New Relic</a>.<sup class="footnote" id="fnref-11_16"><a href="#fn-11_16">16</a></sup> And, as you might suspect by now, there are RailsCasts on many scaling subjects, including profiling, caching, and background jobs.</li>
-
 <li>Ruby and Rails books: I recommend <a href="http://www.amazon.com/gp/product/1430223634"><em>Beginning Ruby</em></a> by Peter Cooper, <a href="http://www.amazon.com/gp/product/1933988657"><em>The Well-Grounded Rubyist</em></a> by David&nbsp;A. Black, and <a href="http://www.amazon.com/gp/product/0672328844"><em>The Ruby Way</em></a> by Hal Fulton for further Ruby learning, and <a href="http://www.amazon.com/gp/product/0321601661"><em>The Rails&nbsp;3 Way</em></a> by Obie Fernandez and <em>Rails&nbsp;3 in Action</em> (wait for the second edition) by Ryan Bigg and Yehuda Katz for more about Rails.</li>
 
 <li><a href="http://peepcode.com/">PeepCode</a> and <a href="http://codeschool.com/">Code School</a>: The screencasts at PeepCode and interactive courses at Code School are consistently high-quality, and I warmly recommend them.</li>
@@ -2527,7 +2525,6 @@ in both the <code>followed_users</code> and <code>followers</code> tables.</p>
 <li id="fn-11_13">For a more advanced way to create the necessary subselect, see the blog post <a href="http://pivotallabs.com/users/jsusser/blog/articles/567-hacking-a-subselect-in-activerecord">&ldquo;Hacking a subselect in ActiveRecord&rdquo;.</a>&nbsp;<a class="arrow" href="#fnref-11_13">&uarr;</a></li>
 <li id="fn-11_14">In order to make a prettier feed for <a class="ref" href="following-users.html#fig-home_page_with_feed">Figure&nbsp;11.20</a>, I&rsquo;ve added a few extra microposts by hand using the Rails console.&nbsp;<a class="arrow" href="#fnref-11_14">&uarr;</a></li>
 <li id="fn-11_15">Note that RailsCasts usually omit the tests, which is probably necessary to keep the episodes nice and short, but you could get the wrong idea about the importance of testing. Once you&rsquo;ve watched the relevant RailsCast to get a basic idea of how to proceed, I suggest writing the new feature using test-driven development. (In this context, I recommend taking a look at <a href="http://railscasts.com/episodes/275-how-i-test">the RailsCast on &ldquo;How I test&rdquo;</a>. You&rsquo;ll see that Ryan Bates himself often uses TDD for real-life development, and in fact his testing style is similar to the style used in this tutorial.)&nbsp;<a class="arrow" href="#fnref-11_15">&uarr;</a></li>
-<li id="fn-11_16">In addition to being a clever phrase&mdash;<em>new relic</em> being a contradiction in terms&mdash;New Relic is also an anagram for the name of the company&rsquo;s founder, Lew Cirne.&nbsp;<a class="arrow" href="#fnref-11_16">&uarr;</a></li>
 </ol>
 </div>
 
