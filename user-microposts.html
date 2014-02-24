@@ -189,7 +189,7 @@ THE SOFTWARE.
     <span class="c1"># This code is wrong!</span>
     <span class="vi">@micropost</span> <span class="o">=</span> <span class="no">Micropost</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">content:</span> <span class="s2">&quot;Lorem ipsum&quot;</span><span class="p">,</span> <span class="ss">user_id:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
   <span class="k">end</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="vi">@micropost</span> <span class="p">}</span>
 
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:content</span><span class="p">)</span> <span class="p">}</span>
@@ -251,13 +251,13 @@ THE SOFTWARE.
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">Micropost</span> <span class="k">do</span>
-
+  
   <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">before</span> <span class="k">do</span>
     <span class="c1"># This code is wrong!</span>
     <span class="vi">@micropost</span> <span class="o">=</span> <span class="no">Micropost</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="ss">content:</span> <span class="s2">&quot;Lorem ipsum&quot;</span><span class="p">,</span> <span class="ss">user_id:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
   <span class="k">end</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="vi">@micropost</span> <span class="p">}</span>
 
   <span class="n">it</span> <span class="p">{</span> <span class="n">should</span> <span class="n">respond_to</span><span class="p">(</span><span class="ss">:content</span><span class="p">)</span> <span class="p">}</span>
@@ -458,7 +458,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">Micropost</span> <span class="k">do</span>
-
+  
   <span class="n">let</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:user</span><span class="p">)</span> <span class="p">}</span>
   <span class="n">before</span> <span class="p">{</span> <span class="vi">@micropost</span> <span class="o">=</span> <span class="n">user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">build</span><span class="p">(</span><span class="ss">content:</span> <span class="s2">&quot;Lorem ipsum&quot;</span><span class="p">)</span> <span class="p">}</span>
 
@@ -498,12 +498,12 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <div class="code"><div class="highlight"><pre><span class="nb">require</span> <span class="s1">&#39;spec_helper&#39;</span>
 
 <span class="n">describe</span> <span class="no">User</span> <span class="k">do</span>
-
+  
   <span class="n">before</span> <span class="k">do</span>
     <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">name</span><span class="p">:</span> <span class="s2">&quot;Example User&quot;</span><span class="p">,</span> <span class="ss">email:</span> <span class="s2">&quot;user@example.com&quot;</span><span class="p">,</span> 
                      <span class="ss">password:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">,</span> <span class="ss">password_confirmation:</span> <span class="s2">&quot;foobar&quot;</span><span class="p">)</span>
   <span class="k">end</span>
-
+  
   <span class="n">subject</span> <span class="p">{</span> <span class="vi">@user</span> <span class="p">}</span>
   <span class="o">.</span>
   <span class="o">.</span>
@@ -646,7 +646,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;micropost associations&quot;</span> <span class="k">do</span>
-
+    
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span> <span class="p">}</span>
     <span class="n">let!</span><span class="p">(</span><span class="ss">:older_micropost</span><span class="p">)</span> <span class="k">do</span> 
       <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">user:</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">created_at:</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">ago</span><span class="p">)</span>
@@ -654,7 +654,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
     <span class="n">let!</span><span class="p">(</span><span class="ss">:newer_micropost</span><span class="p">)</span> <span class="k">do</span>
       <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">user:</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">created_at:</span> <span class="mi">1</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">ago</span><span class="p">)</span>
     <span class="k">end</span>
-
+        
     <span class="n">it</span> <span class="s2">&quot;should have the right microposts in the right order&quot;</span> <span class="k">do</span>
       <span class="vi">@user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="o">[</span><span class="n">newer_micropost</span><span class="p">,</span> <span class="n">older_micropost</span><span class="o">]</span>
     <span class="k">end</span>
@@ -794,7 +794,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
   <span class="o">.</span>
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;micropost associations&quot;</span> <span class="k">do</span>
-
+    
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@user</span><span class="o">.</span><span class="n">save</span> <span class="p">}</span>
     <span class="n">let!</span><span class="p">(</span><span class="ss">:older_micropost</span><span class="p">)</span> <span class="k">do</span> 
       <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">user:</span> <span class="vi">@user</span><span class="p">,</span> <span class="ss">created_at:</span> <span class="mi">1</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">ago</span><span class="p">)</span>
@@ -896,12 +896,12 @@ because this is such an important security concern we&rsquo;ll add a failing tes
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@micropost</span><span class="o">.</span><span class="n">user_id</span> <span class="o">=</span> <span class="kp">nil</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
   <span class="k">end</span>
-
+    
   <span class="n">describe</span> <span class="s2">&quot;with blank content&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@micropost</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot; &quot;</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
   <span class="k">end</span>
-
+  
   <span class="n">describe</span> <span class="s2">&quot;with content that is too long&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="vi">@micropost</span><span class="o">.</span><span class="n">content</span> <span class="o">=</span> <span class="s2">&quot;a&quot;</span> <span class="o">*</span> <span class="mi">141</span> <span class="p">}</span>
     <span class="n">it</span> <span class="p">{</span> <span class="n">should_not</span> <span class="n">be_valid</span> <span class="p">}</span>
@@ -939,12 +939,12 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <div class="listing"><span class="header">Listing 10.18.</span> <span class="description">The Micropost model validations. <br /> <code>app/models/micropost.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">Micropost</span> <span class="o">&lt;</span> <span class="ss">ActiveRecord::Base</span>
   <span class="n">attr_accessible</span> <span class="ss">:content</span>
-
+  
   <span class="n">belongs_to</span> <span class="ss">:user</span>
-
+  
   <span class="n">validates</span> <span class="ss">:content</span><span class="p">,</span> <span class="ss">presence:</span> <span class="kp">true</span><span class="p">,</span> <span class="ss">length:</span> <span class="p">{</span> <span class="ss">maximum:</span> <span class="mi">140</span> <span class="p">}</span>
   <span class="n">validates</span> <span class="ss">:user_id</span><span class="p">,</span> <span class="ss">presence:</span> <span class="kp">true</span>
-
+  
   <span class="n">default_scope</span> <span class="ss">order:</span> <span class="s1">&#39;microposts.created_at DESC&#39;</span>
 <span class="k">end</span>
 </pre></div>
@@ -1236,7 +1236,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <span class="nc">.microposts</span> <span class="p">{</span>
   <span class="na">list-style</span><span class="o">:</span> <span class="no">none</span><span class="p">;</span>
   <span class="na">margin</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">0</span> <span class="mi">0</span> <span class="mi">0</span><span class="p">;</span>
-
+  
   <span class="nt">li</span> <span class="p">{</span>
     <span class="na">padding</span><span class="o">:</span> <span class="mi">10</span><span class="kt">px</span> <span class="mi">0</span><span class="p">;</span>
     <span class="na">border-top</span><span class="o">:</span> <span class="mi">1</span><span class="kt">px</span> <span class="no">solid</span> <span class="mh">#e8e8e8</span><span class="p">;</span>
@@ -1353,7 +1353,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
       <span class="o">.</span>
       <span class="o">.</span>
       <span class="n">describe</span> <span class="s2">&quot;in the Microposts controller&quot;</span> <span class="k">do</span>
-
+        
         <span class="n">describe</span> <span class="s2">&quot;submitting to the create action&quot;</span> <span class="k">do</span>
           <span class="n">before</span> <span class="p">{</span> <span class="n">post</span> <span class="n">microposts_path</span> <span class="p">}</span>
           <span class="n">specify</span> <span class="p">{</span> <span class="n">response</span><span class="o">.</span><span class="n">should</span> <span class="n">redirect_to</span><span class="p">(</span><span class="n">signin_path</span><span class="p">)</span> <span class="p">}</span>
@@ -1390,7 +1390,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
   <span class="k">def</span> <span class="nf">current_user?</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
     <span class="n">user</span> <span class="o">==</span> <span class="n">current_user</span>
   <span class="k">end</span>
-
+    
   <span class="k">def</span> <span class="nf">signed_in_user</span>
     <span class="k">unless</span> <span class="n">signed_in?</span>
       <span class="n">store_location</span>
@@ -1416,7 +1416,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 <div class="listing"><span class="header">Listing 10.28.</span> <span class="description">Adding authentication to the Microposts controller actions. <br /> <code>app/controllers/microposts_controller.rb</code></span> </div>
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MicropostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span>
-
+  
   <span class="k">def</span> <span class="nf">create</span>
   <span class="k">end</span>
 
@@ -1431,7 +1431,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 
 <div class="code"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MicropostsController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
   <span class="n">before_filter</span> <span class="ss">:signed_in_user</span><span class="p">,</span> <span class="ss">only:</span> <span class="o">[</span><span class="ss">:create</span><span class="p">,</span> <span class="ss">:destroy</span><span class="o">]</span>
-
+  
   <span class="k">def</span> <span class="nf">index</span>
   <span class="k">end</span>
 
@@ -1493,9 +1493,9 @@ because this is such an important security concern we&rsquo;ll add a failing tes
 
   <span class="n">describe</span> <span class="s2">&quot;micropost creation&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;with invalid information&quot;</span> <span class="k">do</span>
-
+      
       <span class="n">it</span> <span class="s2">&quot;should not create a micropost&quot;</span> <span class="k">do</span>
         <span class="n">expect</span> <span class="p">{</span> <span class="n">click_button</span> <span class="s2">&quot;Post&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">not_to</span> <span class="n">change</span><span class="p">(</span><span class="no">Micropost</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span>
       <span class="k">end</span>
@@ -1538,7 +1538,7 @@ because this is such an important security concern we&rsquo;ll add a failing tes
       <span class="n">render</span> <span class="s1">&#39;static_pages/home&#39;</span>
     <span class="k">end</span>
   <span class="k">end</span>
-
+  
   <span class="k">def</span> <span class="nf">destroy</span>
   <span class="k">end</span>
 <span class="k">end</span>
@@ -2197,10 +2197,10 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
   <span class="o">.</span>
   <span class="n">describe</span> <span class="s2">&quot;micropost destruction&quot;</span> <span class="k">do</span>
     <span class="n">before</span> <span class="p">{</span> <span class="no">FactoryGirl</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="ss">:micropost</span><span class="p">,</span> <span class="ss">user:</span> <span class="n">user</span><span class="p">)</span> <span class="p">}</span>
-
+    
     <span class="n">describe</span> <span class="s2">&quot;as correct user&quot;</span> <span class="k">do</span>
       <span class="n">before</span> <span class="p">{</span> <span class="n">visit</span> <span class="n">root_path</span> <span class="p">}</span>
-
+      
       <span class="n">it</span> <span class="s2">&quot;should delete a micropost&quot;</span> <span class="k">do</span>
         <span class="n">expect</span> <span class="p">{</span> <span class="n">click_link</span> <span class="s2">&quot;delete&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">change</span><span class="p">(</span><span class="no">Micropost</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
       <span class="k">end</span>
@@ -2230,7 +2230,7 @@ and the micropost form partial in <a class="ref" href="user-microposts.html#code
   <span class="k">end</span>
 
   <span class="kp">private</span>
-
+  
     <span class="k">def</span> <span class="nf">correct_user</span>
       <span class="vi">@micropost</span> <span class="o">=</span> <span class="n">current_user</span><span class="o">.</span><span class="n">microposts</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
       <span class="n">redirect_to</span> <span class="n">root_url</span> <span class="k">if</span> <span class="vi">@micropost</span><span class="o">.</span><span class="n">nil?</span>
