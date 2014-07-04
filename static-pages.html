@@ -1859,6 +1859,15 @@ bundler_stubs/
 
 <p>Then we have to replace the comment at the end of the test group with some system-dependent gems (OS&nbsp;X users may have to install <a href="http://growl.info/downloads#generaldownloads">Growl and growlnotify</a> as well):</p>
 
+<div class="code"><div class="highlight"><pre><span class="c1"># Test gems on Macintosh OS X (Mountain Lion or Mavericks)</span>
+<span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
+  <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.2&#39;</span>
+  <span class="n">gem</span> <span class="s1">&#39;terminal-notifier-guard&#39;</span><span class="p">,</span> <span class="s1">&#39;1.5.3&#39;</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+
+
 <div class="code"><div class="highlight"><pre><span class="c1"># Test gems on Macintosh OS X</span>
 <span class="n">group</span> <span class="ss">:test</span> <span class="k">do</span>
   <span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span><span class="p">,</span> <span class="s1">&#39;1.1.2&#39;</span>
